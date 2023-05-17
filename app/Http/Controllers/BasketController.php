@@ -12,6 +12,7 @@ use App\User;
 use http\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class BasketController extends UserController
 {
@@ -41,7 +42,6 @@ class BasketController extends UserController
     {
         $find_game = DB::table('games')->where('name', $request->game_name)->get();
         $need_game = $find_game[0];
-
         $need_genres = DB::table('game_genres')->where('game_name', $request->game_name)->pluck('genre_name');
 
         $add_game_to_basket = Basket::updateOrCreate(
@@ -52,7 +52,9 @@ class BasketController extends UserController
 
         );
 
-        return redirect("game_page/$need_game->name");
+        return Redirect::route('game_page', [
+            'game_name' => $request->game_name
+        ]);
     }
 
     public function change_amount_game_to_basket(Request $request)

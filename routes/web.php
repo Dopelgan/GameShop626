@@ -35,7 +35,8 @@ Route::any('/game_page/{game_name}', function ($game_name) {
         'need_game' => $find_game[0],
         'need_genres' => $need_genres
     ]);
-});
+
+})->name('game_page');
 
 Route::any('/platform/{name}', function ($name) {
 
