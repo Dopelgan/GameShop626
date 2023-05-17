@@ -40,17 +40,17 @@ class BasketController extends UserController
 
     public function add_game_to_basket(Request $request)
     {
-        $find_game = DB::table('games')->where('name', $request->game_name)->get();
-        $need_game = $find_game[0];
-        $need_genres = DB::table('game_genres')->where('game_name', $request->game_name)->pluck('genre_name');
+        //$find_game = DB::table('games')->where('name', $request->game_name)->get();
+        //$need_game = $find_game[0];
+        //$need_genres = DB::table('game_genres')->where('game_name', $request->game_name)->pluck('genre_name');
 
-        $add_game_to_basket = Basket::updateOrCreate(
-
-            ['game_name' => $request->game_name, 'user_name' => $request->user_name],
-
-            ['game_name' => $request->game_name, 'user_name' => $request->user_name, 'amount' => "1"]
-
-        );
+        //$add_game_to_basket = Basket::updateOrCreate(
+//
+//          ['game_name' => $request->game_name, 'user_name' => $request->user_name],
+//
+//          ['game_name' => $request->game_name, 'user_name' => $request->user_name, 'amount' => "1"]
+//
+//      );
 
         return Redirect::route('game_page', [
             'game_name' => $request->game_name
