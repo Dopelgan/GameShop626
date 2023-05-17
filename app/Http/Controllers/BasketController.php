@@ -12,6 +12,7 @@ use App\User;
 use http\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 
 class BasketController extends UserController
@@ -24,37 +25,26 @@ class BasketController extends UserController
 
         $games = DB::table('games')->whereIn('name', $game_name_in_basket)->get();
 
-//        $game_amount = DB::table('baskets')->whereIn('game_name', $game_name_in_basket)->pluck('amount');
-//        $amount = array_sum($game_amount->all());
-//
-//        $game_price = DB::table('games')->whereIn('name', $game_name_in_basket)->pluck('amount');
-//        $price = array_sum($game_price->all());
 
         return view('basket', [
             'games_in_basket' => $games_in_basket,
-            'games' => $games,
-//            'amount' => $amount,
-//            'price' => $price
+            'games' => $games
         ]);
     }
 
     public function add_game_to_basket(Request $request)
     {
-        //$find_game = DB::table('games')->where('name', $request->game_name)->get();
-        //$need_game = $find_game[0];
-        //$need_genres = DB::table('game_genres')->where('game_name', $request->game_name)->pluck('genre_name');
+        //Log::debug('тест кнопки', $request->all());
 
-        //$add_game_to_basket = Basket::updateOrCreate(
-//
-//          ['game_name' => $request->game_name, 'user_name' => $request->user_name],
-//
-//          ['game_name' => $request->game_name, 'user_name' => $request->user_name, 'amount' => "1"]
-//
-//      );
+        Basket::updateOrCreate(
+            ['game_name' => $request->game_name, 'user_name' => $request->user_name],
+            ['amount' => "1"]
+        );
 
-        return Redirect::route('game_page', [
-            'game_name' => $request->game_name
+        return response()->json([
+            'result' => 'явлад'
         ]);
+
     }
 
     public function change_amount_game_to_basket(Request $request)

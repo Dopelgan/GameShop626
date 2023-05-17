@@ -21,21 +21,14 @@ class FavoritesController extends Controller
 
     public function add_favorite(Request $request)
     {
-//        dd($request->all());
-        $find_game = DB::table('games')->where('name', $request->game_name)->get();
-        $need_game = $find_game[0];
-
-        $need_genres = DB::table('game_genres')->where('game_name', $request->game_name)->pluck('genre_name');
-
         $add_game_to_basket = Favorites::FirstOrCreate(
-
             ['game_name' => $request->game_name, 'user_name' => $request->user_name],
-
             ['game_name' => $request->game_name, 'user_name' => $request->user_name]
-
         );
 
-        return redirect("game_page/$need_game->name");
+        return response()->json([
+            'result' => 'явлад'
+        ]);
     }
 
     public function delete_from_favorites(Request $request)
@@ -50,8 +43,8 @@ class FavoritesController extends Controller
 
     public function clear_favorites()
     {
-        $deletedRows = DB::table('favorites')->where('user_name', 'Admin')->delete();
+        DB::table('favorites')->where('user_name', 'Admin')->delete();
 
-        return redirect('favorites');
+        return response()->json();
     }
 }
