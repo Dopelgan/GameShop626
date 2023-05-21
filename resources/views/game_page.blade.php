@@ -14,23 +14,13 @@
                         @endif
                         @if (!$need_game->amount == 0)
                             <div class="mb-1"> В наличии: {{$need_game->amount}} шт.</div>
-                            {{--                            <form class="mb-1" action="{{route('add_game_to_basket')}}" method="POST">--}}
-                            {{--                                @csrf--}}
-                            {{--                                <input type="hidden" name="game_name" value="{{$need_game->name}}">--}}
-                            {{--                                <input type="hidden" name="user_name" value="Admin">--}}
                             <button id="add_game_to_basket" class="btn btn-outline-warning text-white">Добавить в
                                 корзину
                             </button>
-                            {{--                            </form>--}}
                         @else
                             <div class="mb-1">Нет в наличии.</div>
                         @endif
-{{--                        <form action="{{route('add_favorite')}}" method="post">--}}
-{{--                            @csrf--}}
-{{--                            <input type="hidden" name="game_name" value="{{$need_game->name}}">--}}
-{{--                            <input type="hidden" name="user_name" value="Admin">--}}
                             <button id="add_favorite" class="btn btn-outline-success text-white" type="submit">Добавить в избранное</button>
-{{--                        </form>--}}
                     </div>
 
                     <div class="w-50">
@@ -48,7 +38,7 @@
             </div>
         </div>
     </div>
-    <button id="test">ух сука</button>
+
     <script>
         $('#add_game_to_basket').on('click', function () {
             $.ajax({
@@ -83,9 +73,6 @@
                     alert(response.message)
                 }
             })
-        })
-        $('#test').on('click', function () {
-            alert('ух сука')
         })
     </script>
 

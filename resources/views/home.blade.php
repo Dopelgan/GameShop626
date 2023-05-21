@@ -13,31 +13,42 @@
                             width="200"></a>
                 @endforeach
                 </div>
-                <h5 class="text-white">Игры в наличии:</h5>
-                <div class="row">
+                <h5 class="d-flex justify-content-center m-2 text-white">Игры в наличии:</h5>
+                <div class="d-flex row justify-content-center">
                     @foreach($games as $game)
                         @if(!$game->amount == 0)
-                            <div style="text-align:center" class="d-flex flex-column">
+
+                            <div class="card text-white bg-dark m-1 border-secondary" style="width: 16rem;">
                                 <a href="/game_page/{{$game->name}}">
-                                    <img src='{{$game->image}}'
-                                         class="img-fluid m-1"
-                                         width="110"></a>
-                                <h5 class="m-1">{{$game->price}} ₽</h5>
+                                <img class="card-img-top" src="{{$game->image}}" alt="Card image cap">
+                                </a>
+                                <div class="card-body">
+                                    <a href="/game_page/{{$game->name}}">
+                                    <h6 class="card-title text-white">{{$game->name}}</h6>
+                                    </a>
+                                    <p class="card-text">{{$game->price}} р.</p>
+                                    <a href="#" class="btn btn-success text-white">Добавить в корзину</a>
+                                </div>
                             </div>
+
                         @endif
                     @endforeach
                 </div>
-                <h5 class="text-white">Временно нет в наличии:</h5>
-                <div class="row">
+                <h5 class="d-flex justify-content-center m-2 text-white">Временно нет в наличии:</h5>
+                <div class="d-flex row justify-content-center">
                     @foreach($games as $game)
                         @if($game->amount == 0)
-                            <div style="text-align:center" class="d-flex flex-column">
+                            <div class="card text-white bg-dark m-1 border-secondary" style="width: 16rem;">
                                 <a href="/game_page/{{$game->name}}">
-                                    <img src='{{$game->image}}'
-                                         class="img-fluid m-1"
-                                         width="110"
-                                         alt="Пример"></a>
-                                <h5 class="m-1">{{$game->price}} ₽</h5>
+                                    <img class="card-img-top" src="{{$game->image}}" alt="Card image cap">
+                                </a>
+                                <div class="card-body">
+                                    <a href="/game_page/{{$game->name}}">
+                                        <h6 class="card-title text-white">{{$game->name}}</h6>
+                                    </a>
+                                    <p class="card-text">{{$game->price}} р.</p>
+                                    <a href="#" class="btn btn-warning text-white">Добавить в избранное</a>
+                                </div>
                             </div>
                         @endif
                     @endforeach
