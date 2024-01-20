@@ -25,18 +25,6 @@ class AdminController extends Controller
         ]);
     }
 
-    public function change_test()
-    {
-        $games = Game::get();
-        $genres = Genre::get();
-        $platforms = Platform::get();
-        return view('change_test', [
-            'games' => $games,
-            'genres' => $genres,
-            'platforms' => $platforms
-        ]);
-    }
-
     public function add_game(Request $request)
     {
         $messages = [
@@ -131,7 +119,7 @@ class AdminController extends Controller
             );
         }
 
-        return Redirect::route('change_test');
+        return Redirect::route('test');
     }
 
     public function game_platform(Request $request)
@@ -147,7 +135,7 @@ class AdminController extends Controller
 
         );
 
-        return Redirect::route('change_test');
+        return Redirect::route('test');
     }
 
     public function change_game_amount(Request $request)
@@ -157,7 +145,7 @@ class AdminController extends Controller
         $change->amount = $request->new_amount;
         $change->save();
 
-        return Redirect::route('change_test');
+        return Redirect::route('test');
     }
 
     public function change_description(Request $request)
@@ -167,7 +155,7 @@ class AdminController extends Controller
         $change->description = $request->new_description;
         $change->save();
 
-        return Redirect::route('change_test');
+        return Redirect::route('test');
     }
 
     public function change_game_image(Request $request)
@@ -177,6 +165,6 @@ class AdminController extends Controller
         $change->image = $request->new_image;
         $change->save();
 
-        return Redirect::route('change_test');
+        return Redirect::route('test');
     }
 }

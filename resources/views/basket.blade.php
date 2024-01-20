@@ -59,9 +59,11 @@
                     @endforeach
                 @endforeach
             </div>
+            @if($games_in_basket->count()>0)
             <div class="d-flex w-25 flex-column align-items-center">
                 <h3>ИТОГО:</h3>
             </div>
+            @endif
         </div>
 
 @endsection

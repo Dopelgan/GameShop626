@@ -17,8 +17,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'GameController@home')->name('home');
-Route::get('/test', 'AdminController@test')->name('test');
-Route::get('/change_test', 'AdminController@change_test')->name('change_test');
 Route::get('/home', 'GameController@home')->name('home');
 Route::get('/basket', 'BasketController@basket')->name('basket');
 Route::any('/game_page/{game_name}', function ($game_name) {
@@ -56,6 +54,13 @@ Route::post('/clear_basket', 'BasketController@clear_basket')->name('clear_baske
 Route::post('/change_amount_game_to_basket', 'BasketController@change_amount_game_to_basket')->name(
     'change_amount_game_to_basket'
 );
+
+Route::get('/favorites', 'FavoritesController@favorites')->name('favorites');
+Route::post('/add_favorite', 'FavoritesController@add_favorite')->name('add_favorite');
+Route::post('/delete_from_favorites', 'FavoritesController@delete_from_favorites')->name('delete_from_favorites');
+Route::post('/clear_favorites', 'FavoritesController@clear_favorites')->name('clear_favorites');
+
+Route::get('/test', 'AdminController@test')->name('test');
 Route::post('/add_game', 'AdminController@add_game')->name('add_game');
 Route::post('/add_genre', 'AdminController@add_genre')->name('add_genre');
 Route::post('/add_platform', 'AdminController@add_platform')->name('add_platform');
@@ -64,7 +69,3 @@ Route::post('/game_platform', 'AdminController@game_platform')->name('game_platf
 Route::post('/change_description', 'AdminController@change_description')->name('change_description');
 Route::post('/change_game_amount', 'AdminController@change_game_amount')->name('change_game_amount');
 Route::post('/change_game_image', 'AdminController@change_game_image')->name('change_game_image');
-Route::get('/favorites', 'FavoritesController@favorites')->name('favorites');
-Route::post('/add_favorite', 'FavoritesController@add_favorite')->name('add_favorite');
-Route::post('/delete_from_favorites', 'FavoritesController@delete_from_favorites')->name('delete_from_favorites');
-Route::post('/clear_favorites', 'FavoritesController@clear_favorites')->name('clear_favorites');

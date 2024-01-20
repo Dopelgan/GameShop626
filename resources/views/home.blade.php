@@ -27,7 +27,10 @@
                                     <h6 class="card-title text-white">{{$game->name}}</h6>
                                     </a>
                                     <p class="card-text">{{$game->price}} р.</p>
-                                    <a href="#" class="btn btn-success text-white">Добавить в корзину</a>
+                                    <button id="add_game_to_basket" class="btn btn-outline-warning text-white">Добавить в
+                                        корзину
+                                    </button>
+                                    <button id="add_favorite" class="btn btn-outline-success text-white" type="submit">Добавить в избранное</button>
                                 </div>
                             </div>
 
@@ -47,12 +50,48 @@
                                         <h6 class="card-title text-white">{{$game->name}}</h6>
                                     </a>
                                     <p class="card-text">{{$game->price}} р.</p>
-                                    <a href="#" class="btn btn-warning text-white">Добавить в избранное</a>
+                                    <button id="add_favorite" class="btn btn-outline-success text-white" type="submit">Добавить в избранное</button>
                                 </div>
                             </div>
                         @endif
                     @endforeach
                 </div>
             </div>
+        <script>
+            $('#add_game_to_basket').on('click', function () {
+                $.ajax({
+                    type: "POST", // METHOD
+                    url: "{{ route('add_game_to_basket') }}", // route
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content'),
+                        game_name: "{{$game->name}}",
+                        user_name: "Admin"
+                    },
+                    success: function (response) {
+                        console.log(response.result)
+                    },
+                    error: function (response) {
+                        alert(response.message)
+                    }
+                });
+            })
+            $('#add_favorite').on('click', function () {
+                $.ajax({
+                    type: "POST",
+                    url: "{{route('add_favorite')}}",
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content'),
+                        game_name: "{{$game->name}}",
+                        user_name: "Admin"
+                    },
+                    success: function (response) {
+                        console.log(response.result)
+                    },
+                    error: function (response) {
+                        alert(response.message)
+                    }
+                })
+            })
+        </script>
 
 @endsection
