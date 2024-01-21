@@ -16,10 +16,6 @@
             <div class="d-flex justify-content-center">
                 <h5>Ваша корзина</h5>
             </div>
-            <form action="{{route('clear_basket')}}" method="post">
-                @csrf
-                <button class="btn btn-outline-danger text-white mt-2" type="submit">Очистить корзину</button>
-            </form>
         @else
             <div class="d-flex justify-content-center">
                 <h5>Корзина пуста</h5>
@@ -60,9 +56,14 @@
                 @endforeach
             </div>
             @if($games_in_basket->count()>0)
-            <div class="d-flex w-20 flex-column align-items-center m-5">
-                <h3>Итого: {{$total}}</h3>
-                <button type="button" class="btn btn-block btn-success btn-lg">Оформить заказ</button>
+            <div class="d-flex w-20 flex-column align-items-end ml-5">
+                <h5>Итого:</h5>
+                <h3 class="text-white">{{$total}} р.</h3>
+                <button type="button" class="btn btn-block text-white btn-outline-success">Оформить заказ</button>
+                <form action="{{route('clear_basket')}}" method="post">
+                    @csrf
+                    <button class="btn btn-outline-danger text-white mt-2" type="submit">Очистить корзину</button>
+                </form>
             </div>
             @endif
         </div>

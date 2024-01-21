@@ -16,9 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'GameController@home')->name('home');
-Route::get('/home', 'GameController@home')->name('home');
-Route::get('/basket', 'BasketController@basket')->name('basket');
+
+
 Route::any('/game_page/{game_name}', function ($game_name) {
 
     $game = DB::table('games')->where('name', $game_name)->get();
@@ -49,6 +48,11 @@ Route::any('/platform/{name}', function ($name) {
 });
 
 Route::post('/platform_game', 'GameController@platform_game')->name('platform_game');
+
+Route::get('/', 'GameController@home')->name('home');
+Route::get('/home', 'GameController@home')->name('home');
+
+Route::get('/basket', 'BasketController@basket')->name('basket');
 Route::post('/add_game_to_basket', 'BasketController@add_game_to_basket')->name('add_game_to_basket');
 Route::post('/clear_basket', 'BasketController@clear_basket')->name('clear_basket');
 Route::post('/change_amount_game_to_basket', 'BasketController@change_amount_game_to_basket')->name(

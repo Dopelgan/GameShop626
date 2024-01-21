@@ -17,8 +17,12 @@
                 <div class="d-flex justify-content-center">
                     <h5>Избранное</h5>
                 </div>
-                    @csrf
-                    <button id="clear_favorites" class="btn btn-outline-danger text-white mt-2" type="submit">Очистить избранное</button>
+                @csrf
+                <div class="d-flex justify-content-end">
+                    <button id="clear_favorites" class="btn btn-outline-danger text-white m-2" type="submit">Очистить
+                        избранное
+                    </button>
+                </div>
             @else
                 <div class="d-flex justify-content-center">
                     <h5>Избранное</h5>
@@ -27,59 +31,44 @@
                     <h6>Пока что здесь пусто</h6>
                 </div>
             @endif
-            <div id="games_block" class="d-flex w-75 flex-column">
+
+            <div id="games_block" class="d-flex justify-content-center row">
                 @foreach($games as $game)
-                    <div class="d-flex align-items-center mt-2">
-                        <div class="w-50">
+                    <div class="card text-white bg-dark m-1 border-secondary" style="width: 16rem;">
+                        <a href="/game_page/{{$game->name}}">
+                            <img class="card-img-top" src="{{$game->image}}" alt="Card image cap">
+                        </a>
+                        <div class="card-body">
                             <a href="/game_page/{{$game->name}}">
-                                <img src='{{$game->image}}'
-                                     class="img-fluid m-1"
-                                     width="80"></a>
-                            <a class="text-white-50"
-                               href="/game_page/{{$game->name}}">{{$game->name}}</a>
+                                <h6 class="card-title text-white">{{$game->name}}</h6>
+                            </a>
+                            <p class="card-text">{{$game->price}} р.</p>
+                            @if($game->amount != 0)
+                                <form class="card text-white bg-dark m-1 border-secondary"
+                                      action="{{route('add_game_to_basket')}}" method="POST">
+                                    @csrf
+                                    <input id="game_name" name="game_name" value="{{$game->name}}" type="hidden">
+                                    <input id="user_name" name="user_name" value="Admin" type="hidden">
+                                    <input id="page" name="page" value="favorites" type="hidden">
+                                    <input class="btn btn-outline-warning text-white" type="submit"
+                                           value="Добавить в корзину">
+                                </form>
+                            @else
+                                <h5>Нет в наличии</h5>
+                            @endif
+                            <form class="card text-white bg-dark m-1 border-secondary"
+                                  action="{{route('delete_from_favorites')}}" method="POST">
+                                @csrf
+                                <input id="game_name" name="game_name" value="{{$game->name}}" type="hidden">
+                                <input id="user_name" name="user_name" value="Admin" type="hidden">
+                                <input id="page" name="page" value="favorites" type="hidden">
+                                <input class="btn btn-outline-danger text-white" type="submit"
+                                       value="Удалить из избранного">
+                            </form>
                         </div>
-                        <div class="mr-2">{{$game->price}}р</div>
-                            <button id="delete_from_favorites" class="btn btn-outline-danger text-white mt-2" type="submit">Удалить</button>
                     </div>
                 @endforeach
             </div>
         </div>
-
-        <script>
-            $('#clear_favorites').on('click', function () {
-                $.ajax({
-                    type: "POST",
-                    url: "{{route('clear_favorites')}}",
-                    data: {
-                        _token: $('meta[name="csrf-token"]').attr('content'),
-                        user_name: "Admin"
-                    },
-                    success: function (response) {
-                        $('#games_block').html("<div><h3>Пока что здесь пусто</h3></div>")
-                        $('#clear_favorites').remove()
-                    },
-                    error: function (response) {
-                        alert(response.message)
-                    }
-                })
-            })
-            $('#delete_from_favorites').on('click', function () {
-                $.ajax({
-                    type: "POST",
-                    url: "{{route('delete_from_favorites')}}",
-                    data: {
-                        _token: $('meta[name="csrf-token"]').attr('content'),
-                        user_name: "Admin"
-                    },
-                    success: function (response) {
-                        $('#games_block').html("<div><h3>Пока что здесь пусто</h3></div>")
-                        $('#clear_favorites').remove()
-                    },
-                    error: function (response) {
-                        alert(response.message)
-                    }
-                })
-            })
-        </script>
 
 @endsection
