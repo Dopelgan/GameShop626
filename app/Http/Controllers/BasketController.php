@@ -25,25 +25,30 @@ class BasketController extends UserController
 
         $games = DB::table('games')->whereIn('name', $game_name_in_basket)->get();
 
+        $total = 0;
+
+        foreach ($games_in_basket as $game){
+            $variable = DB::table('games')->where('name', $game->game_name)->get();
+            $price = ($variable[0]->price) * ($game->amount);
+            $total = $total + $price;
+        }
 
         return view('basket', [
             'games_in_basket' => $games_in_basket,
-            'games' => $games
+            'games' => $games,
+            'total' => $total
         ]);
     }
 
     public function add_game_to_basket(Request $request)
     {
-        //Log::debug('тест кнопки', $request->all());
 
         Basket::updateOrCreate(
             ['game_name' => $request->game_name, 'user_name' => $request->user_name],
             ['amount' => "1"]
         );
 
-        return response()->json([
-            'result' => 'явлад'
-        ]);
+        return redirect($request->page);
 
     }
 
@@ -92,5 +97,12 @@ class BasketController extends UserController
         $deletedRows = DB::table('baskets')->where('user_name', 'Admin')->delete();
 
         return redirect('basket');
+    }
+
+    public function price_of_all_games_in_basket()
+    {
+        $games = DB::table('baskets')->where('user_name', 'Admin')->get();
+
+
     }
 }

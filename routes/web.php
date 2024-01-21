@@ -21,17 +21,17 @@ Route::get('/home', 'GameController@home')->name('home');
 Route::get('/basket', 'BasketController@basket')->name('basket');
 Route::any('/game_page/{game_name}', function ($game_name) {
 
-    $find_game = DB::table('games')->where('name', $game_name)->get();
+    $game = DB::table('games')->where('name', $game_name)->get();
 
-    $need_genres = DB::table('game_genres')->where('game_name', $game_name)->pluck('genre_name');
+    $genres = DB::table('game_genres')->where('game_name', $game_name)->pluck('genre_name');
 
-    $change = Game::find($find_game[0]->id);
+    $change = Game::find($game[0]->id);
     $change->count++;
     $change->save();
 
     return view('game_page', [
-        'need_game' => $find_game[0],
-        'need_genres' => $need_genres
+        'game' => $game[0],
+        'genres' => $genres
     ]);
 
 })->name('game_page');

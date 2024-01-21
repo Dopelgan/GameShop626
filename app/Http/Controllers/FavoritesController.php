@@ -26,9 +26,7 @@ class FavoritesController extends Controller
             ['game_name' => $request->game_name, 'user_name' => $request->user_name]
         );
 
-        return response()->json([
-            'result' => 'явлад'
-        ]);
+        return redirect($request->page);
     }
 
     public function delete_from_favorites(Request $request)

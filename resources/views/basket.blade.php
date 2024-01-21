@@ -50,7 +50,7 @@
                                         <div>{{$game_in_basket->amount}}</div>
                                         <input class="btn btn-success m-1" name="change" value="+" type="submit">
                                     </form>
-                                    <div>{{$game->price*$game_in_basket->amount}}</div>
+                                    <div>{{$game->price*$game_in_basket->amount}}р</div>
                                 @else
                                     <div> Временно нет в наличии.</div>
                                 @endif
@@ -60,8 +60,9 @@
                 @endforeach
             </div>
             @if($games_in_basket->count()>0)
-            <div class="d-flex w-25 flex-column align-items-center">
-                <h3>ИТОГО:</h3>
+            <div class="d-flex w-20 flex-column align-items-center m-5">
+                <h3>Итого: {{$total}}</h3>
+                <button type="button" class="btn btn-block btn-success btn-lg">Оформить заказ</button>
             </div>
             @endif
         </div>
