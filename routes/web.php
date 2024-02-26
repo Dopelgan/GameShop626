@@ -16,6 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/adminPanel', 'AdminController@adminPanel')->name('adminPanel');
+Route::post('/addProductToCatalog', 'AdminController@addProductToCatalog')->name('addProductToCatalog');
+Route::post('/addGenreToCatalog', 'AdminController@addGenreToCatalog')->name('addGenreToCatalog');
+Route::post('/addCategoryToCatalog', 'AdminController@addCategoryToCatalog')->name('addCategoryToCatalog');
+Route::post('/linkProductGenre', 'AdminController@linkProductGenre')->name('linkProductGenre');
+
 
 
 Route::any('/game_page/{game_name}', function ($game_name) {
@@ -64,11 +70,10 @@ Route::post('/add_favorite', 'FavoritesController@add_favorite')->name('add_favo
 Route::post('/delete_from_favorites', 'FavoritesController@delete_from_favorites')->name('delete_from_favorites');
 Route::post('/clear_favorites', 'FavoritesController@clear_favorites')->name('clear_favorites');
 
-Route::get('/test', 'AdminController@test')->name('test');
-Route::post('/add_game', 'AdminController@add_game')->name('add_game');
-Route::post('/add_genre', 'AdminController@add_genre')->name('add_genre');
-Route::post('/add_platform', 'AdminController@add_platform')->name('add_platform');
-Route::post('/game_genre', 'AdminController@game_genre')->name('game_genre');
+
+
+
+
 Route::post('/game_platform', 'AdminController@game_platform')->name('game_platform');
 Route::post('/change_description', 'AdminController@change_description')->name('change_description');
 Route::post('/change_game_amount', 'AdminController@change_game_amount')->name('change_game_amount');

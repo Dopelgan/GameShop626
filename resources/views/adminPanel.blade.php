@@ -14,149 +14,111 @@
         </div>
     @endif
     <div class="container">
-        <div class="row">
-            <div class="w-25">
-                <form class="d-flex flex-column m-2" action="{{route('add_game')}}" method="POST">
+        <div class="d-flex row justify-content-center">
+            <div>
+                <form class="d-flex flex-column m-2" action="{{route('addProductToCatalog')}}" method="POST">
                     @csrf
-
                     <h5>Добавить игру</h5>
-
                     <div class="mt-2">
-                        <label for="game_name">Название игры</label>
+                        <label for="product_name">Название игры</label>
                         <br>
-                        <input class="form form-control" id="game_name" type="text" name="game_name" required>
+                        <input class="form form-control" id="product_name" type="text" name="product_name" required>
                     </div>
-
                     <div class="mt-2">
                         <label for="year">Год выхода</label>
                         <br>
                         <select id="year" name="year" required="required" class="custom-select">
-                            @for ($i = 2000; $i < 2024; $i++)
+                            @for ($i = 2000; $i < 2025; $i++)
                                 <option value="{{$i}}">{{$i}}</option>
                             @endfor
                         </select>
                     </div>
-
                     <div class="mt-2">
-                        <label for="genre_name">Выберите жанры (через Ctrl)</label>
+                        <label for="genres">Выберите жанры (через Ctrl)</label>
                         <br>
-                        <select id="genre_name" name="genre_name[]" multiple="multiple" size="4" required="required"
+                        <select id="genres" name="genres[]" multiple="multiple" size="4" required="required"
                                 class="custom-select">
                             @foreach($genres as $genre)
-                                <option value="{{$genre->name}}">{{$genre->name}}</option>
+                                <option value="{{$genre->id}}">{{$genre->rus_name}}</option>
                             @endforeach
                         </select>
                     </div>
-
                     <div class="mt-2">
-                        <label for="platform_name">Выберите платформу</label>
+                        <label for="category">Выберите категорию</label>
                         <br>
-                        <select id="platform_name" name="platform_name" required="required" class="custom-select">
-                            @foreach($platforms as $platform)
-                                <option value="{{$platform->name}}">{{$platform->name}}</option>
+                        <select id="category" name="category" required="required" class="custom-select">
+                            @foreach($categories as $category)
+                                <option value="{{$category->id}}">{{$category->name}}</option>
                             @endforeach
                         </select>
                     </div>
-
                     <div class="mt-2">
-                        <label for="amount">Количество</label>
-                        <input type="text" id="amount" name="amount" required class="form form-control">
+                        <label for="quantity">Количество</label>
+                        <input type="text" id="quantity" name="quantity" required class="form form-control">
                     </div>
-
                     <div class="mt-2">
                         <label for="price">Цена</label>
                         <br>
                         <input id="price" type="text" name="price" required class="form form-control">
                     </div>
-
                     <div class="mt-2">
                         <label for="description">Описание</label>
                         <br>
                         <textarea class="form form-control" id="description" name="description" cols="30" rows="5"
                                   maxlength="1000">Описание пока не добавили.</textarea>
                     </div>
-
                     <div class="mt-2">
-                        <label for="image">Ссылка на изображение</label>
+                        <label for="picture">Ссылка на изображение</label>
                         <br>
-                        <input id="image" type="text" name="image" required class="form form-control">
+                        <input id="picture" type="text" name="picture" required class="form form-control">
                     </div>
-
                     <input class="btn btn-success mt-2" type="submit" value="Добавить">
                 </form>
             </div>
 
-            <div class="w-25">
-                <form class="d-flex flex-column m-2" action="{{route('add_genre')}}" method="POST">
+            <div>
+                <form class="d-flex flex-column m-2" action="{{route('addGenreToCatalog')}}" method="POST">
                     @csrf
                     <h5>Добавить жанр</h5>
-                    <label for="genre_name">Название жанра</label>
-                    <input class="form form-control" type="text" id="genre_name" name="genre_name" required>
-                    <input class="btn btn-success mt-2" type="submit" value="Добавить">
-
-                </form>
-
-                <form class="d-flex flex-column m-2" action="{{route('add_platform')}}" method="POST">
-                    @csrf
-                    <h5>Добавить платформу</h5>
-                    <label>Название платформы</label>
-                    <input class="form form-control" type="text" name="platform_name" required>
-                    <label>Ссылка на изображение</label>
-                    <input class="form form-control" type="text" name="platform_picture" required>
+                    <label for="rus_genre_name">Русское название жанра</label>
+                    <input class="form form-control" type="text" id="rus_genre_name" name="rus_genre_name" required>
+                    <label for="eng_genre_name">Английское название жанра</label>
+                    <input class="form form-control" type="text" id="eng_genre_name" name="eng_genre_name" required>
                     <input class="btn btn-success mt-2" type="submit" value="Добавить">
                 </form>
-            </div>
 
-            <div class="w-25">
-                <form class="d-flex flex-column m-2" action="{{route('game_genre')}}" method="POST">
+                <form class="d-flex flex-column m-2 mt-4" action="{{route('addCategoryToCatalog')}}" method="POST">
                     @csrf
-                    <h5>Связать игру и жанры</h5>
-                    <label for="game_name">Выберите игру</label>
-                    <select class="custom-select" id="game_name" name="game_name" required="required">
-                        @foreach($games as $game)
-                            <option value="{{$game->name}}">{{$game->name}}</option>
+                    <h5>Добавить категорию</h5>
+                    <label for="category_name">Название категории</label>
+                    <input class="form form-control" type="text" id="category_name" name="category_name" required>
+                    <input class="btn btn-success mt-2" type="submit" value="Добавить">
+                </form>
+
+                <form class="d-flex flex-column m-2 mt-4" action="{{route('linkProductGenre')}}" method="POST">
+                    @csrf
+                    <h5>Связать продукт и жанры</h5>
+                    <label for="product_id">Выберите игру</label>
+                    <select class="custom-select" id="product_id" name="product_id" required="required">
+                        @foreach($products as $product)
+                            <option value="{{$product->id}}">{{$product->name}}</option>
                         @endforeach
                     </select>
                     <div class="mt-2">
-                        <label for="game_name">Выберите жанры (через Ctrl)</label>
+                        <label for="genres_id">Выберите жанры (через Ctrl)</label>
                         <br>
-                        <select id="game_name" name="genre_name[]" multiple="multiple" size="4" required="required"
+                        <select id="genres_id" name="genres_id[]" multiple="multiple" size="4" required="required"
                                 class="custom-select">
                             @foreach($genres as $genre)
-                                <option value="{{$genre->name}}">{{$genre->name}}</option>
+                                <option value="{{$genre->id}}">{{$genre->rus_name}}</option>
                             @endforeach
                         </select>
                     </div>
-                    <input class="btn btn-success mt-2" type="submit" value="Связать">
-                </form>
-
-                <form class="d-flex flex-column m-2" action="{{route('game_platform')}}" method="POST">
-                    @csrf
-                    <h5>Связать игру и платформу</h5>
-                    <div>
-                        <label for="game_name">Выберите игру</label>
-                        <br>
-                        <select class="custom-select" id="game_name" name="game_name" required="required">
-                            @foreach($games as $game)
-                                <option value="{{$game->name}}">{{$game->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div>
-                        <label for="platform_name">Выберите платформу</label>
-                        <br>
-                        <select class="custom-select" id="platform_name" name="platform_name" required="required">
-                            @foreach($platforms as $platform)
-                                <option value="{{$platform->name}}">{{$platform->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
                     <input class="btn btn-success mt-2" type="submit" value="Связать">
                 </form>
             </div>
 
+            <!--
             <div class="w-25">
                 <form class="d-flex flex-column m-2" action="{{route('change_game_amount')}}"
                       method="POST">
@@ -164,8 +126,8 @@
                     <h5>Изменить количество игр</h5>
                     <label for="game_name">Выберите игру</label>
                     <select class="custom-select" id="game_name" name="game_name" required="required">
-                        @foreach($games as $game)
-                            <option value="{{$game->name}}">{{$game->name}}</option>
+                        @foreach($products as $product)
+                            <option value="{{$product->id}}">{{$product->name}}</option>
                         @endforeach
                     </select>
                     <label for="new_amount">Изменить кол-во копий</label>
@@ -181,8 +143,8 @@
                         <h5>Редактировать описание:</h5>
                         <label for="game_name">Выберите игру</label>
                         <select class="custom-select" id="game_name" name="game_name" required="required">
-                            @foreach($games as $game)
-                                <option value="{{$game->name}}">{{$game->name}}</option>
+                            @foreach($products as $product)
+                                <option value="{{$product->id}}">{{$product->name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -200,8 +162,8 @@
                     <h5>Изменить изображение игры</h5>
                     <label for="game_name">Выберите игру</label>
                     <select class="custom-select" id="game_name" name="game_name" required="required">
-                        @foreach($games as $game)
-                            <option value="{{$game->name}}">{{$game->name}}</option>
+                        @foreach($products as $product)
+                            <option value="{{$product->id}}">{{$product->name}}</option>
                         @endforeach
                     </select>
                     <label class="mt-2" for="new_image">Вставьте ссылку на изображение</label>
@@ -209,6 +171,7 @@
                     <input class="btn btn-success mt-2" type="submit" value="Изменить">
                 </form>
             </div>
+            -->
         </div>
     </div>
 
