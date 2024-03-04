@@ -40,12 +40,12 @@ class BasketController extends UserController
         ]);
     }
 
-    public function add_game_to_basket(Request $request)
+    public function addToBasket(Request $request)
     {
 
         Basket::updateOrCreate(
-            ['game_name' => $request->game_name, 'user_name' => $request->user_name],
-            ['amount' => "1"]
+            ['product_id' => $request->product_id, 'user_id' => $request->user_id],
+            ['quantity' => "1"]
         );
 
         return redirect($request->page);

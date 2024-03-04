@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Metascore;
 use App\ProductGenre;
 use App\Genre;
 use App\Category;
 use App\Product;
+use Carbon\Carbon;
+use Hooshid\MetacriticScraper\Metacritic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Metacritic\API\MetacriticAPI;
+use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
@@ -19,6 +24,56 @@ class AdminController extends Controller
             'genres' => Genre::get(),
             'categories' => Category::get()
         ]);
+    }
+
+    public function test(Request $request)
+    {
+        $metacritic = new Metacritic();
+        $extract = $metacritic->extract(Str::after($request->url, 'https://www.metacritic.com'));
+        $result = $extract['result'];
+        $error = $extract['error'];
+
+        //dd($result);
+
+        $product = Product::create(
+            [
+                'name' => $result['title'],
+                'year' => Str::before($result['release_year'], '-'),
+                'price' => $request->price,
+                'quantity' => $request->quantity,
+                'description' => $result['summary'],
+                'picture' => $result['thumbnail'],
+                'category_id' => $request->category,
+            ]
+        );
+
+        Metascore::create(
+            [
+                'product_id' => $product->id,
+                'meta_score' => $result['meta_score'],
+                'user_score' => $result['user_score']*10,
+            ]
+        );
+
+        $genre = Genre::firstOrCreate(
+            [
+                'eng_name' => $result['genres']
+            ],
+            [
+                'eng_name' => $result['genres']
+            ]
+        );
+
+        ProductGenre::firstOrCreate(
+            [
+                'product_id' => $product->id, 'genre_id' => $genre->id
+            ],
+            [
+                'product_id' => $product->id, 'genre_id' => $genre->id
+            ]
+        );
+
+        return Redirect::route('adminPanel');
     }
 
     public function addProductToCatalog(Request $request)

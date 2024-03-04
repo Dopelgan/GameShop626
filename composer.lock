@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6558f74828bca9ebecac73d90cea4b1a",
+    "content-hash": "40d7fd1f3b1d31530567282d6c627cd7",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -927,6 +927,68 @@
             "time": "2023-04-17T16:00:37+00:00"
         },
         {
+            "name": "hooshid/metacritic-scraper",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hooshid/metacritic-scraper.git",
+                "reference": "bc0b2304c2115c981099198fcad22d60d74285eb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hooshid/metacritic-scraper/zipball/bc0b2304c2115c981099198fcad22d60d74285eb",
+                "reference": "bc0b2304c2115c981099198fcad22d60d74285eb",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": ">=7.3",
+                "voku/simple_html_dom": "^4.8"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Hooshid\\MetacriticScraper\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alireza Kamali",
+                    "email": "arka1373@gmail.com",
+                    "homepage": "https://github.com/arkamali",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Library for retrieving movie, game, album, tv, person, video, company, story information from metacritic.com",
+            "homepage": "https://github.com/hooshid/metacritic-scraper",
+            "keywords": [
+                "api",
+                "metacritic",
+                "metacritic-metadata",
+                "metacritic-scraper",
+                "metacritic-scraping",
+                "metacritic-webscrapping",
+                "metacritic.com",
+                "parser",
+                "php",
+                "scraper",
+                "scraping"
+            ],
+            "support": {
+                "issues": "https://github.com/hooshid/metacritic-scraper/issues",
+                "source": "https://github.com/hooshid/metacritic-scraper/tree/1.2.0"
+            },
+            "time": "2023-09-02T04:05:21+00:00"
+        },
+        {
             "name": "laravel/framework",
             "version": "v7.28.4",
             "source": {
@@ -1155,6 +1217,61 @@
             "time": "2024-01-04T16:10:04+00:00"
         },
         {
+            "name": "laravel/ui",
+            "version": "v2.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/ui.git",
+                "reference": "d01a705763c243b07be795e9d1bb47f89260f73d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/ui/zipball/d01a705763c243b07be795e9d1bb47f89260f73d",
+                "reference": "d01a705763c243b07be795e9d1bb47f89260f73d",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^7.0",
+                "illuminate/filesystem": "^7.0",
+                "illuminate/support": "^7.0",
+                "php": "^7.2.5|^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Ui\\UiServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Ui\\": "src/",
+                    "Illuminate\\Foundation\\Auth\\": "auth-backend/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "Laravel UI utilities and presets.",
+            "keywords": [
+                "laravel",
+                "ui"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/ui/issues",
+                "source": "https://github.com/laravel/ui/tree/v2.5.0"
+            },
+            "time": "2020-11-03T19:45:19+00:00"
+        },
+        {
             "name": "league/commonmark",
             "version": "1.6.7",
             "source": {
@@ -1334,6 +1451,108 @@
                 "source": "https://github.com/thephpleague/flysystem/tree/master"
             },
             "time": "2018-08-22T07:45:22+00:00"
+        },
+        {
+            "name": "mallardduck/metacritic-api",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mallardduck/php-metacritic-api.git",
+                "reference": "5556e335843724cc5fd72d766ffa0d899fa0447d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mallardduck/php-metacritic-api/zipball/5556e335843724cc5fd72d766ffa0d899fa0447d",
+                "reference": "5556e335843724cc5fd72d766ffa0d899fa0447d",
+                "shasum": ""
+            },
+            "require": {
+                "mashape/unirest-php": "^3.0"
+            },
+            "require-dev": {
+                "phpmetrics/phpmetrics": "^2.7",
+                "vimeo/psalm": "^4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "./libs/simple_html_dom.php"
+                ],
+                "psr-4": {
+                    "Metacritic\\API\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Melroy van den Berg",
+                    "homepage": "https://melroy.org/",
+                    "role": "Original Creator"
+                },
+                {
+                    "name": "Dan Pock",
+                    "homepage": "https://danpock.me/",
+                    "role": "Fork Maintainer"
+                }
+            ],
+            "support": {
+                "source": "https://github.com/mallardduck/php-metacritic-api/tree/2.1.0"
+            },
+            "time": "2022-11-30T18:01:54+00:00"
+        },
+        {
+            "name": "mashape/unirest-php",
+            "version": "v3.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Mashape/unirest-php.git",
+                "reference": "842c0f242dfaaf85f16b72e217bf7f7c19ab12cb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Mashape/unirest-php/zipball/842c0f242dfaaf85f16b72e217bf7f7c19ab12cb",
+                "reference": "842c0f242dfaaf85f16b72e217bf7f7c19ab12cb",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "0.1.*",
+                "phpunit/phpunit": "~4.4"
+            },
+            "suggest": {
+                "ext-json": "Allows using JSON Bodies for sending and parsing requests"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Unirest\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Unirest PHP",
+            "homepage": "https://github.com/Mashape/unirest-php",
+            "keywords": [
+                "client",
+                "curl",
+                "http",
+                "https",
+                "rest"
+            ],
+            "support": {
+                "email": "opensource@mashape.com",
+                "issues": "https://github.com/Mashape/unirest-php/issues",
+                "source": "https://github.com/Mashape/unirest-php/tree/master"
+            },
+            "time": "2016-08-11T17:49:21+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -4811,6 +5030,87 @@
                 }
             ],
             "time": "2022-01-24T18:55:24+00:00"
+        },
+        {
+            "name": "voku/simple_html_dom",
+            "version": "4.8.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/voku/simple_html_dom.git",
+                "reference": "9ef90f0280fe16054c117e04ea86617ce0fcdd35"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/voku/simple_html_dom/zipball/9ef90f0280fe16054c117e04ea86617ce0fcdd35",
+                "reference": "9ef90f0280fe16054c117e04ea86617ce0fcdd35",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-libxml": "*",
+                "ext-simplexml": "*",
+                "php": ">=7.0.0",
+                "symfony/css-selector": "~3.0 || ~4.0 || ~5.0 || ~6.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~6.0 || ~7.0 || ~9.0"
+            },
+            "suggest": {
+                "voku/portable-utf8": "If you need e.g. UTF-8 fixed output."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "voku\\helper\\": "src/voku/helper/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "dimabdc",
+                    "email": "support@titor.ru",
+                    "homepage": "https://github.com/dimabdc",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Lars Moelleken",
+                    "homepage": "https://www.moelleken.org/",
+                    "role": "Fork-Maintainer"
+                }
+            ],
+            "description": "Simple HTML DOM package.",
+            "homepage": "https://github.com/voku/simple_html_dom",
+            "keywords": [
+                "HTML Parser",
+                "dom",
+                "php dom"
+            ],
+            "support": {
+                "issues": "https://github.com/voku/simple_html_dom/issues",
+                "source": "https://github.com/voku/simple_html_dom/tree/4.8.8"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/moelleken",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/voku",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/voku",
+                    "type": "patreon"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/voku/simple_html_dom",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2023-02-12T16:15:15+00:00"
         }
     ],
     "packages-dev": [
@@ -6779,7 +7079,8 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.2.5"
+        "php": "^7.2.5",
+        "ext-json": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.6.0"

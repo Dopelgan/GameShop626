@@ -77,6 +77,37 @@
             </div>
 
             <div>
+                <form class="d-flex flex-column m-2" action="{{route('test')}}" method="GET">
+                    @csrf
+                    <h5>Добавить игру 2</h5>
+                    <div class="mt-2">
+                        <label for="url">Ссылка на игру</label>
+                        <br>
+                        <input class="form form-control" id="url" type="text" name="url" required>
+                    </div>
+                    <div class="mt-2">
+                        <label for="category">Выберите категорию</label>
+                        <br>
+                        <select id="category" name="category" required="required" class="custom-select">
+                            @foreach($categories as $category)
+                                <option value="{{$category->id}}">{{$category->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mt-2">
+                        <label for="quantity">Количество</label>
+                        <input type="text" id="quantity" name="quantity" required class="form form-control">
+                    </div>
+                    <div class="mt-2">
+                        <label for="price">Цена</label>
+                        <br>
+                        <input id="price" type="text" name="price" required class="form form-control">
+                    </div>
+                    <input class="btn btn-success mt-2" type="submit" value="Добавить">
+                </form>
+            </div>
+
+            <div>
                 <form class="d-flex flex-column m-2" action="{{route('addGenreToCatalog')}}" method="POST">
                     @csrf
                     <h5>Добавить жанр</h5>

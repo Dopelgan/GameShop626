@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Favorites;
+use App\Favorite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class FavoritesController extends Controller
+class FavoriteController extends Controller
 {
     public function favorites()
     {
@@ -19,11 +19,11 @@ class FavoritesController extends Controller
         ]);
     }
 
-    public function add_favorite(Request $request)
+    public function addToFavorite(Request $request)
     {
-        $add_game_to_basket = Favorites::FirstOrCreate(
-            ['game_name' => $request->game_name, 'user_name' => $request->user_name],
-            ['game_name' => $request->game_name, 'user_name' => $request->user_name]
+        Favorite::FirstOrCreate(
+            ['product_id' => $request->product_id, 'user_id' => $request->user_id],
+            ['product_id' => $request->product_id, 'user_id' => $request->user_id]
         );
 
         return redirect($request->page);

@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Basket;
+use App\Category;
 use App\Game;
 use App\GameGenre;
 use App\GamePlatform;
 use App\Genre;
 use App\Platform;
+use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,11 +17,9 @@ class GameController extends UserController
 {
     public function home()
     {
-        $games = DB::table('games')->get();
-        $platforms = DB::table('platforms')->get();
         return view('home', [
-            'games' => $games,
-            'platforms' => $platforms,
+            'products' => Product::get(),
+            'categories' => Category::get(),
         ]);
     }
 
