@@ -19,11 +19,11 @@
                     @if(!$product->quantity == 0)
 
                         <div class="card text-white bg-dark m-1 border-secondary" style="width: 16rem;">
-                            <a href="/product/{{$product->name}}">
+                            <a href="/product/{{$product->id}}">
                                 <img class="card-img-top" src="{{$product->picture}}" alt="Card image cap">
                             </a>
                             <div class="card-body">
-                                <a href="/product/{{$product->name}}">
+                                <a href="/product/{{$product->id}}">
                                     <h6 class="card-title text-white">{{$product->name}}</h6>
                                 </a>
                                 <p class="card-text">{{$product->price}} р.</p>
@@ -44,11 +44,9 @@
                                     <input id="page" name="page" value="home" type="hidden">
                                     <input class="btn btn-outline-success text-white" type="submit"
                                            value="Добавить в избранное">
-
                                 </form>
                             </div>
                         </div>
-
                     @endif
 
                 @endforeach

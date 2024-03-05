@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('year')->default('0');
             $table->longText('picture')->nullable();
             $table->unsignedBigInteger('quantity')->default('0');
+            $table->unsignedBigInteger('count')->default('0');
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unique(['name', 'category_id']);
             $table->foreign('category_id')->references('id')->on('categories');

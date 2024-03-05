@@ -1,6 +1,8 @@
 <?php
 
 use App\Product;
+use App\ProductGenre;
+use App\Genre;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -24,24 +26,20 @@ Route::post('/addCategoryToCatalog', 'AdminController@addCategoryToCatalog')->na
 Route::post('/linkProductGenre', 'AdminController@linkProductGenre')->name('linkProductGenre');
 Route::post('/addToBasket', 'BasketController@addToBasket')->name('addToBasket');
 Route::post('/addToFavorite', 'FavoriteController@addToFavorite')->name('addToFavorite');
-Route::get('/test', 'AdminController@test')->name('test');
+Route::get('/autoAddProductToCatalog', 'AdminController@autoAddProductToCatalog')->name('autoAddProductToCatalog');
 
-Route::any('/game_page/{game_name}', function ($game_name) {
+Route::any('/product/{product_id}', function ($product_id) {
 
-    $game = DB::table('games')->where('name', $game_name)->get();
+    $product = Product::find($product_id);
+    $product->count++;
+    $product->save();
 
-    $genres = DB::table('game_genres')->where('game_name', $game_name)->pluck('genre_name');
-
-    $change = Game::find($game[0]->id);
-    $change->count++;
-    $change->save();
-
-    return view('game_page', [
-        'game' => $game[0],
-        'genres' => $genres
+    return view('product', [
+        'product' => Product::where('id', $product_id)->get()->find($product_id),
+        'genres' => Genre::whereIn('id', ProductGenre::where('product_id', $product_id)->get()->pluck('genre_id'))->get()
     ]);
 
-})->name('game_page');
+})->name('product');
 
 Route::any('/platform/{name}', function ($name) {
 

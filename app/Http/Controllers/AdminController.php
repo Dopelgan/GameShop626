@@ -26,7 +26,7 @@ class AdminController extends Controller
         ]);
     }
 
-    public function test(Request $request)
+    public function autoAddProductToCatalog(Request $request)
     {
         $metacritic = new Metacritic();
         $extract = $metacritic->extract(Str::after($request->url, 'https://www.metacritic.com'));
