@@ -3,30 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Favorite;
+use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class FavoriteController extends Controller
 {
     public function favorites()
     {
-        $games_in_favorites = DB::table('favorites')->where('user_name', 'Admin')->get();
-        $pluck = DB::table('favorites')->where('user_name', 'Admin')->pluck('game_name');
-        $games = DB::table('games')->whereIn('name', $pluck)->get();
-
-        return view('favorites', [
-            'games' => $games
-        ]);
+        return view('favorites',[
+            'products' => Product::whereIn('id', Favorite::where('user_id', Auth::user()->id)->pluck('product_id'))->get()
+            ]
+        );
     }
 
     public function addToFavorite(Request $request)
     {
         Favorite::FirstOrCreate(
-            ['product_id' => $request->product_id, 'user_id' => $request->user_id],
-            ['product_id' => $request->product_id, 'user_id' => $request->user_id]
+            ['product_id' => $request->product_id, 'user_id' => Auth::user()->id],
+            ['product_id' => $request->product_id, 'user_id' => Auth::user()->id]
         );
 
-        return redirect($request->page);
+        return back();
     }
 
     public function delete_from_favorites(Request $request)

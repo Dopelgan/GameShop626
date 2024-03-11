@@ -161,7 +161,6 @@
                 </form>
             </div>
 
-            <!--
             <div class="w-25">
                 <form class="d-flex flex-column m-2" action="{{route('change_game_amount')}}"
                       method="POST">
@@ -199,22 +198,21 @@
                     <input class="btn btn-success mt-2" type="submit" value="Изменить">
                 </form>
 
-                <form class="d-flex flex-column m-2" action="{{route('change_game_image')}}"
+                <form class="d-flex flex-column m-2" action="{{route('changeProductPicture')}}"
                       method="POST">
                     @csrf
-                    <h5>Изменить изображение игры</h5>
-                    <label for="game_name">Выберите игру</label>
-                    <select class="custom-select" id="game_name" name="game_name" required="required">
+                    <h5>Изменить изображение продукта</h5>
+                    <label for="product_id">Выберите игру</label>
+                    <select class="custom-select" id="product_id" name="product_id" required="required">
                         @foreach($products as $product)
                             <option value="{{$product->id}}">{{$product->name}}</option>
                         @endforeach
                     </select>
-                    <label class="mt-2" for="new_image">Вставьте ссылку на изображение</label>
-                    <input class="form form-control" type="text" id="new_image" name="new_image" required>
+                    <label class="mt-2" for="picture">Вставьте ссылку на изображение</label>
+                    <input class="form form-control" type="text" id="picture" name="picture" required>
                     <input class="btn btn-success mt-2" type="submit" value="Изменить">
                 </form>
             </div>
-            -->
         </div>
     </div>
 

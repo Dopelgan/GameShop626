@@ -73,7 +73,7 @@ class AdminController extends Controller
             ]
         );
 
-        return Redirect::route('adminPanel');
+        return back();
     }
 
     public function addProductToCatalog(Request $request)
@@ -111,7 +111,7 @@ class AdminController extends Controller
             );
         }
 
-        return Redirect::route('adminPanel');
+        return back();
     }
 
     public function addGenreToCatalog(Request $request)
@@ -133,7 +133,7 @@ class AdminController extends Controller
             ]
         );
 
-        return Redirect::route('adminPanel');
+        return back();
     }
 
     public function addCategoryToCatalog(Request $request)
@@ -152,7 +152,7 @@ class AdminController extends Controller
             ]
         );
 
-        return Redirect::route('adminPanel');
+        return back();
     }
 
     public function linkProductGenre(Request $request)
@@ -168,7 +168,7 @@ class AdminController extends Controller
             );
         }
 
-        return Redirect::route('adminPanel');
+        return back();
     }
 
     public function change_game_amount(Request $request)
@@ -178,7 +178,7 @@ class AdminController extends Controller
         $change->amount = $request->new_amount;
         $change->save();
 
-        return Redirect::route('test');
+        return back();
     }
 
     public function change_description(Request $request)
@@ -188,16 +188,15 @@ class AdminController extends Controller
         $change->description = $request->new_description;
         $change->save();
 
-        return Redirect::route('test');
+        return back();
     }
 
-    public function change_game_image(Request $request)
+    public function changeProductPicture(Request $request)
     {
-        $game = DB::table('games')->where('name', $request->game_name)->get();
-        $change = Game::find($game[0]->id);
-        $change->image = $request->new_image;
+        $change = Product::find($request->product_id);
+        $change->picture = $request->picture;
         $change->save();
 
-        return Redirect::route('test');
+        return back();
     }
 }

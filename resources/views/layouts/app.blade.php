@@ -19,9 +19,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="bg-dark">
+<body>
 <div id="app">
-    <nav class="navbar navbar-expand-md navbar-dark bg-secondary shadow-sm">
+    <nav class="navbar navbar-expand-md navbar-dark shadow-sm" style="background-color: #3f9ae5">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'Laravel') }}
@@ -55,12 +55,13 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route ('favorites') }}">{{ ('Избранное') }}</a>
+                                <a class="dropdown-item" href="{{ route ('basket') }}">{{ ('Корзина') }}</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                    {{ ('Logout') }}
+                                    {{ ('Выйти') }}
                                 </a>
-
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>

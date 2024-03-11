@@ -1,5 +1,6 @@
 <?php
 
+use App\Metascore;
 use App\Product;
 use App\ProductGenre;
 use App\Genre;
@@ -29,16 +30,14 @@ Route::post('/addToFavorite', 'FavoriteController@addToFavorite')->name('addToFa
 Route::get('/autoAddProductToCatalog', 'AdminController@autoAddProductToCatalog')->name('autoAddProductToCatalog');
 
 Route::any('/product/{product_id}', function ($product_id) {
-
     $product = Product::find($product_id);
     $product->count++;
     $product->save();
-
     return view('product', [
         'product' => Product::where('id', $product_id)->get()->find($product_id),
-        'genres' => Genre::whereIn('id', ProductGenre::where('product_id', $product_id)->get()->pluck('genre_id'))->get()
+        'genres' => Genre::whereIn('id', ProductGenre::where('product_id', $product_id)->get()->pluck('genre_id'))->get(),
+        'metascore' => Metascore::where('product_id', $product_id)->get()->first()
     ]);
-
 })->name('product');
 
 Route::any('/platform/{name}', function ($name) {
@@ -53,10 +52,7 @@ Route::any('/platform/{name}', function ($name) {
     ]);
 });
 
-Route::post('/platform_game', 'GameController@platform_game')->name('platform_game');
-
-Route::get('/', 'GameController@home')->name('home');
-Route::get('/main', 'GameController@home')->name('main');
+Route::post('/platform_game', 'ProductController@platform_game')->name('platform_game');
 
 Route::get('/basket', 'BasketController@basket')->name('basket');
 Route::post('/clear_basket', 'BasketController@clear_basket')->name('clear_basket');
@@ -76,7 +72,9 @@ Route::post('/clear_favorites', 'FavoriteController@clear_favorites')->name('cle
 Route::post('/game_platform', 'AdminController@game_platform')->name('game_platform');
 Route::post('/change_description', 'AdminController@change_description')->name('change_description');
 Route::post('/change_game_amount', 'AdminController@change_game_amount')->name('change_game_amount');
-Route::post('/change_game_image', 'AdminController@change_game_image')->name('change_game_image');
+Route::post('/changeProductPicture', 'AdminController@changeProductPicture')->name('changeProductPicture');
+
+Route::get('/', 'HomeController@home')->name('home');
 
 Auth::routes();
 

@@ -13,56 +13,52 @@
                 </div>
             @endif
 
-            @if($games->count()>0)
+            @if($products->count()>0)
                 <div class="d-flex justify-content-center">
-                    <h5>Избранное</h5>
+                    <h3 class="font-weight-bold">Избранное</h3>
                 </div>
                 @csrf
                 <div class="d-flex justify-content-end">
-                    <button id="clear_favorites" class="btn btn-outline-danger text-white m-2" type="submit">Очистить
+                    <button id="clear_favorites" class="btn btn-secondary  m-2" type="submit">Очистить
                         избранное
                     </button>
                 </div>
             @else
                 <div class="d-flex justify-content-center">
-                    <h5>Избранное</h5>
+                    <h3 class="font-weight-bold">Избранное</h3>
                 </div>
                 <div class="d-flex justify-content-center">
                     <h6>Пока что здесь пусто</h6>
                 </div>
             @endif
 
-            <div id="games_block" class="d-flex justify-content-center row">
-                @foreach($games as $game)
-                    <div class="card text-white bg-dark m-1 border-secondary" style="width: 16rem;">
-                        <a href="/game_page/{{$game->name}}">
-                            <img class="card-img-top" src="{{$game->image}}" alt="Card image cap">
+            <div id="product_block" class="d-flex justify-content-center row">
+                @foreach($products as $product)
+                    <div class="card col-md-3" style="width: 16rem;">
+                        <a href="/product/{{$product->id}}">
+                            <img class="card-img-top mt-3" src="{{$product->picture}}" alt="Card image cap">
                         </a>
                         <div class="card-body">
-                            <a href="/game_page/{{$game->name}}">
-                                <h6 class="card-title text-white">{{$game->name}}</h6>
+                            <a href="/game_page/{{$product->name}}">
+                                <h5 class="card-title text-center text-dark">{{$product->name}}</h5>
                             </a>
-                            <p class="card-text">{{$game->price}} р.</p>
-                            @if($game->amount != 0)
-                                <form class="card text-white bg-dark m-1 border-secondary"
-                                      action="{{route('add_game_to_basket')}}" method="POST">
+                            <h5 class="card-text text-center text-danger">{{$product->price}} р.</h5>
+                            @if(!$product->quantity == 0)
+                                <form class="card m-1 "
+                                      action="{{route('addToBasket')}}" method="POST">
                                     @csrf
-                                    <input id="game_name" name="game_name" value="{{$game->name}}" type="hidden">
-                                    <input id="user_name" name="user_name" value="Admin" type="hidden">
-                                    <input id="page" name="page" value="favorites" type="hidden">
-                                    <input class="btn btn-outline-warning text-white" type="submit"
+                                    <input id="product_id" name="product_id" value="{{$product->id}}" type="hidden">
+                                    <input class="btn btn-block btn-success" type="submit"
                                            value="Добавить в корзину">
                                 </form>
                             @else
                                 <h5>Нет в наличии</h5>
                             @endif
-                            <form class="card text-white bg-dark m-1 border-secondary"
+                            <form class="card m-1"
                                   action="{{route('delete_from_favorites')}}" method="POST">
                                 @csrf
-                                <input id="game_name" name="game_name" value="{{$game->name}}" type="hidden">
-                                <input id="user_name" name="user_name" value="Admin" type="hidden">
-                                <input id="page" name="page" value="favorites" type="hidden">
-                                <input class="btn btn-outline-danger text-white" type="submit"
+                                <input id="product" name="product" value="{{$product->id}}" type="hidden">
+                                <input class="btn btn-secondary" type="submit"
                                        value="Удалить из избранного">
                             </form>
                         </div>

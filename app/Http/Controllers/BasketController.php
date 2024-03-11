@@ -48,7 +48,7 @@ class BasketController extends UserController
             ['quantity' => "1"]
         );
 
-        return redirect($request->page);
+        return back();
 
     }
 
