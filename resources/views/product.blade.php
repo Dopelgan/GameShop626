@@ -10,9 +10,21 @@
                         @if(!$metascore == null)
                         <div class="d-flex flex-row justify-content-around align-items-center">
                             <h6 class="font-weight-bold">Metascore</h6>
+                            @if($metascore->meta_score >= 75)
                             <h6 class = "d-flex justify-content-center align-items-center font-weight-bold rounded" style="background-color: #2fa360;  width: 30px; height: 30px;">{{$metascore->meta_score}}</h6>
+                            @elseif($metascore->meta_score >= 50)
+                                <h6 class = "d-flex justify-content-center align-items-center font-weight-bold rounded" style="background-color: #f6993f;  width: 30px; height: 30px;">{{$metascore->meta_score}}</h6>
+                            @elseif($metascore->meta_score < 50)
+                                <h6 class = "d-flex justify-content-center align-items-center font-weight-bold rounded" style="background-color: #d0211c;  width: 30px; height: 30px;">{{$metascore->meta_score}}</h6>
+                            @endif
                             <h6 class="font-weight-bold">User score</h6>
-                            <h6 class = "d-flex justify-content-center align-items-center font-weight-bold rounded-circle" style="background-color: #2fa360;  width: 30px; height: 30px;">{{$metascore->user_score}}</h6>
+                            @if($metascore->meta_score >= 75)
+                                <h6 class = "d-flex justify-content-center align-items-center font-weight-bold rounded-circle" style="background-color: #2fa360;  width: 30px; height: 30px;">{{$metascore->user_score}}</h6>
+                            @elseif($metascore->meta_score >= 50)
+                                <h6 class = "d-flex justify-content-center align-items-center font-weight-bold rounded-circle" style="background-color: #f6993f;  width: 30px; height: 30px;">{{$metascore->user_score}}</h6>
+                            @elseif($metascore->meta_score < 50)
+                                <h6 class = "d-flex justify-content-center align-items-center font-weight-bold rounded-circle" style="background-color: #d0211c;  width: 30px; height: 30px;">{{$metascore->user_score}}</h6>
+                            @endif
                         </div>
                         @endif
                         <img

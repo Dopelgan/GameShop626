@@ -24,10 +24,22 @@
                                 @foreach($metascore as $meta)
                                     @if($meta->product_id == $product->id)
                                         <div class="d-flex justify-content-end card-img-overlay">
+                                            @if ($meta->meta_score >= 75)
                                             <h4 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
                                                 style="background-color: #2fa360;  width: 40px; height: 40px;">
                                                 {{$meta->meta_score}}
                                             </h4>
+                                            @elseif($meta->meta_score > 50)
+                                                <h4 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
+                                                    style="background-color: #f6993f;  width: 40px; height: 40px;">
+                                                    {{$meta->meta_score}}
+                                                </h4>
+                                            @elseif($meta->meta_score <= 50)
+                                                <h4 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
+                                                    style="background-color: #d0211c;  width: 40px; height: 40px;">
+                                                    {{$meta->meta_score}}
+                                                </h4>
+                                            @endif
                                         </div>
                                     @endif
                                 @endforeach

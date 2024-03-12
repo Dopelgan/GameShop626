@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h3 style="text-align:center" class="text-white">Страница администратора</h3>
+        <h3 style="text-align:center">Страница администратора</h3>
     </div>
     @if(count($errors) > 0)
         <div class="alert alert-danger">
@@ -13,12 +13,12 @@
             </ul>
         </div>
     @endif
-    <div class="container text-white-50">
+    <div class="container -50">
         <div class="d-flex row justify-content-center">
             <div class="w-25">
                 <form class="d-flex flex-column m-2" action="{{route('autoAddProductToCatalog')}}" method="GET">
                     @csrf
-                    <h5 class="text-white">Добавить игру, её жанры и оценки с метакритик автоматически</h5>
+                    <h5>Добавить игру, её жанры и оценки с метакритик автоматически</h5>
                     <div class="mt-2">
                         <label for="url">Ссылка на игру</label>
                         <br>
@@ -49,7 +49,7 @@
             <div>
                 <form class="d-flex flex-column m-2" action="{{route('addProductToCatalog')}}" method="POST">
                     @csrf
-                    <h5 class="text-white">Добавить игру вручную</h5>
+                    <h5>Добавить игру вручную</h5>
                     <div class="mt-2">
                         <label for="product_name">Название игры</label>
                         <br>
@@ -116,7 +116,7 @@
             <div>
                 <form class="d-flex flex-column m-2" action="{{route('addGenreToCatalog')}}" method="POST">
                     @csrf
-                    <h5 class="text-white">Добавить жанр</h5>
+                    <h5>Добавить жанр</h5>
                     <label for="rus_genre_name">Русское название жанра</label>
                     <input class="form form-control" type="text" id="rus_genre_name" name="rus_genre_name" required>
                     <label for="eng_genre_name">Английское название жанра</label>
@@ -126,7 +126,7 @@
 
                 <form class="d-flex flex-column m-2 mt-4" action="{{route('addCategoryToCatalog')}}" method="POST">
                     @csrf
-                    <h5 class="text-white">Добавить категорию</h5>
+                    <h5>Добавить категорию</h5>
                     <label for="category_name">Название категории</label>
                     <input class="form form-control" type="text" id="category_name" name="category_name" required>
                     <input class="btn btn-success mt-2" type="submit" value="Добавить">
@@ -134,7 +134,7 @@
 
                 <form class="d-flex flex-column m-2 mt-4" action="{{route('linkProductGenre')}}" method="POST">
                     @csrf
-                    <h5 class="text-white">Связать продукт и жанры</h5>
+                    <h5>Связать продукт и жанры</h5>
                     <label for="product_id">Выберите игру</label>
                     <select class="custom-select" id="product_id" name="product_id" required="required">
                         @foreach($products as $product)
