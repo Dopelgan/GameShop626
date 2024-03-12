@@ -1,74 +1,69 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="d-flex justify-content-center">
-        <div class="container">
-            @if(count($errors) > 0)
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach($errors->all() as $error)
-                            <li>{{ $error}}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+    <div class="container">
+        @if(count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error}}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
-            @if($games->count()>0)
-                <div class="d-flex justify-content-center">
-                    <h5>Избранное</h5>
-                </div>
+        @if($products->count()>0)
+            <h3 class="font-weight-bold text-center">Избранное</h3>
+            <form action="{{route('clearFavorites')}}" method="POST">
                 @csrf
-                <div class="d-flex justify-content-end">
-                    <button id="clear_favorites" class="btn btn-outline-danger text-white m-2" type="submit">Очистить
-                        избранное
-                    </button>
-                </div>
-            @else
-                <div class="d-flex justify-content-center">
-                    <h5>Избранное</h5>
-                </div>
-                <div class="d-flex justify-content-center">
-                    <h6>Пока что здесь пусто</h6>
-                </div>
-            @endif
+                <button id="clear_favorites" class="btn btn-secondary" type="submit">Очистить
+                    избранное
+                </button>
+            </form>
+        @else
+            <div class="d-flex justify-content-center">
+                <h3 class="font-weight-bold">Избранное</h3>
+            </div>
+            <div class="d-flex justify-content-center">
+                <h6>Пока что здесь пусто</h6>
+            </div>
+        @endif
 
-            <div id="games_block" class="d-flex justify-content-center row">
-                @foreach($games as $game)
-                    <div class="card text-white bg-dark m-1 border-secondary" style="width: 16rem;">
-                        <a href="/game_page/{{$game->name}}">
-                            <img class="card-img-top" src="{{$game->image}}" alt="Card image cap">
+        <div class="d-flex row">
+            @foreach($products as $product)
+                @if(!$product->quantity == 0)
+                    <div class="card shadow m-1 bg-white rounded" style="width: 180px">
+                        <a href="/product/{{$product->id}}">
+                            <img class="card-img-top rounded bg" src="{{$product->picture}}" alt="Card image cap">
                         </a>
-                        <div class="card-body">
-                            <a href="/game_page/{{$game->name}}">
-                                <h6 class="card-title text-white">{{$game->name}}</h6>
+                        <div class="d-flex flex-column justify-content-center p-2">
+                            <a href="/product/{{$product->id}}">
+                                <div class="d-flex align-items-center justify-content-center text-dark text-center"
+                                     style="height: 3rem">{{$product->name}}</div>
                             </a>
-                            <p class="card-text">{{$game->price}} р.</p>
-                            @if($game->amount != 0)
-                                <form class="card text-white bg-dark m-1 border-secondary"
-                                      action="{{route('add_game_to_basket')}}" method="POST">
+                            <h5 class="text-center text-danger">{{$product->price}} р.</h5>
+                            @if(!$product->quantity == 0)
+                                <form class="card m-1 "
+                                      action="{{route('addToBasket')}}" method="POST">
                                     @csrf
-                                    <input id="game_name" name="game_name" value="{{$game->name}}" type="hidden">
-                                    <input id="user_name" name="user_name" value="Admin" type="hidden">
-                                    <input id="page" name="page" value="favorites" type="hidden">
-                                    <input class="btn btn-outline-warning text-white" type="submit"
-                                           value="Добавить в корзину">
+                                    <input id="product_id" name="product_id" value="{{$product->id}}" type="hidden">
+                                    <input class="btn btn-sm btn-block btn-outline-dark" type="submit"
+                                           value="В корзину">
                                 </form>
                             @else
                                 <h5>Нет в наличии</h5>
                             @endif
-                            <form class="card text-white bg-dark m-1 border-secondary"
-                                  action="{{route('delete_from_favorites')}}" method="POST">
+                            <form class="card m-1"
+                                  action="{{route('deleteFavorite')}}" method="POST">
                                 @csrf
-                                <input id="game_name" name="game_name" value="{{$game->name}}" type="hidden">
-                                <input id="user_name" name="user_name" value="Admin" type="hidden">
-                                <input id="page" name="page" value="favorites" type="hidden">
-                                <input class="btn btn-outline-danger text-white" type="submit"
-                                       value="Удалить из избранного">
+                                <input id="product_id" name="product_id" value="{{$product->id}}" type="hidden">
+                                <input class="btn btn-sm btn-block btn-light" type="submit"
+                                       value="Удалить">
                             </form>
                         </div>
                     </div>
-                @endforeach
-            </div>
+                @endif
+            @endforeach
         </div>
 
 @endsection

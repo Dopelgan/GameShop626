@@ -2,140 +2,173 @@
 
 namespace App\Http\Controllers;
 
-use App\Game;
-use App\GameGenre;
-use App\GamePlatform;
+use App\Metascore;
+use App\ProductGenre;
 use App\Genre;
-use App\Platform;
+use App\Category;
+use App\Product;
+use Carbon\Carbon;
+use Hooshid\MetacriticScraper\Metacritic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Metacritic\API\MetacriticAPI;
+use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
-    public function test()
+    public function adminPanel()
     {
-        $games = Game::get();
-        $genres = Genre::get();
-        $platforms = Platform::get();
-        return view('test', [
-            'games' => $games,
-            'genres' => $genres,
-            'platforms' => $platforms
+        return view('adminPanel', [
+            'products' => Product::get(),
+            'genres' => Genre::get(),
+            'categories' => Category::get()
         ]);
     }
 
-    public function add_game(Request $request)
+    public function autoAddProductToCatalog(Request $request)
+    {
+        $metacritic = new Metacritic();
+        $extract = $metacritic->extract(Str::after($request->url, 'https://www.metacritic.com'));
+        $result = $extract['result'];
+        $error = $extract['error'];
+
+        //dd($result);
+
+        $product = Product::create(
+            [
+                'name' => $result['title'],
+                'year' => Str::before($result['release_year'], '-'),
+                'price' => $request->price,
+                'quantity' => $request->quantity,
+                'description' => $result['summary'],
+                'picture' => $result['thumbnail'],
+                'category_id' => $request->category,
+            ]
+        );
+
+        Metascore::create(
+            [
+                'product_id' => $product->id,
+                'meta_score' => $result['meta_score'],
+                'user_score' => $result['user_score']*10,
+            ]
+        );
+
+        $genre = Genre::firstOrCreate(
+            [
+                'eng_name' => $result['genres']
+            ],
+            [
+                'eng_name' => $result['genres']
+            ]
+        );
+
+        ProductGenre::firstOrCreate(
+            [
+                'product_id' => $product->id, 'genre_id' => $genre->id
+            ],
+            [
+                'product_id' => $product->id, 'genre_id' => $genre->id
+            ]
+        );
+
+        return back();
+    }
+
+    public function addProductToCatalog(Request $request)
     {
         $messages = [
-            'game_name.unique' => 'Такая игра уже в каталоге.',
-            'amount.numeric' => 'В поле "Количество" вводимое значение должно быть числовым'
+            'product_name.unique' => 'Такая игра уже в каталоге.',
+            'quantity.numeric' => 'В поле "Количество" вводимое значение должно быть числовым'
         ];
 
         $request->validate([
-            'game_name' => 'max:255|unique:games,name',
-            'amount' => 'numeric|max:255',
+            'product_name' => 'max:255|unique:products,name',
+            'quantity' => 'numeric|max:255',
         ], $messages);
 
-        $game = new Game();
-        $game->name = $request->game_name;
-        $game->year = $request->year;
-        $game->price = $request->price;
-        $game->amount = $request->amount;
-        $game->description = $request->description;
-        $game->image = $request->image;
-        $game->save();
+        $product = Product::create(
+            [
+                'name' => $request->product_name,
+                'year' => $request->year,
+                'price' => $request->price,
+                'quantity' => $request->quantity,
+                'description' => $request->description,
+                'picture' => $request->picture,
+                'category_id' => $request->category,
+            ]
+        );
 
-
-        foreach ($request->genre_name as $genre) {
-            $game_genres = GameGenre::firstOrCreate(
-
-                ['game_name' => $request->game_name, 'genre_name' => $genre],
-
-                ['game_name' => $request->game_name, 'genre_name' => $genre]
-
+        foreach ($request->genres as $genre) {
+            ProductGenre::firstOrCreate(
+                [
+                    'product_id' => $product->id, 'genre_id' => $genre
+                ],
+                [
+                    'product_id' => $product->id, 'genre_id' => $genre
+                ]
             );
         }
 
-        $game_platform = GamePlatform::firstOrCreate(
+        return back();
+    }
 
-            ['game_name' => $request->game_name, 'platform_name' => $request->platform_name],
+    public function addGenreToCatalog(Request $request)
+    {
+        $messages = [
+            'rus_genre_name.unique' => 'Такой жанр уже добавлен.',
+            'eng_genre_name.unique' => 'Такой жанр уже добавлен.',
+        ];
 
+        $request->validate([
+            'rus_genre_name' => 'max:255|unique:genres,rus_name',
+            'eng_genre_name' => 'max:255|unique:genres,eng_name',
+        ], $messages);
+
+        Genre::create(
             [
-                'game_name' => $request->game_name,
-                'platform_name' => $request->platform_name,
+                'rus_name' => $request->rus_genre_name,
+                'eng_name' => $request->eng_genre_name,
             ]
-
         );
 
-        return Redirect::route('test');
+        return back();
     }
 
-    public function add_genre(Request $request)
+    public function addCategoryToCatalog(Request $request)
     {
         $messages = [
-            'genre_name.unique' => 'Такой жанр уже добавлен.',
+            'category_name.unique' => 'Такая категория уже добавлена.',
         ];
 
         $request->validate([
-            'genre_name' => 'max:255|unique:genres,name',
+            'category_name' => 'max:255|unique:categories,name',
         ], $messages);
 
-        $genre = new Genre();
-        $genre->name = $request->genre_name;
-        $genre->save();
+        Category::create(
+            [
+                'name' => $request->category_name,
+            ]
+        );
 
-        return Redirect::route('test');
+        return back();
     }
 
-    public function add_platform(Request $request)
+    public function linkProductGenre(Request $request)
     {
-        $messages = [
-            'platform_name.unique' => 'Такая платформа уже добавлена.',
-        ];
-
-        $request->validate([
-            'platform_name' => 'max:255|unique:platforms,name',
-        ], $messages);
-
-        $platform = new Platform();
-        $platform->name = $request->platform_name;
-        $platform->picture = $request->platform_picture;
-        $platform->save();
-
-        return Redirect::route('test');
-    }
-
-    public function game_genre(Request $request)
-    {
-//        dd($request->genre_name);
-        foreach ($request->genre_name as $genre) {
-            $game_genres = GameGenre::firstOrCreate(
-
-                ['game_name' => $request->game_name, 'genre_name' => $genre],
-
-                ['game_name' => $request->game_name, 'genre_name' => $genre]
-
+        foreach ($request->genres_id as $genre_id) {
+            ProductGenre::firstOrCreate(
+                [
+                    'product_id' => $request->product_id, 'genre_id' => $genre_id
+                ],
+                [
+                    'product_id' => $request->product_id, 'genre_id' => $genre_id
+                ]
             );
         }
 
-        return Redirect::route('test');
-    }
-
-    public function game_platform(Request $request)
-    {
-        $game_platform = GamePlatform::firstOrCreate(
-
-            ['game_name' => $request->game_name, 'platform_name' => $request->platform_name],
-
-            [
-                'game_name' => $request->game_name,
-                'platform_name' => $request->platform_name,
-            ]
-
-        );
-
-        return Redirect::route('test');
+        return back();
     }
 
     public function change_game_amount(Request $request)
@@ -145,7 +178,7 @@ class AdminController extends Controller
         $change->amount = $request->new_amount;
         $change->save();
 
-        return Redirect::route('test');
+        return back();
     }
 
     public function change_description(Request $request)
@@ -155,16 +188,15 @@ class AdminController extends Controller
         $change->description = $request->new_description;
         $change->save();
 
-        return Redirect::route('test');
+        return back();
     }
 
-    public function change_game_image(Request $request)
+    public function changeProductPicture(Request $request)
     {
-        $game = DB::table('games')->where('name', $request->game_name)->get();
-        $change = Game::find($game[0]->id);
-        $change->image = $request->new_image;
+        $change = Product::find($request->product_id);
+        $change->picture = $request->picture;
         $change->save();
 
-        return Redirect::route('test');
+        return back();
     }
 }

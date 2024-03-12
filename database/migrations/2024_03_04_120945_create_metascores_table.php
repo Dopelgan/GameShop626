@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGameGenresTable extends Migration
+class CreateMetascoresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateGameGenresTable extends Migration
      */
     public function up()
     {
-        Schema::create('game_genres', function (Blueprint $table) {
+        Schema::create('metascores', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('game_name');
-            $table->string('genre_name');
+            $table->unsignedBigInteger('product_id')->unique();
+            $table->tinyInteger('meta_score')->nullable();
+            $table->tinyInteger('user_score')->nullable();
+
+            $table->foreign('product_id')->references('id')->on('products');
         });
     }
 
@@ -28,6 +31,6 @@ class CreateGameGenresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('game_genres');
+        Schema::dropIfExists('metascores');
     }
 }
