@@ -28,6 +28,9 @@ Route::post('/linkProductGenre', 'AdminController@linkProductGenre')->name('link
 Route::post('/addToBasket', 'BasketController@addToBasket')->name('addToBasket');
 Route::post('/addToFavorite', 'FavoriteController@addToFavorite')->name('addToFavorite');
 Route::get('/autoAddProductToCatalog', 'AdminController@autoAddProductToCatalog')->name('autoAddProductToCatalog');
+Route::post('/filter', 'ProductController@filter')->name('filter');
+Route::post('/clearFavorites', 'FavoriteController@clearFavorites')->name('clearFavorites');
+Route::post('/deleteFavorite', 'FavoriteController@deleteFavorite')->name('deleteFavorite');
 
 Route::any('/product/{product_id}', function ($product_id) {
     $product = Product::find($product_id);
@@ -36,7 +39,9 @@ Route::any('/product/{product_id}', function ($product_id) {
     return view('product', [
         'product' => Product::where('id', $product_id)->get()->find($product_id),
         'genres' => Genre::whereIn('id', ProductGenre::where('product_id', $product_id)->get()->pluck('genre_id'))->get(),
-        'metascore' => Metascore::where('product_id', $product_id)->get()->first()
+        'metascore' => Metascore::where('product_id', $product_id)->get()->first(),
+        'products' => Product::orderBy('count', 'DESC')->take(6)->get(),
+        'metascores' => Metascore::whereIn('product_id', Product::orderBy('count', 'DESC')->take(6)->pluck('id'))->get()
     ]);
 })->name('product');
 
@@ -62,8 +67,8 @@ Route::post('/change_amount_game_to_basket', 'BasketController@change_amount_gam
 
 Route::get('/favorites', 'FavoriteController@favorites')->name('favorites');
 
-Route::post('/delete_from_favorites', 'FavoriteController@delete_from_favorites')->name('delete_from_favorites');
-Route::post('/clear_favorites', 'FavoriteController@clear_favorites')->name('clear_favorites');
+
+
 
 
 

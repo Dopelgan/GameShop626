@@ -12,8 +12,8 @@ class FavoriteController extends Controller
 {
     public function favorites()
     {
-        return view('favorites',[
-            'products' => Product::whereIn('id', Favorite::where('user_id', Auth::user()->id)->pluck('product_id'))->get()
+        return view('favorites', [
+                'products' => Product::whereIn('id', Favorite::where('user_id', Auth::user()->id)->pluck('product_id'))->get()
             ]
         );
     }
@@ -28,20 +28,17 @@ class FavoriteController extends Controller
         return back();
     }
 
-    public function delete_from_favorites(Request $request)
+    public function deleteFavorite(Request $request)
     {
-        $deletedRows = DB::table('favorites')
-            ->where('user_name', 'Admin')
-            ->where('game_name', "$request->game_name")
-            ->delete();
+        Favorite::where('user_id', Auth::user()->id)->where('product_id', "$request->product_id")->delete();
 
-        return redirect('favorites');
+        return back();
     }
 
-    public function clear_favorites()
+    public function clearFavorites()
     {
-        DB::table('favorites')->where('user_name', 'Admin')->delete();
+        Favorite::where('user_id', Auth::user()->id)->delete();
 
-        return response()->json();
+        return back();
     }
 }

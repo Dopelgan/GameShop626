@@ -2,44 +2,52 @@
 
 @section('content')
 
-    <div class="p-3 mb-2">
+    <div class="p-3 mb-2 container">
         <div class="d-flex justify-content-around container">
             <div class="d-flex justify-content-center">
                 @if(!$product->picture==null)
                     <div class="col-md-3">
                         @if(!$metascore == null)
-                        <div class="d-flex flex-row justify-content-around align-items-center">
-                            <h6 class="font-weight-bold">Metascore</h6>
-                            @if($metascore->meta_score >= 75)
-                            <h6 class = "d-flex justify-content-center align-items-center font-weight-bold rounded" style="background-color: #2fa360;  width: 30px; height: 30px;">{{$metascore->meta_score}}</h6>
-                            @elseif($metascore->meta_score >= 50)
-                                <h6 class = "d-flex justify-content-center align-items-center font-weight-bold rounded" style="background-color: #f6993f;  width: 30px; height: 30px;">{{$metascore->meta_score}}</h6>
-                            @elseif($metascore->meta_score < 50)
-                                <h6 class = "d-flex justify-content-center align-items-center font-weight-bold rounded" style="background-color: #d0211c;  width: 30px; height: 30px;">{{$metascore->meta_score}}</h6>
-                            @endif
-                            <h6 class="font-weight-bold">User score</h6>
-                            @if($metascore->meta_score >= 75)
-                                <h6 class = "d-flex justify-content-center align-items-center font-weight-bold rounded-circle" style="background-color: #2fa360;  width: 30px; height: 30px;">{{$metascore->user_score}}</h6>
-                            @elseif($metascore->meta_score >= 50)
-                                <h6 class = "d-flex justify-content-center align-items-center font-weight-bold rounded-circle" style="background-color: #f6993f;  width: 30px; height: 30px;">{{$metascore->user_score}}</h6>
-                            @elseif($metascore->meta_score < 50)
-                                <h6 class = "d-flex justify-content-center align-items-center font-weight-bold rounded-circle" style="background-color: #d0211c;  width: 30px; height: 30px;">{{$metascore->user_score}}</h6>
-                            @endif
-                        </div>
+                            <div class="d-flex flex-row justify-content-around align-items-center">
+                                <h6 class="font-weight-bold">Metascore</h6>
+                                @if($metascore->meta_score >= 75)
+                                    <h6 class="d-flex justify-content-center align-items-center font-weight-bold rounded"
+                                        style="background-color: #2fa360;  width: 30px; height: 30px;">{{$metascore->meta_score}}</h6>
+                                @elseif($metascore->meta_score >= 50)
+                                    <h6 class="d-flex justify-content-center align-items-center font-weight-bold rounded"
+                                        style="background-color: #f6993f;  width: 30px; height: 30px;">{{$metascore->meta_score}}</h6>
+                                @else()
+                                    <h6 class="d-flex justify-content-center align-items-center font-weight-bold rounded"
+                                        style="background-color: #d0211c;  width: 30px; height: 30px;">{{$metascore->meta_score}}</h6>
+                                @endif
+                                <h6 class="font-weight-bold">User score</h6>
+                                @if($metascore->meta_score >= 75)
+                                    <h6 class="d-flex justify-content-center align-items-center font-weight-bold rounded-circle"
+                                        style="background-color: #2fa360;  width: 30px; height: 30px;">{{$metascore->user_score}}</h6>
+                                @elseif($metascore->meta_score >= 50)
+                                    <h6 class="d-flex justify-content-center align-items-center font-weight-bold rounded-circle"
+                                        style="background-color: #f6993f;  width: 30px; height: 30px;">{{$metascore->user_score}}</h6>
+                                @else()
+                                    <h6 class="d-flex justify-content-center align-items-center font-weight-bold rounded-circle"
+                                        style="background-color: #d0211c;  width: 30px; height: 30px;">{{$metascore->user_score}}</h6>
+                                @endif
+                            </div>
                         @endif
                         <img
                             src='{{$product->picture}}'
-                            class="img-fluid mr-5 rounded">
+                            class="img-fluid mr-5 rounded shadow bg-white p-2">
                         @endif
-                        <form class="d-flex flex-column m-2" action="{{route('changeProductPicture')}}"
-                              method="POST">
-                            @csrf
-                            <b>Изменить изображение</b>
-                            <input id="product_id" name="product_id" value="{{$product->id}}" type="hidden">
-                            <label for="picture">Вставьте ссылку на изображение</label>
-                            <input class="form form-control" type="text" id="picture" name="picture" required>
-                            <input class="btn btn-success mt-2" type="submit" value="Изменить">
-                        </form>
+                        @if($product->picture == null)
+                            <form class="d-flex flex-column m-2" action="{{route('changeProductPicture')}}"
+                                  method="POST">
+                                @csrf
+                                <b>Изменить изображение</b>
+                                <input id="product_id" name="product_id" value="{{$product->id}}" type="hidden">
+                                <label for="picture">Вставьте ссылку на изображение</label>
+                                <input class="form form-control" type="text" id="picture" name="picture" required>
+                                <input class="btn btn-success mt-2" type="submit" value="Изменить">
+                            </form>
+                        @endif
                     </div>
                     <div class="col-md-6">
                         <h3 class="">{{$product->name}}</h3>
@@ -53,8 +61,10 @@
                                 @endif
                             @endforeach
                         </h5>
-                        <h5 class="">Описание:</h5>
-                        <p>{{$product->description}}</p>
+                        <div class="card shadow p-3 mb-2 bg-white">
+                            <h5 class="">Описание:</h5>
+                            <p>{{$product->description}}</p>
+                        </div>
                     </div>
                     <div class="d-flex flex-column col-md-3">
                         <h5 class="d-flex justify-content-end">Цена:</h5>
@@ -66,7 +76,7 @@
                                       action="{{route('addToBasket')}}" method="POST">
                                     @csrf
                                     <input id="product_id" name="product_id" value="{{$product->id}}" type="hidden">
-                                    <input class="btn btn-block btn-success" type="submit"
+                                    <input class="btn btn-block btn-outline-dark" type="submit"
                                            value="Добавить в корзину">
                                 </form>
                             @else
@@ -76,13 +86,68 @@
                                   action="{{route('addToFavorite')}}" method="POST">
                                 @csrf
                                 <input id="product_id" name="product_id" value="{{$product->id}}" type="hidden">
-                                <input class="btn text-white btn-block btn-primary" type="submit"
+                                <input class="btn btn-block btn-light" type="submit"
                                        value="Добавить в избранное">
                             </form>
                         </div>
                     </div>
             </div>
         </div>
-    </div>
+        <h5 class="d-flex justify-content-center m-2">САМЫЕ ПОПУЛЯРНЫЕ</h5>
+        <div class="d-flex row justify-content-center">
+            @foreach($products as $product)
+                @if(!$product->quantity == 0)
+
+                    <div class="card shadow m-1 bg-white rounded" style="width: 180px">
+                        <a href="/product/{{$product->id}}">
+                            <img class="card-img-top rounded bg" src="{{$product->picture}}" alt="Card image cap">
+                            @foreach($metascores as $meta)
+                                @if($meta->product_id == $product->id)
+                                    <div class="d-flex justify-content-end card-img-overlay">
+                                        @if ($meta->meta_score >= 75)
+                                            <h6 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
+                                                style="background-color: #2fa360;  width: 25px; height: 25px;">
+                                                {{$meta->meta_score}}
+                                            </h6>
+                                        @elseif($meta->meta_score > 50)
+                                            <h6 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
+                                                style="background-color: #f6993f;  width: 25px; height: 25px;">
+                                                {{$meta->meta_score}}
+                                            </h6>
+                                        @else()
+                                            <h6 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
+                                                style="background-color: #d0211c;  width: 25px; height: 25px;">
+                                                {{$meta->meta_score}}
+                                            </h6>
+                                        @endif
+                                    </div>
+                                @endif
+                            @endforeach
+                        </a>
+                        <div class="d-flex flex-column justify-content-center p-2">
+                            <a href="/product/{{$product->id}}">
+                                <div class="d-flex align-items-center justify-content-center text-dark text-center" style="height: 3rem">{{$product->name}}</div>
+                            </a>
+                            <h5 class="text-center text-danger">{{$product->price}} р.</h5>
+                            <form class="card"
+                                action="{{route('addToBasket')}}" method="POST">
+                                @csrf
+                                <input id="product_id" name="product_id" value="{{$product->id}}" type="hidden">
+                                <input class="btn btn-block btn-sm btn-outline-dark shadow-sm" type="submit"
+                                       value="В корзину">
+                            </form>
+                            <form class="card"
+                                  action="{{route('addToFavorite')}}" method="POST">
+                                @csrf
+                                <input id="product_id" name="product_id" value="{{$product->id}}" type="hidden">
+                                <input class="btn btn-block btn-sm btn-light shadow-sm" type="submit"
+                                       value="В избранное">
+                            </form>
+                        </div>
+                    </div>
+                @endif
+
+            @endforeach
+        </div>
 
 @endsection

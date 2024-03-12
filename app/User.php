@@ -37,8 +37,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function games_from_basket()
-    {
-        return $this->belongsToMany(Game::class, 'baskets','user_name','game_name');
-    }
 }

@@ -29,16 +29,18 @@ class HomeController extends Controller
         return view('home', [
             'products' => Product::orderBy('count', 'DESC')->take(8)->get(),
             'categories' => Category::get(),
-            'metascore' => Metascore::whereIn('product_id', Product::orderBy('count', 'DESC')->take(8)->pluck('id'))->get()
+            'metascore' => Metascore::whereIn('product_id', Product::orderBy('count', 'DESC')->take(8)->pluck('id'))->get(),
+            'new' => Product::orderBy('year', 'DESC')->take(3)->get()
         ]);
     }
 
     public function home()
     {
         return view('home', [
-            'products' => Product::orderBy('count', 'DESC')->take(8)->get(),
+            'popular' => Product::orderBy('count', 'DESC')->take(5)->get(),
             'categories' => Category::get(),
-            'metascore' => Metascore::whereIn('product_id', Product::orderBy('count', 'DESC')->take(8)->pluck('id'))->get()
+            'metascore' => Metascore::whereIn('product_id', Product::orderBy('count', 'DESC')->take(5)->pluck('id'))->orWhereIn('product_id', Product::orderBy('year', 'DESC')->take(3)->pluck('id'))->get(),
+            'newest' => Product::orderBy('year', 'DESC')->take(3)->get(),
         ]);
     }
 }

@@ -19,9 +19,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body class="gradient-box shadow-1-strong rounded-7 mb-5">
 <div id="app">
-    <nav class="navbar navbar-expand-md navbar-dark shadow-sm" style="background-color: #3f9ae5">
+    <nav class="navbar navbar-expand-md navbar-dark shadow-sm" style="background-color: #298fe2">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'Laravel') }}

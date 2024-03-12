@@ -15,5 +15,8 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends UserController
 {
-
+    public function filter(Request $request)
+    {
+        return view('filter');
+    }
 }
