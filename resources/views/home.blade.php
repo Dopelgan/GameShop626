@@ -29,33 +29,29 @@
                     @if(!$new->quantity == 0)
 
                         <div class="card shadow bg-white rounded m-1" style="max-width: 360px">
-                            <a href="/product/{{$new->id}}">
+                            <a href="/product/{{$new->product_id}}">
                                 <img class="card-img-top rounded bg" src="{{$new->picture}}" alt="Card image cap">
-                                @foreach($metascore as $meta)
-                                    @if($meta->product_id == $new->id)
                                         <div class="d-flex justify-content-end card-img-overlay">
-                                            @if ($meta->meta_score >= 75)
+                                            @if ($new->meta_score >= 75)
                                                 <h4 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
                                                     style="background-color: #2fa360;  width: 40px; height: 40px;">
-                                                    {{$meta->meta_score}}
+                                                    {{$new->meta_score}}
                                                 </h4>
-                                            @elseif($meta->meta_score > 50)
+                                            @elseif($new->meta_score > 50)
                                                 <h4 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
                                                     style="background-color: #f6993f;  width: 40px; height: 40px;">
-                                                    {{$meta->meta_score}}
+                                                    {{$new->meta_score}}
                                                 </h4>
-                                            @else()
+                                            @elseif($product->meta_score > 0)
                                                 <h4 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
                                                     style="background-color: #d0211c;  width: 40px; height: 40px;">
-                                                    {{$meta->meta_score}}
+                                                    {{$new->meta_score}}
                                                 </h4>
                                             @endif
                                         </div>
-                                    @endif
-                                @endforeach
                             </a>
                             <div class="card-body d-flex flex-column justify-content-center">
-                                <a href="/product/{{$new->id}}">
+                                <a href="/product/{{$new->product_id}}">
                                     <h4 class="card-title text-dark text-center">{{$new->name}}</h4>
                                 </a>
                                 <h4 class="card-text text-center text-danger">{{$new->price}} р.</h4>
@@ -69,30 +65,26 @@
                 @foreach($popular as $product)
                     @if(!$product->quantity == 0)
                         <div class="card shadow m-1 bg-white rounded" style="width: 220px">
-                            <a href="/product/{{$product->id}}">
+                            <a href="/product/{{$product->product_id}}">
                                 <img class="card-img-top rounded bg" src="{{$product->picture}}" alt="Card image cap">
-                                @foreach($metascore as $meta)
-                                    @if($meta->product_id == $product->id)
                                         <div class="d-flex justify-content-end card-img-overlay">
-                                            @if ($meta->meta_score >= 75)
+                                            @if ($product->meta_score >= 75)
                                                 <h6 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
                                                     style="background-color: #2fa360;  width: 30px; height: 30px;">
-                                                    {{$meta->meta_score}}
+                                                    {{$product->meta_score}}
                                                 </h6>
-                                            @elseif($meta->meta_score > 50)
+                                            @elseif($product->meta_score > 50)
                                                 <h6 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
                                                     style="background-color: #f6993f;  width: 30px; height: 30px;">
-                                                    {{$meta->meta_score}}
+                                                    {{$product->meta_score}}
                                                 </h6>
-                                            @else()
+                                            @elseif($product->meta_score > 0)
                                                 <h6 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
                                                     style="background-color: #d0211c;  width: 30px; height: 30px;">
-                                                    {{$meta->meta_score}}
+                                                    {{$product->meta_score}}
                                                 </h6>
                                             @endif
                                         </div>
-                                    @endif
-                                @endforeach
                             </a>
                             <div class="d-flex flex-column justify-content-center p-2">
                                 <a href="/product/{{$product->id}}">

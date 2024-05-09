@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Metascore;
 use App\Product;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -27,20 +26,18 @@ class HomeController extends Controller
     public function index()
     {
         return view('home', [
-            'products' => Product::orderBy('count', 'DESC')->take(8)->get(),
+            'popular' => Product::leftJoin('metascores', 'products.id', '=', 'metascores.product_id')->orderBy('count', 'DESC')->take(5)->get(),
             'categories' => Category::get(),
-            'metascore' => Metascore::whereIn('product_id', Product::orderBy('count', 'DESC')->take(8)->pluck('id'))->get(),
-            'new' => Product::orderBy('year', 'DESC')->take(3)->get()
+            'newest' => Product::leftJoin('metascores', 'products.id', '=', 'metascores.product_id')->orderBy('year', 'DESC')->take(3)->get(),
         ]);
     }
 
     public function home()
     {
         return view('home', [
-            'popular' => Product::orderBy('count', 'DESC')->take(5)->get(),
+            'popular' => Product::leftJoin('metascores', 'products.id', '=', 'metascores.product_id')->orderBy('count', 'DESC')->take(5)->get(),
             'categories' => Category::get(),
-            'metascore' => Metascore::whereIn('product_id', Product::orderBy('count', 'DESC')->take(5)->pluck('id'))->orWhereIn('product_id', Product::orderBy('year', 'DESC')->take(3)->pluck('id'))->get(),
-            'newest' => Product::orderBy('year', 'DESC')->take(3)->get(),
+            'newest' => Product::leftJoin('metascores', 'products.id', '=', 'metascores.product_id')->orderBy('year', 'DESC')->take(3)->get(),
         ]);
     }
 }

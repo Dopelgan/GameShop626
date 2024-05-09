@@ -28,7 +28,7 @@ Route::post('/linkProductGenre', 'AdminController@linkProductGenre')->name('link
 Route::post('/addToBasket', 'BasketController@addToBasket')->name('addToBasket');
 Route::post('/addToFavorite', 'FavoriteController@addToFavorite')->name('addToFavorite');
 Route::get('/autoAddProductToCatalog', 'AdminController@autoAddProductToCatalog')->name('autoAddProductToCatalog');
-Route::post('/filter', 'ProductController@filter')->name('filter');
+Route::post('/filter', 'FilterController@filter')->name('filter');
 Route::post('/clearFavorites', 'FavoriteController@clearFavorites')->name('clearFavorites');
 Route::post('/deleteFavorite', 'FavoriteController@deleteFavorite')->name('deleteFavorite');
 
@@ -80,14 +80,6 @@ Route::post('/change_game_amount', 'AdminController@change_game_amount')->name('
 Route::post('/changeProductPicture', 'AdminController@changeProductPicture')->name('changeProductPicture');
 
 Route::get('/', 'HomeController@home')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 

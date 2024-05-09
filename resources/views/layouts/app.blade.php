@@ -37,6 +37,12 @@
                 </ul>
 
                 <!-- Right Side Of Navbar -->
+                <form class="row w-50" action="{{route('filter')}}" method="post">
+                    @csrf
+                    <input type="text" name="search" id="search" class="form-control w-50">
+                    <button class="btn btn-light ml-2 w-25" type="submit">Поиск</button>
+                </form>
+
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
                     @guest

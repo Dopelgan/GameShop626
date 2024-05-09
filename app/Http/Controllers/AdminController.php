@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Hooshid\MetacriticScraper\Metacritic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
 use Metacritic\API\MetacriticAPI;
 use Illuminate\Support\Str;

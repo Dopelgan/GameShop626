@@ -126,7 +126,7 @@
                         </a>
                         <div class="d-flex flex-column justify-content-center p-2">
                             <a href="/product/{{$product->id}}">
-                                <div class="d-flex align-items-center justify-content-center text-dark text-center" style="height: 3rem">{{$product->name}}</div>
+                                <div class="d-flex align-items-center justify-content-center text-dark text-center text" style="height: 3rem">{{$product->name}}</div>
                             </a>
                             <h5 class="text-center text-danger">{{$product->price}} р.</h5>
                             <form class="card"

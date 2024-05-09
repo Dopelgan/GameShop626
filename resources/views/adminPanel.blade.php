@@ -13,8 +13,8 @@
             </ul>
         </div>
     @endif
-    <div class="container -50">
-        <div class="d-flex row justify-content-center">
+    <div class="container">
+        <div class="d-flex row justify-content-between">
             <div class="w-25">
                 <form class="d-flex flex-column m-2" action="{{route('autoAddProductToCatalog')}}" method="GET">
                     @csrf
@@ -50,12 +50,12 @@
                 <form class="d-flex flex-column m-2" action="{{route('addProductToCatalog')}}" method="POST">
                     @csrf
                     <h5>Добавить игру вручную</h5>
-                    <div class="mt-2">
+                    <div class="form-group">
                         <label for="product_name">Название игры</label>
                         <br>
                         <input class="form form-control" id="product_name" type="text" name="product_name" required>
                     </div>
-                    <div class="mt-2">
+                    <div class="form-group">
                         <label for="year">Год выхода</label>
                         <br>
                         <select id="year" name="year" required="required" class="custom-select">
@@ -64,7 +64,7 @@
                             @endfor
                         </select>
                     </div>
-                    <div class="mt-2">
+                    <div class="form-group">
                         <label for="genres">Выберите жанры (через Ctrl)</label>
                         <br>
                         <select id="genres" name="genres[]" multiple="multiple" size="4" required="required"
@@ -80,7 +80,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="mt-2">
+                    <div class="form-group">
                         <label for="category">Выберите категорию</label>
                         <br>
                         <select id="category" name="category" required="required" class="custom-select">
@@ -89,22 +89,22 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="mt-2">
+                    <div class="form-group">
                         <label for="quantity">Количество</label>
                         <input type="text" id="quantity" name="quantity" required class="form form-control">
                     </div>
-                    <div class="mt-2">
+                    <div class="form-group">
                         <label for="price">Цена</label>
                         <br>
                         <input id="price" type="text" name="price" required class="form form-control">
                     </div>
-                    <div class="mt-2">
+                    <div class="form-group">
                         <label for="description">Описание</label>
                         <br>
                         <textarea class="form form-control" id="description" name="description" cols="30" rows="5"
                                   maxlength="1000">Описание пока не добавили.</textarea>
                     </div>
-                    <div class="mt-2">
+                    <div class="form-group">
                         <label for="picture">Ссылка на изображение</label>
                         <br>
                         <input id="picture" type="text" name="picture" required class="form form-control">
