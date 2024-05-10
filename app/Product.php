@@ -12,4 +12,9 @@ class Product extends Model
     {
         return $this->hasMany(Metascore::class);
     }
+
+    public function basket()
+    {
+        return $this->belongsTo(Basket::class);
+    }
 }

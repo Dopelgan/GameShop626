@@ -26,18 +26,28 @@ class HomeController extends Controller
     public function index()
     {
         return view('home', [
-            'popular' => Product::leftJoin('metascores', 'products.id', '=', 'metascores.product_id')->orderBy('count', 'DESC')->take(5)->get(),
-            'categories' => Category::get(),
-            'newest' => Product::leftJoin('metascores', 'products.id', '=', 'metascores.product_id')->orderBy('year', 'DESC')->take(3)->get(),
+            'popular' => Product::leftJoin('metascores', 'products.id', '=', 'metascores.product_id')
+                ->orderBy('count', 'DESC')
+                ->take(5)
+                ->get(),
+            'newest' => Product::leftJoin('metascores', 'products.id', '=', 'metascores.product_id')
+                ->orderBy('year', 'DESC')
+                ->take(3)
+                ->get(),
         ]);
     }
 
     public function home()
     {
         return view('home', [
-            'popular' => Product::leftJoin('metascores', 'products.id', '=', 'metascores.product_id')->orderBy('count', 'DESC')->take(5)->get(),
-            'categories' => Category::get(),
-            'newest' => Product::leftJoin('metascores', 'products.id', '=', 'metascores.product_id')->orderBy('year', 'DESC')->take(3)->get(),
+            'popular' => Product::leftJoin('metascores', 'products.id', '=', 'metascores.product_id')
+                ->orderBy('count', 'DESC')
+                ->take(5)
+                ->get(),
+            'newest' => Product::leftJoin('metascores', 'products.id', '=', 'metascores.product_id')
+                ->orderBy('year', 'DESC')
+                ->take(3)
+                ->get(),
         ]);
     }
 }

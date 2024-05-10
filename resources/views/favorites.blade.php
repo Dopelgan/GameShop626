@@ -33,11 +33,11 @@
             @foreach($products as $product)
                 @if(!$product->quantity == 0)
                     <div class="card shadow m-1 bg-white rounded" style="width: 180px">
-                        <a href="/product/{{$product->id}}">
+                        <a href="{{ route('product.show', ['id' => $product->id]) }}">
                             <img class="card-img-top rounded bg" src="{{$product->picture}}" alt="Card image cap">
                         </a>
                         <div class="d-flex flex-column justify-content-center p-2">
-                            <a href="/product/{{$product->id}}">
+                            <a href="{{ route('product.show', ['id' => $product->id]) }}">
                                 <div class="d-flex align-items-center justify-content-center text-dark text-center"
                                      style="height: 3rem">{{$product->name}}</div>
                             </a>

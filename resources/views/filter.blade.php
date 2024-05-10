@@ -44,7 +44,7 @@
                         <br>
                         @foreach($categories as $category)
                             <div class="custom-control custom-switch">
-                                <input class="custom-control-input" type="checkbox" name="genre_id[]"
+                                <input class="custom-control-input" type="checkbox" name="category_id"
                                        id="{{ $category->name }}"
                                        value="{{ $category->id }}">
                                 <label class="custom-control-label" for="{{ $category->name }}">
@@ -69,7 +69,7 @@
                     @foreach($filter as $product)
                         @if(!$product->quantity == 0)
                             <div class="card shadow m-1 bg-white rounded" style="width: 200px;">
-                                <a href="/product/{{$product->product_id}}">
+                                <a href="{{ route('product.show', ['id' => $product->product_id]) }}">
                                     <img class="card-img-top rounded bg" src="{{$product->picture}}"
                                          alt="Card image cap">
                                             <div class="d-flex justify-content-end card-img-overlay">
@@ -92,7 +92,7 @@
                                             </div>
                                 </a>
                                 <div class="d-flex flex-column justify-content-center p-2">
-                                    <a href="/product/{{$product->product_id}}">
+                                    <a href="{{ route('product.show', ['id' => $product->product_id]) }}">
                                         <div
                                             class="d-flex align-items-center justify-content-center text-dark text-center"
                                             style="height: 3rem">{{$product->name}}</div>
@@ -101,14 +101,14 @@
                                     <form class="card"
                                           action="{{route('addToBasket')}}" method="POST">
                                         @csrf
-                                        <input id="product_id" name="product_id" value="{{$product->id}}" type="hidden">
+                                        <input id="product_id" name="product_id" value="{{$product->product_id}}" type="hidden">
                                         <input class="btn btn-block btn-sm btn-outline-dark shadow-sm" type="submit"
                                                value="В корзину">
                                     </form>
                                     <form class="card"
                                           action="{{route('addToFavorite')}}" method="POST">
                                         @csrf
-                                        <input id="product_id" name="product_id" value="{{$product->id}}" type="hidden">
+                                        <input id="product_id" name="product_id" value="{{$product->product_id}}" type="hidden">
                                         <input class="btn btn-block btn-sm btn-light shadow-sm" type="submit"
                                                value="В избранное">
                                     </form>

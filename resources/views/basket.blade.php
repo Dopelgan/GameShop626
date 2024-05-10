@@ -12,7 +12,7 @@
                 </ul>
             </div>
         @endif
-        @if($games_in_basket->count()>0)
+        @if($products->count()>0)
             <div class="d-flex justify-content-center">
                 <h5>Ваша корзина</h5>
             </div>
@@ -23,46 +23,40 @@
         @endif
         <div class="row">
             <div class="d-flex w-75 flex-column">
-                @foreach($games_in_basket as $game_in_basket)
-                    @foreach($games as $game)
-                        @if($game->name==$game_in_basket->game_name)
+                @foreach($products as $product)
                             <div class="d-flex justify-content-between align-items-center mt-2">
                                 <div class="w-50">
-                                    <a href="/game_page/{{$game->name}}">
-                                        <img src='{{$game->image}}'
+                                    <a href="{{ route('product.show', ['id' => $product->id]) }}">
+                                        <img src='{{$product->picture}}'
                                              class="img-fluid m-1"
                                              width="80"></a>
-                                    <a class="text-white-50"
-                                       href="/game_page/{{$game_in_basket->game_name}}">{{$game_in_basket->game_name}}</a>
+                                    <a class="text-black-50"
+                                       href="/product/{{$product->id}}">{{$product->name}}</a>
                                 </div>
-                                @if(!$game->amount <= 0)
+                                @if($product->quantity > 0)
                                     <form class="d-flex flex-row align-items-center"
-                                          action="{{route('change_amount_game_to_basket')}}" method="post">
+                                          action="{{route('addToBasket')}}" method="post">
                                         @csrf
-                                        <input type="hidden" name="game_name" value="{{$game->name}}">
-                                        <input type="hidden" name="game_amount" value="{{$game_in_basket->amount}}">
-                                        <input type="hidden" name="user_name" value="Admin">
+                                        <input type="hidden" name="product_id" value="{{$product->id}}">
                                         <input class="btn btn-danger m-1" name="change" value="-" type="submit">
-                                        <div>{{$game_in_basket->amount}}</div>
+                                        <div>{{$product->bt_quantity}}</div>
                                         <input class="btn btn-success m-1" name="change" value="+" type="submit">
                                     </form>
-                                    <div>{{$game->price*$game_in_basket->amount}}р</div>
+                                    <div>{{$product->price*$product->bt_quantity}} р.</div>
                                 @else
                                     <div> Временно нет в наличии.</div>
                                 @endif
                             </div>
-                        @endif
-                    @endforeach
                 @endforeach
             </div>
-            @if($games_in_basket->count()>0)
+            @if($products->count()>0)
             <div class="d-flex w-20 flex-column align-items-end ml-5">
                 <h5>Итого:</h5>
-                <h3 class="text-white">{{$total}} р.</h3>
-                <button type="button" class="btn btn-block text-white btn-outline-success">Оформить заказ</button>
-                <form action="{{route('clear_basket')}}" method="post">
+                <h3>{{$total}} р.</h3>
+                <button type="button" class="btn btn-block btn-outline-success">Оформить заказ</button>
+                <form action="{{route('clearBasket')}}" method="post">
                     @csrf
-                    <button class="btn btn-outline-danger text-white mt-2" type="submit">Очистить корзину</button>
+                    <button class="btn btn-outline-danger mt-2" type="submit">Очистить корзину</button>
                 </form>
             </div>
             @endif

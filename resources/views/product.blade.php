@@ -2,8 +2,8 @@
 
 @section('content')
 
-    <div class="p-3 mb-2 container">
-        <div class="d-flex justify-content-around container">
+    <div class="container">
+        <div class="d-flex justify-content-around" style="min-height: 420px">
             <div class="d-flex justify-content-center">
                 @if(!$product->picture==null)
                     <div class="col-md-3">
@@ -69,7 +69,7 @@
                     <div class="d-flex flex-column col-md-3">
                         <h5 class="d-flex justify-content-end">Цена:</h5>
                         <h1 class=" d-flex justify-content-end font-weight-bold">{{$product->price}}</h1>
-                        <h6 class=" d-flex justify-content-end">В наличии: {{$product->quantity}}</h6>
+                        <h6 class=" d-flex justify-content-end">В наличии: {{$product->quantity}} шт.</h6>
                         <div>
                             @if (!$product->quantity == 0)
                                 <form class="card m-1 "
@@ -93,61 +93,57 @@
                     </div>
             </div>
         </div>
-        <h5 class="d-flex justify-content-center m-2">САМЫЕ ПОПУЛЯРНЫЕ</h5>
+        <h4 class="d-flex justify-content-center m-2">САМЫЕ ПОПУЛЯРНЫЕ</h4>
         <div class="d-flex row justify-content-center">
-            @foreach($products as $product)
+            @foreach($popular as $product)
                 @if(!$product->quantity == 0)
-
                     <div class="card shadow m-1 bg-white rounded" style="width: 180px">
-                        <a href="/product/{{$product->id}}">
+                        <a href="{{ route('product.show', ['id' => $product->product_id]) }}">
                             <img class="card-img-top rounded bg" src="{{$product->picture}}" alt="Card image cap">
-                            @foreach($metascores as $meta)
-                                @if($meta->product_id == $product->id)
-                                    <div class="d-flex justify-content-end card-img-overlay">
-                                        @if ($meta->meta_score >= 75)
-                                            <h6 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
-                                                style="background-color: #2fa360;  width: 25px; height: 25px;">
-                                                {{$meta->meta_score}}
-                                            </h6>
-                                        @elseif($meta->meta_score > 50)
-                                            <h6 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
-                                                style="background-color: #f6993f;  width: 25px; height: 25px;">
-                                                {{$meta->meta_score}}
-                                            </h6>
-                                        @else()
-                                            <h6 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
-                                                style="background-color: #d0211c;  width: 25px; height: 25px;">
-                                                {{$meta->meta_score}}
-                                            </h6>
-                                        @endif
-                                    </div>
+                            <div class="d-flex justify-content-end card-img-overlay">
+                                @if ($product->meta_score >= 75)
+                                    <h6 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
+                                        style="background-color: #2fa360;  width: 30px; height: 30px;">
+                                        {{$product->meta_score}}
+                                    </h6>
+                                @elseif($product->meta_score > 50)
+                                    <h6 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
+                                        style="background-color: #f6993f;  width: 30px; height: 30px;">
+                                        {{$product->meta_score}}
+                                    </h6>
+                                @elseif($product->meta_score > 0)
+                                    <h6 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
+                                        style="background-color: #d0211c;  width: 30px; height: 30px;">
+                                        {{$product->meta_score}}
+                                    </h6>
                                 @endif
-                            @endforeach
+                            </div>
                         </a>
                         <div class="d-flex flex-column justify-content-center p-2">
-                            <a href="/product/{{$product->id}}">
-                                <div class="d-flex align-items-center justify-content-center text-dark text-center text" style="height: 3rem">{{$product->name}}</div>
+                            <a href="/product/{{$product->product_id}}">
+                                <div class="d-flex align-items-center justify-content-center text-dark text-center"
+                                     style="height: 3rem">{{$product->name}}</div>
                             </a>
                             <h5 class="text-center text-danger">{{$product->price}} р.</h5>
                             <form class="card"
-                                action="{{route('addToBasket')}}" method="POST">
+                                  action="{{route('addToBasket')}}" method="POST">
                                 @csrf
-                                <input id="product_id" name="product_id" value="{{$product->id}}" type="hidden">
+                                <input id="product_id" name="product_id" value="{{$product->product_id}}" type="hidden">
                                 <input class="btn btn-block btn-sm btn-outline-dark shadow-sm" type="submit"
                                        value="В корзину">
                             </form>
                             <form class="card"
                                   action="{{route('addToFavorite')}}" method="POST">
                                 @csrf
-                                <input id="product_id" name="product_id" value="{{$product->id}}" type="hidden">
+                                <input id="product_id" name="product_id" value="{{$product->product_id}}" type="hidden">
                                 <input class="btn btn-block btn-sm btn-light shadow-sm" type="submit"
                                        value="В избранное">
                             </form>
                         </div>
                     </div>
                 @endif
-
             @endforeach
         </div>
+    </div>
 
 @endsection

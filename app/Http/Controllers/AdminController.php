@@ -27,14 +27,12 @@ class AdminController extends Controller
         ]);
     }
 
-    public function autoAddProductToCatalog(Request $request)
+    public function autoAddProduct(Request $request)
     {
         $metacritic = new Metacritic();
         $extract = $metacritic->extract(Str::after($request->url, 'https://www.metacritic.com'));
         $result = $extract['result'];
         $error = $extract['error'];
-
-        //dd($result);
 
         $product = Product::create(
             [
@@ -77,7 +75,7 @@ class AdminController extends Controller
         return back();
     }
 
-    public function addProductToCatalog(Request $request)
+    public function addProduct(Request $request)
     {
         $messages = [
             'product_name.unique' => 'Такая игра уже в каталоге.',
@@ -115,7 +113,7 @@ class AdminController extends Controller
         return back();
     }
 
-    public function addGenreToCatalog(Request $request)
+    public function addGenre(Request $request)
     {
         $messages = [
             'rus_genre_name.unique' => 'Такой жанр уже добавлен.',
@@ -137,7 +135,7 @@ class AdminController extends Controller
         return back();
     }
 
-    public function addCategoryToCatalog(Request $request)
+    public function addCategory(Request $request)
     {
         $messages = [
             'category_name.unique' => 'Такая категория уже добавлена.',
@@ -172,31 +170,23 @@ class AdminController extends Controller
         return back();
     }
 
-    public function change_game_amount(Request $request)
+    public function changeQuantity(Request $request)
     {
-        $game = DB::table('games')->where('name', $request->game_name)->get();
-        $change = Game::find($game[0]->id);
-        $change->amount = $request->new_amount;
-        $change->save();
+        Product::where('id', $request->product_id)->update(['quantity' => $request->quantity]);
 
         return back();
     }
 
-    public function change_description(Request $request)
+    public function changeDescription(Request $request)
     {
-        $game = DB::table('games')->where('name', $request->game_name)->get();
-        $change = Game::find($game[0]->id);
-        $change->description = $request->new_description;
-        $change->save();
+        Product::where('id', $request->product_id)->update(['description' => $request->description]);
 
         return back();
     }
 
-    public function changeProductPicture(Request $request)
+    public function changePicture(Request $request)
     {
-        $change = Product::find($request->product_id);
-        $change->picture = $request->picture;
-        $change->save();
+        Product::where('id', $request->product_id)->update(['picture' => $request->picture]);
 
         return back();
     }
