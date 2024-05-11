@@ -38,13 +38,24 @@
                                           action="{{route('addToBasket')}}" method="post">
                                         @csrf
                                         <input type="hidden" name="product_id" value="{{$product->id}}">
-                                        <input class="btn btn-danger m-1" name="change" value="-" type="submit">
-                                        <div>{{$product->bt_quantity}}</div>
-                                        <input class="btn btn-success m-1" name="change" value="+" type="submit">
+                                        <input class="btn btn-success m-1" value="Добавить" type="submit">
+                                    </form>
+                                    <div>{{$product->bt_quantity}}</div>
+                                    <form class="d-flex flex-row align-items-center"
+                                          action="{{route('removeFromBasket')}}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="product_id" value="{{$product->id}}">
+                                        <input class="btn btn-danger m-1" value="Удалить" type="submit">
                                     </form>
                                     <div>{{$product->price*$product->bt_quantity}} р.</div>
                                 @else
                                     <div> Временно нет в наличии.</div>
+                                    <form class="d-flex flex-row align-items-center"
+                                          action="{{route('removeFromBasket')}}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="product_id" value="{{$product->id}}">
+                                        <input class="btn btn-danger m-1" value="Удалить" type="submit">
+                                    </form>
                                 @endif
                             </div>
                 @endforeach
@@ -53,8 +64,11 @@
             <div class="d-flex w-20 flex-column align-items-end ml-5">
                 <h5>Итого:</h5>
                 <h3>{{$total}} р.</h3>
-                <button type="button" class="btn btn-block btn-outline-success">Оформить заказ</button>
-                <form action="{{route('clearBasket')}}" method="post">
+                <form action="{{ route('createOrder') }}" method="POST">
+                    @csrf
+                    <button class="btn btn-block btn-outline-success" type="submit">Оформить заказ</button>
+                </form>
+                <form action="{{route('clearBasket')}}" method="POST">
                     @csrf
                     <button class="btn btn-outline-danger mt-2" type="submit">Очистить корзину</button>
                 </form>

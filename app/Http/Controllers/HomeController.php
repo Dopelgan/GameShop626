@@ -8,14 +8,12 @@ use App\Product;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    protected $product;
+
+    public function __construct(Product $product)
     {
         $this->middleware('auth');
+        $this->product = $product;
     }
 
     /**
@@ -26,28 +24,16 @@ class HomeController extends Controller
     public function index()
     {
         return view('home', [
-            'popular' => Product::leftJoin('metascores', 'products.id', '=', 'metascores.product_id')
-                ->orderBy('count', 'DESC')
-                ->take(5)
-                ->get(),
-            'newest' => Product::leftJoin('metascores', 'products.id', '=', 'metascores.product_id')
-                ->orderBy('year', 'DESC')
-                ->take(3)
-                ->get(),
+            'popular' => $this->product->getPopularProducts(),
+            'newest' => $this->product->getNewestProducts(),
         ]);
     }
 
     public function home()
     {
         return view('home', [
-            'popular' => Product::leftJoin('metascores', 'products.id', '=', 'metascores.product_id')
-                ->orderBy('count', 'DESC')
-                ->take(5)
-                ->get(),
-            'newest' => Product::leftJoin('metascores', 'products.id', '=', 'metascores.product_id')
-                ->orderBy('year', 'DESC')
-                ->take(3)
-                ->get(),
+            'popular' => $this->product->getPopularProducts(),
+            'newest' => $this->product->getNewestProducts(),
         ]);
     }
 }

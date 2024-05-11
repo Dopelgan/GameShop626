@@ -62,6 +62,7 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route ('user.profile') }}">{{ ('Профиль') }}</a>
                                 <a class="dropdown-item" href="{{ route ('favorites') }}">{{ ('Избранное') }}</a>
                                 <a class="dropdown-item" href="{{ route ('basket') }}">{{ ('Корзина') }}</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"

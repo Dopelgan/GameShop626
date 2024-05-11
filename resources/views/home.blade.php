@@ -39,44 +39,40 @@
             <h4 class="d-flex justify-content-center m-2">УЖЕ В ПРОДАЖЕ!</h4>
             <div class="d-flex row justify-content-center mb-2">
                 @foreach($newest as $new)
-                    @if(!$new->quantity == 0)
-
-                        <div class="card shadow bg-white rounded m-1" style="width: 270px">
-                            <a href="{{ route('product.show', ['id' => $new->product_id]) }}">
-                                <img class="card-img-top rounded bg" src="{{$new->picture}}" alt="Card image cap">
-                                <div class="d-flex justify-content-end card-img-overlay">
-                                    @if ($new->meta_score >= 75)
-                                        <h4 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
-                                            style="background-color: #2fa360;  width: 40px; height: 40px;">
-                                            {{$new->meta_score}}
-                                        </h4>
-                                    @elseif($new->meta_score > 50)
-                                        <h4 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
-                                            style="background-color: #f6993f;  width: 40px; height: 40px;">
-                                            {{$new->meta_score}}
-                                        </h4>
-                                    @elseif($new->meta_score > 0)
-                                        <h4 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
-                                            style="background-color: #d0211c;  width: 40px; height: 40px;">
-                                            {{$new->meta_score}}
-                                        </h4>
-                                    @endif
-                                </div>
-                            </a>
-                            <div class="card-body d-flex flex-column justify-content-center">
-                                <a href="{{ route('product.show', ['id' => $new->product_id]) }}">
-                                    <h4 class="card-title text-dark text-center">{{$new->name}}</h4>
-                                </a>
-                                <h4 class="card-text text-center text-danger">{{$new->price}} р.</h4>
+                    <div class="card shadow bg-white rounded m-1" style="width: 270px">
+                        <a href="{{ route('product.show', ['id' => $new->product_id]) }}">
+                            <img class="card-img-top rounded bg" src="{{$new->picture}}" alt="Card image cap">
+                            <div class="d-flex justify-content-end card-img-overlay">
+                                @if ($new->meta_score >= 75)
+                                    <h4 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
+                                        style="background-color: #2fa360;  width: 40px; height: 40px;">
+                                        {{$new->meta_score}}
+                                    </h4>
+                                @elseif($new->meta_score > 50)
+                                    <h4 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
+                                        style="background-color: #f6993f;  width: 40px; height: 40px;">
+                                        {{$new->meta_score}}
+                                    </h4>
+                                @elseif($new->meta_score > 0)
+                                    <h4 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
+                                        style="background-color: #d0211c;  width: 40px; height: 40px;">
+                                        {{$new->meta_score}}
+                                    </h4>
+                                @endif
                             </div>
+                        </a>
+                        <div class="card-body d-flex flex-column justify-content-center">
+                            <a href="{{ route('product.show', ['id' => $new->product_id]) }}">
+                                <h4 class="card-title text-dark text-center">{{$new->name}}</h4>
+                            </a>
+                            <h4 class="card-text text-center text-danger">{{$new->price}} р.</h4>
                         </div>
-                    @endif
+                    </div>
                 @endforeach
             </div>
             <h4 class="d-flex justify-content-center m-2">САМЫЕ ПОПУЛЯРНЫЕ</h4>
             <div class="d-flex row justify-content-center">
                 @foreach($popular as $product)
-                    @if(!$product->quantity == 0)
                         <div class="card shadow m-1 bg-white rounded" style="width: 180px">
                             <a href="{{ route('product.show', ['id' => $product->product_id]) }}">
                                 <img class="card-img-top rounded bg" src="{{$product->picture}}" alt="Card image cap">
@@ -108,20 +104,22 @@
                                 <form class="card"
                                       action="{{route('addToBasket')}}" method="POST">
                                     @csrf
-                                    <input id="product_id" name="product_id" value="{{$product->product_id}}" type="hidden">
+                                    <input id="product_id" name="product_id" value="{{$product->product_id}}"
+                                           type="hidden">
                                     <input class="btn btn-block btn-sm btn-outline-dark shadow-sm" type="submit"
                                            value="В корзину">
                                 </form>
                                 <form class="card"
                                       action="{{route('addToFavorite')}}" method="POST">
                                     @csrf
-                                    <input id="product_id" name="product_id" value="{{$product->product_id}}" type="hidden">
-                                    <input id="notificationButton" class="btn btn-block btn-sm btn-light shadow-sm" type="submit"
+                                    <input id="product_id" name="product_id" value="{{$product->product_id}}"
+                                           type="hidden">
+                                    <input id="notificationButton" class="btn btn-block btn-sm btn-light shadow-sm"
+                                           type="submit"
                                            value="В избранное">
                                 </form>
                             </div>
                         </div>
-                    @endif
                 @endforeach
             </div>
         </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use App\Metascore;
 use App\Product;
 use App\ProductGenre;
@@ -35,6 +36,7 @@ Route::post('/deleteFavorite', 'FavoriteController@deleteFavorite')->name('delet
 
 Route::get('/basket', 'BasketController@basket')->name('basket');
 Route::post('/addToBasket', 'BasketController@addToBasket')->name('addToBasket');
+Route::post('/removeFromBasket', 'BasketController@removeFromBasket')->name('removeFromBasket');
 Route::post('/clearBasket', 'BasketController@clearBasket')->name('clearBasket');
 
 Route::get('/adminPanel', 'AdminController@adminPanel')->name('adminPanel');
@@ -43,6 +45,22 @@ Route::get('/autoAddProduct', 'AdminController@autoAddProduct')->name('autoAddPr
 Route::post('/changeDescription', 'AdminController@changeDescription')->name('changeDescription');
 Route::post('/changeQuantity', 'AdminController@changeQuantity')->name('changeQuantity');
 Route::post('/changeProductPicture', 'AdminController@changeProductPicture')->name('changeProductPicture');
-Route::post('/addGenreToCatalog', 'AdminController@addGenreToCatalog')->name('addGenreToCatalog');
-Route::post('/addCategoryToCatalog', 'AdminController@addCategoryToCatalog')->name('addCategoryToCatalog');
+Route::post('/addGenre', 'AdminController@addGenre')->name('addGenre');
+Route::post('/addCategory', 'AdminController@addCategory')->name('addCategory');
 Route::post('/linkProductGenre', 'AdminController@linkProductGenre')->name('linkProductGenre');
+
+Route::any('/createOrder', 'PackageController@createOrder')->name('createOrder');
+Route::post('/makePackage', 'PackageController@makePackage')->name('makePackage');
+
+Route::get('userProfile','UserController@userProfile')->name('userProfile');
+Route::post('userUpdate','UserController@userUpdate')->name('userUpdate');
+
+
+Route::middleware(['auth'])->group(function () {
+    // Роут для отображения профиля пользователя
+    Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
+
+    // Роут для обновления данных профиля
+    Route::put('/profile/update', [UserController::class, 'updateProfile'])->name('user.update');
+});
+

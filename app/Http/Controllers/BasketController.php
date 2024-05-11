@@ -8,13 +8,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class BasketController extends UserController
+class BasketController extends Controller
 {
     public function basket()
     {
         $products = Product::join('baskets', 'products.id', '=', 'baskets.product_id')
             ->where('user_id', Auth::user()->id)
-            ->where('baskets.quantity', '!=', '0')
             ->select('baskets.quantity as bt_quantity', 'products.*')
             ->get();
 
@@ -30,19 +29,12 @@ class BasketController extends UserController
 
     public function addToBasket(Request $request)
     {
-
-
         $basket = Basket::where('product_id', $request->product_id)
             ->where('user_id', Auth::user()->id)
             ->first();
 
         if ($basket) {
-            if (isset($request->change)) {
-                $change = ($request->change == '-') ? -1 : 1;
-                $basket->increment('quantity', $change);
-            } else {
-                $basket->increment('quantity', 1);
-            }
+            $basket->increment('quantity', 1);
         } else {
             Basket::create([
                 'product_id' => $request->product_id,
@@ -53,6 +45,25 @@ class BasketController extends UserController
 
         return back();
     }
+
+    public function removeFromBasket(Request $request)
+    {
+        $basket = Basket::where('product_id', $request->product_id)
+            ->where('user_id', Auth::user()->id)
+            ->first();
+
+        if ($basket) {
+            $basket->decrement('quantity', 1);
+
+            // Проверяем, если количество стало равным нулю, удаляем запись
+            if ($basket->quantity == 0) {
+                $basket->delete();
+            }
+        }
+
+        return back();
+    }
+
 
     public function clearBasket()
     {
