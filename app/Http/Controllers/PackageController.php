@@ -11,14 +11,27 @@ use Illuminate\Support\Facades\Auth;
 class PackageController extends Controller
 {
 
-    public function createOrder(Request $request)
+    public function package(Request $request)
     {
-        $products = Product::join('baskets', 'products.id', '=', 'baskets.product_id')
-            ->where('user_id', Auth::user()->id)
-            ->select('baskets.quantity as bt_quantity', 'products.*')
+        $parentPackage = Package::find($request->id);
+
+        $childPackages = Package::with('product')
+            ->where('parent_id', $request->id)
             ->get();
 
-        return view('createOrder', ['products' => $products]);
+        return view('package', [
+            'parentPackage' => $parentPackage,
+            'childPackages' => $childPackages,
+        ]);
+    }
+
+    public function order(Request $request)
+    {
+        $products = Basket::with('product')
+            ->where('user_id', Auth::user()->id)
+            ->get();
+
+        return view('order', ['products' => $products]);
     }
 
     public function makePackage(Request $request)
@@ -26,14 +39,22 @@ class PackageController extends Controller
         // Получаем текущего пользователя
         $user = auth()->user();
 
-        // Обновляем данные пользователя
-        $user->update([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'middle_name' => $request->middle_name,
-            'address' => $request->address,
-            'phone_number' => $request->phone_number,
+        // Проверяем, имеет ли пользователь доступ к редактированию этого профиля
+        if ($request->user()->id !== $user->id) {
+            abort(403);
+        }
+
+        // Валидируем данные
+        $validatedData = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'middle_name' => 'nullable|string|max:255',
+            'address' => 'nullable|string|max:255',
+            'phone_number' => 'nullable|string|max:255',
         ]);
+
+        // Обновляем данные пользователя
+        $user->update($validatedData);
 
         // Создаем родительское отправление (multiplace)
         $parentPackage = Package::create([
@@ -80,8 +101,27 @@ class PackageController extends Controller
         Basket::where('user_id', $user->id)->delete();
 
         // Возвращаем ответ с сообщением об успешном создании заказа
-        return redirect()->back()->with('success', 'Заказ успешно создан!');
+        return redirect('basket')->with('success', 'Заказ успешно создан!');
     }
 
+    public function remove(Request $request)
+    {
+        $packages = Package::where('parent_id', $request->package_id)
+            ->orWhere('id', $request->package_id)
+            ->get();
+
+        foreach ($packages as $package) {
+            if ($package->current_status = 'new')
+            $package->update([
+                'current_status' => 'removed',
+                'removed_at' => now()
+            ]);
+
+        }
+
+        // Возвращаем ответ с сообщением об успешном создании заказа
+        return redirect()->back()->with('success', 'Заказ успешно отменен!');
+
+    }
 
 }

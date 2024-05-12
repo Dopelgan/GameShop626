@@ -17,7 +17,10 @@ class UserController extends Controller
         $user = auth()->user();
 
         // Получаем все заказы пользователя
-        $packages = Package::where('user_id', $user->id)->get();
+        $packages = Package::where('user_id', $user->id)
+            ->where('parent_id', null)
+            ->where('current_status', '<>', 'removed')
+            ->get();
 
         // Возвращаем представление с заказами пользователя
         return view('profile', [
@@ -25,8 +28,11 @@ class UserController extends Controller
             'packages' => $packages]);
     }
 
-    public function updateProfile(Request $request, User $user)
+    public function updateProfile(Request $request)
     {
+        // Получаем текущего пользователя
+        $user = auth()->user();
+
         // Проверяем, имеет ли пользователь доступ к редактированию этого профиля
         if ($request->user()->id !== $user->id) {
             abort(403);
@@ -45,6 +51,6 @@ class UserController extends Controller
         $user->update($validatedData);
 
         // Перенаправляем пользователя на страницу профиля с сообщением об успешном обновлении
-        return redirect()->route('userProfile')->with('success', 'Профиль успешно обновлен');
+        return redirect()->route('user.profile')->with('success', 'Профиль успешно обновлен');
     }
 }

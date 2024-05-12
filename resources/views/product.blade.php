@@ -94,50 +94,45 @@
             </div>
         </div>
         <h4 class="d-flex justify-content-center m-2">САМЫЕ ПОПУЛЯРНЫЕ</h4>
-        <div class="d-flex row justify-content-center">
+        <div class="d-flex row justify-content-between">
             @foreach($popular as $product)
-                <div class="card shadow m-1 bg-white rounded" style="width: 180px">
-                    <a href="{{ route('product.show', ['id' => $product->product_id]) }}">
-                        <img class="card-img-top rounded bg" src="{{$product->picture}}" alt="Card image cap">
-                        <div class="d-flex justify-content-end card-img-overlay">
-                            @if ($product->meta_score >= 75)
-                                <h6 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
-                                    style="background-color: #2fa360;  width: 30px; height: 30px;">
-                                    {{$product->meta_score}}
-                                </h6>
-                            @elseif($product->meta_score > 50)
-                                <h6 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
-                                    style="background-color: #f6993f;  width: 30px; height: 30px;">
-                                    {{$product->meta_score}}
-                                </h6>
-                            @elseif($product->meta_score > 0)
-                                <h6 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
-                                    style="background-color: #d0211c;  width: 30px; height: 30px;">
-                                    {{$product->meta_score}}
-                                </h6>
-                            @endif
-                        </div>
-                    </a>
-                    <div class="d-flex flex-column justify-content-center p-2">
-                        <a href="/product/{{$product->product_id}}">
-                            <div class="d-flex align-items-center justify-content-center text-dark text-center"
-                                 style="height: 3rem">{{$product->name}}</div>
+                <div class="card shadow bg-white rounded m-1" style="width: 180px;">
+                    <div class="card shadow bg-white rounded">
+                        <a href="{{ route('product.show', ['id' => $product->id]) }}">
+                            <img class="card-img-top rounded" src="{{$product->picture}}" alt="Card image cap">
+                            <div class="card-img-overlay">
+                                <div class="d-flex justify-content-end card-img-overlay">
+                                    <h6 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded
+                                    @if ($product->metascore->meta_score >= 75)
+                                        bg-success
+                                    @elseif($product->metascore->meta_score > 50)
+                                        bg-warning
+                                    @else
+                                        bg-danger
+                                    @endif
+                                        " style="width: 30px; height: 30px;">
+                                        {{$product->metascore->meta_score}}
+                                    </h6>
+                                </div>
+                            </div>
                         </a>
-                        <h5 class="text-center text-danger">{{$product->price}} р.</h5>
-                        <form class="card"
-                              action="{{route('addToBasket')}}" method="POST">
-                            @csrf
-                            <input id="product_id" name="product_id" value="{{$product->product_id}}" type="hidden">
-                            <input class="btn btn-block btn-sm btn-outline-dark shadow-sm" type="submit"
-                                   value="В корзину">
-                        </form>
-                        <form class="card"
-                              action="{{route('addToFavorite')}}" method="POST">
-                            @csrf
-                            <input id="product_id" name="product_id" value="{{$product->product_id}}" type="hidden">
-                            <input class="btn btn-block btn-sm btn-light shadow-sm" type="submit"
-                                   value="В избранное">
-                        </form>
+                    </div>
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <a class="card-title text-dark text-center"
+                           href="{{ route('product.show', ['id' => $product->id]) }}">
+                            <h6>{{$product->name}}</h6>
+                        </a>
+                        <div>
+                            <form action="{{route('addToBasket')}}" method="POST">
+                                @csrf
+                                <input id="product_id" name="product_id" value="{{$product->id}}"
+                                       type="hidden">
+                                <h5 class="card-text text-center text-danger">{{$product->price}} р.</h5>
+                                <input class="btn btn-block btn-outline-dark btn-sm shadow-sm"
+                                       type="submit"
+                                       value="В корзину">
+                            </form>
+                        </div>
                     </div>
                 </div>
             @endforeach

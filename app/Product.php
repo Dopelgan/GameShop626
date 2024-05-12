@@ -23,18 +23,25 @@ class Product extends Model
         return $this->belongsTo(Basket::class);
     }
 
+    public function packages()
+    {
+        return $this->hasMany(Package::class);
+    }
+
     public static function getPopularProducts()
     {
-        return Product::leftJoin('metascores', 'products.id', '=', 'metascores.product_id')
+        return Product::with('metascore')
+            ->where('quantity', '>', '0')
             ->orderBy('count', 'DESC')
-            ->take(5)
+            ->take(6)
             ->get();
     }
 
     public static function getNewestProducts()
     {
-        return Product::leftJoin('metascores', 'products.id', '=', 'metascores.product_id')
-            ->orderBy('year', 'DESC')
+        return Product::with('metascore')
+            ->where('quantity', '>', '0')
+            ->orderBy('count', 'DESC')
             ->take(3)
             ->get();
     }

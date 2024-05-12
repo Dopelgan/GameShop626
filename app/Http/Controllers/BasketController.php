@@ -12,13 +12,12 @@ class BasketController extends Controller
 {
     public function basket()
     {
-        $products = Product::join('baskets', 'products.id', '=', 'baskets.product_id')
-            ->where('user_id', Auth::user()->id)
-            ->select('baskets.quantity as bt_quantity', 'products.*')
-            ->get();
+        $products = Basket::whereHas('product', function ($query) {
+            $query->where('user_id', Auth::user()->id);
+        })->get();
 
         $total = $products->sum(function($product) {
-            return $product->bt_quantity * $product->price;
+            return $product->quantity * $product->product->price;
         });
 
         return view('basket', [

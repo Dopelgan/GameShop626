@@ -32,7 +32,7 @@ Route::any('/filter', 'FilterController@filter')->name('filter');
 Route::get('/favorites', 'FavoriteController@favorites')->name('favorites');
 Route::post('/addToFavorite', 'FavoriteController@addToFavorite')->name('addToFavorite');
 Route::post('/clearFavorites', 'FavoriteController@clearFavorites')->name('clearFavorites');
-Route::post('/deleteFavorite', 'FavoriteController@deleteFavorite')->name('deleteFavorite');
+Route::post('/deleteFromFavorite', 'FavoriteController@deleteFromFavorite')->name('deleteFromFavorite');
 
 Route::get('/basket', 'BasketController@basket')->name('basket');
 Route::post('/addToBasket', 'BasketController@addToBasket')->name('addToBasket');
@@ -49,7 +49,7 @@ Route::post('/addGenre', 'AdminController@addGenre')->name('addGenre');
 Route::post('/addCategory', 'AdminController@addCategory')->name('addCategory');
 Route::post('/linkProductGenre', 'AdminController@linkProductGenre')->name('linkProductGenre');
 
-Route::any('/createOrder', 'PackageController@createOrder')->name('createOrder');
+Route::any('/order', 'PackageController@order')->name('order');
 Route::post('/makePackage', 'PackageController@makePackage')->name('makePackage');
 
 Route::get('userProfile','UserController@userProfile')->name('userProfile');
@@ -64,3 +64,5 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/profile/update', [UserController::class, 'updateProfile'])->name('user.update');
 });
 
+Route::any('/package/{id}', 'PackageController@package')->name('package');
+Route::post('/packageRemove', 'PackageController@remove')->name('packageRemove');
