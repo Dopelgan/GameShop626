@@ -31,7 +31,14 @@ class PackageController extends Controller
             ->where('user_id', Auth::user()->id)
             ->get();
 
-        return view('order', ['products' => $products]);
+        $total = $products->sum(function($product) {
+            return $product->quantity * $product->product->price;
+        });
+
+        return view('order', [
+            'products' => $products,
+            'total' => $total,
+        ]);
     }
 
     public function makePackage(Request $request)

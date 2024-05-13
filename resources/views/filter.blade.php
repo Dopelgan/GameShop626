@@ -67,29 +67,23 @@
             <div class="w-75">
                 <div class="d-flex row justify-content-center">
                     @foreach($filter as $product)
-                        @if(!$product->quantity == 0)
+Измен                        @if($product->quantity > 0)
                             <div class="card shadow m-1 bg-white rounded" style="width: 200px;">
                                 <a href="{{ route('product.show', ['id' => $product->product_id]) }}">
                                     <img class="card-img-top rounded bg" src="{{$product->picture}}"
                                          alt="Card image cap">
-                                            <div class="d-flex justify-content-end card-img-overlay">
-                                                @if ($product->meta_score >= 75)
-                                                    <h6 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
-                                                        style="background-color: #2fa360;  width: 30px; height: 30px;">
-                                                        {{$product->meta_score}}
-                                                    </h6>
-                                                @elseif($product->meta_score > 50)
-                                                    <h6 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
-                                                        style="background-color: #f6993f;  width: 30px; height: 30px;">
-                                                        {{$product->meta_score}}
-                                                    </h6>
-                                                @elseif($product->meta_score > 0)
-                                                    <h6 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
-                                                        style="background-color: #d0211c;  width: 30px; height: 30px;">
-                                                        {{$product->meta_score}}
-                                                    </h6>
-                                                @endif
-                                            </div>
+                                    <div class="d-flex justify-content-end card-img-overlay">
+                                        <h6 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
+                                            @if ($product->meta_score >= 75)
+                                                style="background-color: #2fa360;  width: 30px; height: 30px;">
+                                            @elseif($product->meta_score > 50)
+                                                style="background-color: #f6993f;  width: 30px; height: 30px;">
+                                            @elseif($product->meta_score > 0)
+                                                style="background-color: #d0211c;  width: 30px; height: 30px;">
+                                            @endif
+                                            {{$product->meta_score}}
+                                        </h6>
+                                    </div>
                                 </a>
                                 <div class="d-flex flex-column justify-content-center p-2">
                                     <a href="{{ route('product.show', ['id' => $product->product_id]) }}">
@@ -101,14 +95,52 @@
                                     <form class="card"
                                           action="{{route('addToBasket')}}" method="POST">
                                         @csrf
-                                        <input id="product_id" name="product_id" value="{{$product->product_id}}" type="hidden">
+                                        <input id="product_id" name="product_id" value="{{$product->product_id}}"
+                                               type="hidden">
                                         <input class="btn btn-block btn-sm btn-outline-dark shadow-sm" type="submit"
                                                value="В корзину">
                                     </form>
                                     <form class="card"
                                           action="{{route('addToFavorite')}}" method="POST">
                                         @csrf
-                                        <input id="product_id" name="product_id" value="{{$product->product_id}}" type="hidden">
+                                        <input id="product_id" name="product_id" value="{{$product->product_id}}"
+                                               type="hidden">
+                                        <input class="btn btn-block btn-sm btn-light shadow-sm" type="submit"
+                                               value="В избранное">
+                                    </form>
+                                </div>
+                            </div>
+                        @else
+                            <div class="card shadow m-1 bg-white rounded" style="width: 200px;">
+                                <a href="{{ route('product.show', ['id' => $product->product_id]) }}">
+                                    <img class="card-img-top rounded bg" src="{{$product->picture}}"
+                                         alt="Card image cap">
+                                    <div class="d-flex justify-content-end card-img-overlay">
+                                        <h6 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"
+                                            @if ($product->meta_score >= 75)
+                                                style="background-color: #2fa360;  width: 30px; height: 30px;">
+                                            @elseif($product->meta_score > 50)
+                                                style="background-color: #f6993f;  width: 30px; height: 30px;">
+                                            @elseif($product->meta_score > 0)
+                                                style="background-color: #d0211c;  width: 30px; height: 30px;">
+                                            @endif
+                                            {{$product->meta_score}}
+                                        </h6>
+                                    </div>
+                                </a>
+                                <div class="d-flex flex-column justify-content-center p-2">
+                                    <a href="{{ route('product.show', ['id' => $product->product_id]) }}">
+                                        <div
+                                            class="d-flex align-items-center justify-content-center text-dark text-center"
+                                            style="height: 3rem">{{$product->name}}</div>
+                                    </a>
+                                    <h5 class="text-center text-danger">{{$product->price}} р.</h5>
+                                    <h6 class="text-center">Нет в наличии</h6>
+                                    <form class="card"
+                                          action="{{route('addToFavorite')}}" method="POST">
+                                        @csrf
+                                        <input id="product_id" name="product_id" value="{{$product->product_id}}"
+                                               type="hidden">
                                         <input class="btn btn-block btn-sm btn-light shadow-sm" type="submit"
                                                value="В избранное">
                                     </form>

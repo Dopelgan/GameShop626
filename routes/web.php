@@ -62,6 +62,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Роут для обновления данных профиля
     Route::put('/profile/update', [UserController::class, 'updateProfile'])->name('user.update');
+    Route::put('/profile/editProfile', [UserController::class, 'editProfile'])->name('user.edit');
 });
 
 Route::any('/package/{id}', 'PackageController@package')->name('package');

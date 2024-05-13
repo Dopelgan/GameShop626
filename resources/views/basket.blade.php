@@ -20,7 +20,7 @@
         @else
             <div class="d-flex flex-row">
                 <div class="card w-75">
-                    <h1 class="m-3">Ваша корзина</h1>
+                    <h1 class="card-header">Ваша корзина</h1>
                     <table class="table">
                         <thead>
                         <tr>

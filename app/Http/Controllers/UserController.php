@@ -28,6 +28,16 @@ class UserController extends Controller
             'packages' => $packages]);
     }
 
+    public function editProfile()
+    {
+        // Получаем текущего пользователя
+        $user = auth()->user();
+
+        // Возвращаем представление с заказами пользователя
+        return view('editProfile', [
+            'user' => $user]);
+    }
+
     public function updateProfile(Request $request)
     {
         // Получаем текущего пользователя

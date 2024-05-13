@@ -45,9 +45,9 @@
                     <button type="submit" class="btn btn-primary">Создать заказ</button>
                 </form>
             </div>
-            <div>
-                <h3>Состав заказа:</h3>
-                <table class="table shadow rounded">
+            <div class="card shadow rounded">
+                <h3 class="card-header text-right">Состав заказа:</h3>
+                <table class="table">
                     <thead>
                     <tr>
                         <th></th>
@@ -80,6 +80,7 @@
                     @endforeach
                     </tbody>
                 </table>
+                <h3 class="card-footer text-right">Итого: {{$total}}</h3>
             </div>
         </div>
     </div>
