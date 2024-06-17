@@ -65,5 +65,9 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/profile/editProfile', [UserController::class, 'editProfile'])->name('user.edit');
 });
 
+Route::get('/change-password', 'UserController@showChangePasswordForm')->name('password.change');
+Route::post('/change-password', 'UserController@changePassword')->name('password.update');
+
+
 Route::any('/package/{id}', 'PackageController@package')->name('package');
 Route::post('/packageRemove', 'PackageController@remove')->name('packageRemove');

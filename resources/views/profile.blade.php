@@ -6,30 +6,37 @@
     <div class="container d-flex flex-column">
         <h1 class="text-center">Профиль</h1>
         <div class="d-flex flex-row justify-content-center">
-                <div class="card w-25">
-                    <h3 class="card-header">Ваши данные:</h3>
-                    <div class="card-body">
-                        <h6>ФИО:</h6>
-                        <h5>{{ $user->last_name }}</h5>
-                        <h5>{{ $user->first_name }}</h5>
-                        <h5>{{ $user->middle_name }}</h5>
-                        <h6>Адрес:</h6>
-                        <h5>{{ $user->address }}</h5>
-                        <h6>Номер телефона:</h6>
-                        <h5>{{ $user->phone_number }}</h5>
-                    </div>
+            <div class="card w-25">
+                <h3 class="card-header">Ваши данные:</h3>
+                <div class="card-body">
+                    <h6>ФИО:</h6>
+                    <h5>{{ $user->last_name }}</h5>
+                    <h5>{{ $user->first_name }}</h5>
+                    <h5>{{ $user->middle_name }}</h5>
+                    <h6>Адрес:</h6>
+                    <h5>{{ $user->address }}</h5>
+                    <h6>Номер телефона:</h6>
+                    <h5>{{ $user->phone_number }}</h5>
+                </div>
+                <div class="card-footer">
                     <form action="{{ route('user.edit') }}" method="POST">
                         @csrf
                         @method('PUT')
                         <input type="hidden" id="user_id" name="user_id" value="{{ $user->id }}">
-                        <button type="submit" class="btn btn-primary mb-3 ml-3">Изменить информацию</button>
+                        <button type="submit" class="btn btn-primary">Изменить информацию</button>
+                    </form>
+                    <form action="{{ route('password.change') }}" method="GET">
+                        @csrf
+                        <input type="hidden" id="user_id" name="user_id" value="{{ $user->id }}">
+                        <button type="submit" class="btn btn-outline-dark mt-1">Изменить пароль</button>
                     </form>
                 </div>
+            </div>
             <div class="w-75 ml-4 card">
                 <h2 class="card-header">Ваши заказы</h2>
 
                 @if ($packages->isEmpty())
-                    <p>У вас нет заказов</p>
+                    <div class="card-body">У вас нет заказов</div>
                 @else
                     <table class="table">
                         <thead>
