@@ -6,7 +6,6 @@ use App\Favorite;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class FavoriteController extends Controller
 {
@@ -28,7 +27,7 @@ class FavoriteController extends Controller
         return back();
     }
 
-    public function deleteFavorite(Request $request)
+    public function deleteFromFavorite(Request $request)
     {
         Favorite::where('user_id', Auth::user()->id)->where('product_id', "$request->product_id")->delete();
 

@@ -4,19 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Basket;
 use App\Category;
-use App\Game;
-use App\GameGenre;
-use App\GamePlatform;
-use App\Genre;
-use App\Platform;
+use App\Metascore;
 use App\Product;
+use App\ProductGenre;
+use App\Genre;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ProductController extends UserController
+class ProductController extends Controller
 {
-    public function filter(Request $request)
+
+    public function show(Request $request)
     {
-        return view('filter');
+        $product = Product::with('genres', 'metascore')->find($request->id);
+        $product->count++;
+        $product->save();
+
+        return view('product', [
+            'product' => $product,
+            'popular' => Product::getPopularProducts()
+        ]);
+
     }
+
 }

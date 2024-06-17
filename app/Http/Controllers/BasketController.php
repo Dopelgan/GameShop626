@@ -3,106 +3,72 @@
 namespace App\Http\Controllers;
 
 use App\Basket;
-use App\Game;
-use App\GameGenre;
-use App\GamePlatform;
-use App\Genre;
-use App\Platform;
-use App\User;
-use http\Message;
+use App\Product;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Redirect;
 
-class BasketController extends UserController
+class BasketController extends Controller
 {
     public function basket()
     {
-        $game_name_in_basket = DB::table('baskets')->where('user_name', 'Admin')->pluck('game_name');
+        $products = Basket::whereHas('product', function ($query) {
+            $query->where('user_id', Auth::user()->id);
+        })->get();
 
-        $games_in_basket = DB::table('baskets')->where('user_name', 'Admin')->get();
-
-        $games = DB::table('games')->whereIn('name', $game_name_in_basket)->get();
-
-        $total = 0;
-
-        foreach ($games_in_basket as $game){
-            $variable = DB::table('games')->where('name', $game->game_name)->get();
-            $price = ($variable[0]->price) * ($game->amount);
-            $total = $total + $price;
-        }
+        $total = $products->sum(function($product) {
+            return $product->quantity * $product->product->price;
+        });
 
         return view('basket', [
-            'games_in_basket' => $games_in_basket,
-            'games' => $games,
-            'total' => $total
+            'products' => $products,
+            'total' => $total,
         ]);
     }
 
     public function addToBasket(Request $request)
     {
+        $basket = Basket::where('product_id', $request->product_id)
+            ->where('user_id', Auth::user()->id)
+            ->first();
 
-        Basket::updateOrCreate(
-            ['product_id' => $request->product_id, 'user_id' => $request->user_id],
-            ['quantity' => "1"]
-        );
+        if ($basket) {
+            $basket->increment('quantity', 1);
+        } else {
+            Basket::create([
+                'product_id' => $request->product_id,
+                'user_id' => Auth::user()->id,
+                'quantity' => 1
+            ]);
+        }
 
         return back();
-
     }
 
-    public function change_amount_game_to_basket(Request $request)
+    public function removeFromBasket(Request $request)
     {
-        $game_amount = DB::table('games')->where('name', "$request->game_name")->pluck('amount');
+        $basket = Basket::where('product_id', $request->product_id)
+            ->where('user_id', Auth::user()->id)
+            ->first();
 
-//        dd($request->game_amount);
+        if ($basket) {
+            $basket->decrement('quantity', 1);
 
-        if ($request->change == '-') {
-            if ($request->game_amount - 1 == 0) {
-                DB::table('baskets')
-                    ->where('user_name', 'Admin')
-                    ->where('game_name', "$request->game_name")
-                    ->delete();
-            } else {
-                $subtract_game_amount_basket = Basket::updateOrCreate(
-
-                    ['game_name' => $request->game_name, 'user_name' => $request->user_name],
-
-                    [
-                        'amount' => $request->game_amount - 1
-                    ]
-
-                );
-            }
-        } else {
-            if ($game_amount[0] > $request->game_amount) {
-                $add_game_amount_basket = Basket::updateOrCreate(
-
-                    ['game_name' => $request->game_name, 'user_name' => $request->user_name],
-
-                    [
-                        'amount' => $request->game_amount + 1
-                    ]
-
-                );
+            // Проверяем, если количество стало равным нулю, удаляем запись
+            if ($basket->quantity == 0) {
+                $basket->delete();
             }
         }
 
+        return back();
+    }
+
+
+    public function clearBasket()
+    {
+        Basket::where('user_id', Auth::user()->id)->delete();
+
         return redirect('basket');
     }
 
-    public function clear_basket()
-    {
-        $deletedRows = DB::table('baskets')->where('user_name', 'Admin')->delete();
-
-        return redirect('basket');
-    }
-
-    public function price_of_all_games_in_basket()
-    {
-        $games = DB::table('baskets')->where('user_name', 'Admin')->get();
-
-
-    }
 }
