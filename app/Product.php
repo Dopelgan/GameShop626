@@ -41,7 +41,7 @@ class Product extends Model
     {
         return Product::with('metascore')
             ->where('quantity', '>', '0')
-            ->orderBy('count', 'DESC')
+            ->orderBy('date', 'DESC')
             ->take(3)
             ->get();
     }

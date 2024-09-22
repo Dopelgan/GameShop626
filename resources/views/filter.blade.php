@@ -67,7 +67,7 @@
             <div class="w-75">
                 <div class="d-flex row justify-content-center">
                     @foreach($filter as $product)
-Измен                        @if($product->quantity > 0)
+                        @if($product->quantity > 0)
                             <div class="card shadow m-1 bg-white rounded" style="width: 200px;">
                                 <a href="{{ route('product.show', ['id' => $product->product_id]) }}">
                                     <img class="card-img-top rounded bg" src="{{$product->picture}}"

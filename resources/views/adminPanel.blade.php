@@ -15,70 +15,67 @@
     @endif
     <div class="container">
         <div class="d-flex row justify-content-between">
-            <div class="w-25">
-                <form class="d-flex flex-column m-2" action="{{route('autoAddProduct')}}" method="GET">
-                    @csrf
-                    <h5>Добавить игру, её жанры и оценки с метакритик автоматически</h5>
-                    <div class="mt-2">
-                        <label for="url">Ссылка на игру</label>
-                        <br>
-                        <input class="form form-control" id="url" type="text" name="url" required>
-                    </div>
-                    <div class="mt-2">
-                        <label for="category">Выберите категорию</label>
-                        <br>
-                        <select id="category" name="category" required="required" class="custom-select">
-                            @foreach($categories as $category)
-                                <option value="{{$category->id}}">{{$category->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="mt-2">
-                        <label for="quantity">Количество</label>
-                        <input type="text" id="quantity" name="quantity" required class="form form-control">
-                    </div>
-                    <div class="mt-2">
-                        <label for="price">Цена</label>
-                        <br>
-                        <input id="price" type="text" name="price" required class="form form-control">
-                    </div>
-                    <input class="btn btn-success mt-2" type="submit" value="Добавить">
-                </form>
-            </div>
+            {{--            <div class="w-25">--}}
+            {{--                <form class="d-flex flex-column m-2" action="{{route('autoAddProduct')}}" method="GET">--}}
+            {{--                    @csrf--}}
+            {{--                    <h5>Добавить игру, её жанры и оценки с метакритик автоматически</h5>--}}
+            {{--                    <div class="mt-2">--}}
+            {{--                        <label for="url">Ссылка на игру</label>--}}
+            {{--                        <br>--}}
+            {{--                        <input class="form form-control" id="url" type="text" name="url" required>--}}
+            {{--                    </div>--}}
+            {{--                    <div class="mt-2">--}}
+            {{--                        <label for="category">Выберите категорию</label>--}}
+            {{--                        <br>--}}
+            {{--                        <select id="category" name="category" required="required" class="custom-select">--}}
+            {{--                            @foreach($categories as $category)--}}
+            {{--                                <option value="{{$category->id}}">{{$category->name}}</option>--}}
+            {{--                            @endforeach--}}
+            {{--                        </select>--}}
+            {{--                    </div>--}}
+            {{--                    <div class="mt-2">--}}
+            {{--                        <label for="quantity">Количество</label>--}}
+            {{--                        <input type="text" id="quantity" name="quantity" required class="form form-control">--}}
+            {{--                    </div>--}}
+            {{--                    <div class="mt-2">--}}
+            {{--                        <label for="price">Цена</label>--}}
+            {{--                        <br>--}}
+            {{--                        <input id="price" type="text" name="price" required class="form form-control">--}}
+            {{--                    </div>--}}
+            {{--                    <input class="btn btn-success mt-2" type="submit" value="Добавить">--}}
+            {{--                </form>--}}
+            {{--            </div>--}}
 
-            <div>
-                <form class="d-flex flex-column m-2" action="{{route('addProduct')}}" method="POST">
+            <div class="card">
+                <h5 class="card-header">Добавить игру вручную</h5>
+                <form class="d-flex flex-column m-2 card-body" action="{{route('addProduct')}}" method="POST">
                     @csrf
-                    <h5>Добавить игру вручную</h5>
                     <div class="form-group">
                         <label for="product_name">Название игры</label>
                         <br>
                         <input class="form form-control" id="product_name" type="text" name="product_name" required>
                     </div>
                     <div class="form-group">
-                        <label for="year">Год выхода</label>
-                        <br>
-                        <select id="year" name="year" required="required" class="custom-select">
-                            @for ($i = 2000; $i < 2025; $i++)
-                                <option value="{{$i}}">{{$i}}</option>
-                            @endfor
-                        </select>
+                        <label for="dateInput">Выберите дату выхода:</label>
+                        <input type="date" class="form-control" name="dateInput" id="dateInput" required="required" placeholder="Выберите дату">
                     </div>
                     <div class="form-group">
-                        <label for="genres">Выберите жанры (через Ctrl)</label>
+                        <label for="genres">Выберите жанры</label>
                         <br>
-                        <select id="genres" name="genres[]" multiple="multiple" size="4" required="required"
-                                class="custom-select">
+                        <div id="genres" class="custom-checkbox-group">
                             @foreach($genres as $genre)
-                                <option value="{{$genre->id}}">
-                                    @if($genre->rus_name == null)
-                                        {{$genre->eng_name}}
-                                    @else
-                                        {{$genre->rus_name}}
-                                    @endif
-                                </option>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="genres[]" value="{{$genre->id}}" id="genre{{$genre->id}}">
+                                    <label class="form-check-label" for="genre{{$genre->id}}">
+                                        @if($genre->rus_name == null)
+                                            {{$genre->eng_name}}
+                                        @else
+                                            {{$genre->rus_name}}
+                                        @endif
+                                    </label>
+                                </div>
                             @endforeach
-                        </select>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="category">Выберите категорию</label>
@@ -88,6 +85,12 @@
                                 <option value="{{$category->id}}">{{$category->name}}</option>
                             @endforeach
                         </select>
+                    </div>
+                    <div class="form-group d-flex flex-column">
+                        <label for="metascore">Metascore</label>
+                        <input type="text" id="metascore" name="metascore" required class="form form-control">
+                        <label for="userscore">Userscore</label>
+                        <input type="text" id="userscore" name="userscore" required class="form form-control">
                     </div>
                     <div class="form-group">
                         <label for="quantity">Количество</label>

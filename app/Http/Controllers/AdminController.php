@@ -27,53 +27,53 @@ class AdminController extends Controller
         ]);
     }
 
-    public function autoAddProduct(Request $request)
-    {
-        $metacritic = new Metacritic();
-        $extract = $metacritic->extract(Str::after($request->url, 'https://www.metacritic.com'));
-        $result = $extract['result'];
-        $error = $extract['error'];
-
-        $product = Product::create(
-            [
-                'name' => $result['title'],
-                'year' => Str::before($result['release_year'], '-'),
-                'price' => $request->price,
-                'quantity' => $request->quantity,
-                'description' => $result['summary'],
-                'picture' => $result['thumbnail'],
-                'category_id' => $request->category,
-            ]
-        );
-
-        Metascore::create(
-            [
-                'product_id' => $product->id,
-                'meta_score' => $result['meta_score'],
-                'user_score' => $result['user_score']*10,
-            ]
-        );
-
-        $genre = Genre::firstOrCreate(
-            [
-                'eng_name' => $result['genres']
-            ],
-            [
-                'eng_name' => $result['genres']
-            ]
-        );
-
-        ProductGenre::firstOrCreate(
-            [
-                'product_id' => $product->id, 'genre_id' => $genre->id
-            ],
-            [
-                'product_id' => $product->id, 'genre_id' => $genre->id
-            ]
-        );
-
-        return back();
-    }
+//    public function autoAddProduct(Request $request)
+//    {
+//        $metacritic = new Metacritic();
+//        $extract = $metacritic->extract(Str::after($request->url, 'https://www.metacritic.com'));
+//        $result = $extract['result'];
+//        $error = $extract['error'];
+//
+//        $product = Product::create(
+//            [
+//                'name' => $result['title'],
+//                'year' => Str::before($result['release_year'], '-'),
+//                'price' => $request->price,
+//                'quantity' => $request->quantity,
+//                'description' => $result['summary'],
+//                'picture' => $result['thumbnail'],
+//                'category_id' => $request->category,
+//            ]
+//        );
+//
+//        Metascore::create(
+//            [
+//                'product_id' => $product->id,
+//                'meta_score' => $result['meta_score'],
+//                'user_score' => $result['user_score']*10,
+//            ]
+//        );
+//
+//        $genre = Genre::firstOrCreate(
+//            [
+//                'eng_name' => $result['genres']
+//            ],
+//            [
+//                'eng_name' => $result['genres']
+//            ]
+//        );
+//
+//        ProductGenre::firstOrCreate(
+//            [
+//                'product_id' => $product->id, 'genre_id' => $genre->id
+//            ],
+//            [
+//                'product_id' => $product->id, 'genre_id' => $genre->id
+//            ]
+//        );
+//
+//        return back();
+//    }
 
     public function addProduct(Request $request)
     {
@@ -90,12 +90,20 @@ class AdminController extends Controller
         $product = Product::create(
             [
                 'name' => $request->product_name,
-                'year' => $request->year,
+                'date' => $request->dateInput,
                 'price' => $request->price,
                 'quantity' => $request->quantity,
                 'description' => $request->description,
                 'picture' => $request->picture,
                 'category_id' => $request->category,
+            ]
+        );
+
+        $metascore = Metascore::create(
+            [
+                'meta_score' => $request->metascore,
+                'user_score' => $request->userscore,
+                'product_id' => $product->id,
             ]
         );
 

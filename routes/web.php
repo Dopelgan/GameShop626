@@ -1,13 +1,8 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
-use App\Metascore;
-use App\Product;
-use App\ProductGenre;
-use App\Genre;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +21,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/product/{id}', 'ProductController@show')->name('product.show');
+Route::resource('products', 'ProductController');
 
 Route::any('/filter', 'FilterController@filter')->name('filter');
 
