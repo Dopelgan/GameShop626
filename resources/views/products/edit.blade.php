@@ -25,7 +25,7 @@
                 @endif
 
                 <!-- Форма редактирования -->
-                <form action="{{ route('products.update', $product->id) }}" method="POST">
+                <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -55,7 +55,13 @@
 
                     <div class="form-group">
                         <label for="date">Выберите дату выхода:</label>
-                        <input type="date" class="form-control" name="date" id="date" required="required" placeholder="Выберите дату">
+                        <input type="date" value="{{ old('date', $product->date) }}" class="form-control" name="date" id="date" required="required" placeholder="Выберите дату">
+                    </div>
+
+                    <div class="custom-file mb-3">
+                        <input type="file" name="image" id="image" class="custom-file-input" accept="image/*" required>
+                        <label class="custom-file-label" for="validatedCustomFile">Загрузите файл...</label>
+                        <div class="invalid-feedback">Некорректный файл. Пожалуйста, выберите изображение.</div>
                     </div>
 
                     <!-- Кнопка для сохранения изменений -->

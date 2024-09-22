@@ -18,7 +18,7 @@
                     <div class="card shadow bg-white rounded m-1" style="width: 180px;">
                         <div class="card shadow bg-white rounded">
                             <a href="{{ route('product.show', ['id' => $product->id]) }}">
-                                <img class="card-img-top rounded" src="{{$product->picture}}" alt="Card image cap">
+                                <img class="card-img-top rounded" src="{{asset($product->image)}}" alt="Card image cap">
                                 <div class="card-img-overlay">
                                     <div class="d-flex justify-content-end card-img-overlay">
                                         <h6 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded

@@ -70,7 +70,7 @@
                         @if($product->quantity > 0)
                             <div class="card shadow m-1 bg-white rounded" style="width: 200px;">
                                 <a href="{{ route('product.show', ['id' => $product->product_id]) }}">
-                                    <img class="card-img-top rounded bg" src="{{$product->picture}}"
+                                    <img class="card-img-top rounded bg" src="{{asset($product->image)}}"
                                          alt="Card image cap">
                                     <div class="d-flex justify-content-end card-img-overlay">
                                         <h6 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"

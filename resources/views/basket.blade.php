@@ -35,7 +35,7 @@
                             <tr>
                                 <td class="align-middle">
                                     <a href="{{ route('product.show', ['id' => $product->product->id]) }}">
-                                        <img src='{{$product->product->picture}}' class="img-fluid shadow rounded"
+                                        <img src='{{ asset($product->product->image) }}' class="img-fluid shadow rounded"
                                              width="80">
                                     </a>
                                 </td>

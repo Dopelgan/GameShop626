@@ -63,7 +63,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-iconv" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-intl-normalizer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-intl-idn" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php72" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-mbstring" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php80" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php73" />
@@ -106,6 +105,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/tijsverkoyen/css-to-inline-styles" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/swiftmailer/swiftmailer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/dragonmantank/cron-expression" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/league/mime-type-detection" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

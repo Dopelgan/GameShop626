@@ -5,9 +5,9 @@
     <div class="container">
         <div class="d-flex justify-content-around" style="min-height: 420px">
             <div class="d-flex justify-content-center">
-                @if(!$product->picture==null)
+                @if($product->image)
                     <div class="col-md-3">
-                        @if(!$product->metascore == null)
+                        @if($product->metascore)
                             <div class="d-flex flex-row justify-content-around align-items-center">
                                 <h6 class="font-weight-bold">Metascore</h6>
                                 @if($product->metascore->meta_score >= 75)
@@ -34,10 +34,10 @@
                             </div>
                         @endif
                         <img
-                            src='{{$product->picture}}'
+                            src="{{ asset($product->image) }}"
                             class="img-fluid mr-5 rounded shadow bg-white p-2">
                         @endif
-                        @if($product->picture == null)
+                        @if($product->image == null)
                             <form class="d-flex flex-column m-2" action="{{route('changeProductPicture')}}"
                                   method="POST">
                                 @csrf
@@ -51,7 +51,7 @@
                     </div>
                     <div class="col-md-6">
                         <h3 class="">{{$product->name}}</h3>
-                        <h5 class="">Год выхода: {{$product->year}}</h5>
+                        <h5 class="">Дата выхода: {{\Carbon\Carbon::parse($product->date)->translatedFormat('d F Y')}} г.</h5>
                         <h5 class="">Жанры:
                             @foreach ($product->genres as $genre)
                                 @if(!$genre->rus_name == null)
@@ -89,6 +89,7 @@
                                     <input class="btn btn-block btn-light" type="submit"
                                            value="Добавить в избранное">
                                 </form>
+                                <a href="{{ route('products.edit', $product->id) }}" class="btn btn-block btn-primary">Изменить</a>
                             </div>
                     </div>
             </div>
@@ -99,7 +100,7 @@
                 <div class="card shadow bg-white rounded m-1" style="width: 180px;">
                     <div class="card shadow bg-white rounded">
                         <a href="{{ route('product.show', ['id' => $product->id]) }}">
-                            <img class="card-img-top rounded" src="{{$product->picture}}" alt="Card image cap">
+                            <img class="card-img-top rounded" src="{{ asset($product->image) }}" alt="Card image cap">
                             <div class="card-img-overlay">
                                 <div class="d-flex justify-content-end card-img-overlay">
                                     <h6 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded

@@ -26,7 +26,7 @@ class ChangeProductsYearToDate extends Migration
      */
     public function down()
     {
-        Schema::table('date', function (Blueprint $table) {
+        Schema::table('products', function (Blueprint $table) {
             $table->dropColumn('date');  // Удаление поля year
             $table->unsignedInteger('year')->default('0');
         });
