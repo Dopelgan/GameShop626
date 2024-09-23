@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Metascore;
 use App\ProductGenre;
 use App\Genre;
 use App\Category;
