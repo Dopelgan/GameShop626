@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -35,16 +34,6 @@ Route::post('/addToBasket', 'BasketController@addToBasket')->name('addToBasket')
 Route::post('/removeFromBasket', 'BasketController@removeFromBasket')->name('removeFromBasket');
 Route::post('/clearBasket', 'BasketController@clearBasket')->name('clearBasket');
 
-Route::get('/adminPanel', 'AdminController@adminPanel')->name('adminPanel');
-Route::post('/addProduct', 'AdminController@addProduct')->name('addProduct');
-Route::get('/autoAddProduct', 'AdminController@autoAddProduct')->name('autoAddProduct');
-Route::post('/changeDescription', 'AdminController@changeDescription')->name('changeDescription');
-Route::post('/changeQuantity', 'AdminController@changeQuantity')->name('changeQuantity');
-Route::post('/changeProductPicture', 'AdminController@changeProductPicture')->name('changeProductPicture');
-Route::post('/addGenre', 'AdminController@addGenre')->name('addGenre');
-Route::post('/addCategory', 'AdminController@addCategory')->name('addCategory');
-Route::post('/linkProductGenre', 'AdminController@linkProductGenre')->name('linkProductGenre');
-
 Route::any('/order', 'PackageController@order')->name('order');
 Route::post('/makePackage', 'PackageController@makePackage')->name('makePackage');
 
@@ -67,3 +56,14 @@ Route::post('/change-password', 'UserController@changePassword')->name('password
 
 Route::any('/package/{id}', 'PackageController@package')->name('package');
 Route::post('/packageRemove', 'PackageController@remove')->name('packageRemove');
+
+
+Route::get('/adminPanel', 'AdminController@adminPanel')->name('adminPanel');
+Route::post('/addProduct', 'AdminController@addProduct')->name('addProduct');
+Route::get('/autoAddProduct', 'AdminController@autoAddProduct')->name('autoAddProduct');
+Route::post('/changeDescription', 'AdminController@changeDescription')->name('changeDescription');
+Route::post('/changeQuantity', 'AdminController@changeQuantity')->name('changeQuantity');
+Route::post('/changeProductPicture', 'AdminController@changeProductPicture')->name('changeProductPicture');
+Route::post('/addGenre', 'AdminController@addGenre')->name('addGenre');
+Route::post('/addCategory', 'AdminController@addCategory')->name('addCategory');
+Route::post('/linkProductGenre', 'AdminController@linkProductGenre')->name('linkProductGenre');

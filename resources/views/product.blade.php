@@ -121,7 +121,7 @@
                     <div class="card-body d-flex flex-column justify-content-between">
                         <a class="card-title text-dark text-center"
                            href="{{ route('product.show', ['id' => $product->id]) }}">
-                            <h6>{{$product->name}}</h6>
+                            <h6 class="truncate">{{$product->name}}</h6>
                         </a>
                         <div>
                             <form action="{{route('addToBasket')}}" method="POST">

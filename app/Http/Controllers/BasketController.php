@@ -42,7 +42,7 @@ class BasketController extends Controller
             ]);
         }
 
-        return back();
+        return redirect()->back()->with('success', 'Товар добавлен в корзину.');
     }
 
     public function removeFromBasket(Request $request)
@@ -60,7 +60,7 @@ class BasketController extends Controller
             }
         }
 
-        return back();
+        return redirect()->back()->with('success', 'Товар удален из корзины.');
     }
 
 
@@ -68,7 +68,7 @@ class BasketController extends Controller
     {
         Basket::where('user_id', Auth::user()->id)->delete();
 
-        return redirect('basket');
+        return redirect()->back()->with('success', 'Корзина очищена.');
     }
 
 }

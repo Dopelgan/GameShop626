@@ -24,20 +24,20 @@ class FavoriteController extends Controller
             ['product_id' => $request->product_id, 'user_id' => Auth::user()->id]
         );
 
-        return back();
+        return redirect()->back()->with('success', 'Товар добавлен в избранное.');
     }
 
     public function deleteFromFavorite(Request $request)
     {
         Favorite::where('user_id', Auth::user()->id)->where('product_id', "$request->product_id")->delete();
 
-        return back();
+        return redirect()->back()->with('success', 'Товар удален из избранного.');
     }
 
     public function clearFavorites()
     {
         Favorite::where('user_id', Auth::user()->id)->delete();
 
-        return back();
+        return redirect()->back()->with('success', 'Избранное очищено.');
     }
 }
