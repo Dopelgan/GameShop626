@@ -7,6 +7,7 @@ use App\Package;
 use Illuminate\Http\Request;
 use App\Product;
 use Illuminate\Support\Facades\Auth;
+use App\Services\LogService;
 
 class PackageController extends Controller
 {
@@ -106,6 +107,9 @@ class PackageController extends Controller
 
         // Очищаем корзину пользователя
         Basket::where('user_id', $user->id)->delete();
+
+        // Записать информационный лог
+        LogService::write('info', 'Создан заказ', ['user_id' => $user->id, 'package_id' => $parentPackage->id]);
 
         // Возвращаем ответ с сообщением об успешном создании заказа
         return redirect('basket')->with('success', 'Заказ успешно создан!');

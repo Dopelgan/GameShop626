@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Metascore;
 use App\Product;
+use App\Services\LogService;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -14,6 +15,8 @@ class ProductController extends Controller
     {
         $product = Product::with('genres', 'metascore')->find($request->id);
         $product->count++;
+        // Записать информационный лог
+        LogService::write('info', 'Просмотрен продукт', ['user_id' => auth()->user(), 'product_id' => $product->id]);
         $product->save();
 
         return view('product', [
