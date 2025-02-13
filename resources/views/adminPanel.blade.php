@@ -108,9 +108,9 @@
                                   maxlength="1000">Описание пока не добавили.</textarea>
                     </div>
                     <div class="form-group">
-                        <label for="picture">Ссылка на изображение</label>
+                        <label for="image">Ссылка на изображение</label>
                         <br>
-                        <input id="picture" type="text" name="picture" required class="form form-control">
+                        <input id="image" type="text" name="image" required class="form form-control">
                     </div>
                     <input class="btn btn-success mt-2" type="submit" value="Добавить">
                 </form>
@@ -120,10 +120,8 @@
                 <form class="d-flex flex-column m-2" action="{{route('addGenre')}}" method="POST">
                     @csrf
                     <h5>Добавить жанр</h5>
-                    <label for="rus_genre_name">Русское название жанра</label>
-                    <input class="form form-control" type="text" id="rus_genre_name" name="rus_genre_name" required>
-                    <label for="eng_genre_name">Английское название жанра</label>
-                    <input class="form form-control" type="text" id="eng_genre_name" name="eng_genre_name" required>
+                    <label for="name">Название жанра</label>
+                    <input class="form form-control" type="text" id="name" name="name" required>
                     <input class="btn btn-success mt-2" type="submit" value="Добавить">
                 </form>
 

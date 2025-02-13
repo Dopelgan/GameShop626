@@ -7,14 +7,7 @@ use App\ProductGenre;
 use App\Genre;
 use App\Category;
 use App\Product;
-use Carbon\Carbon;
-use Hooshid\MetacriticScraper\Metacritic;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Redirect;
-use Metacritic\API\MetacriticAPI;
-use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
@@ -26,54 +19,6 @@ class AdminController extends Controller
             'categories' => Category::get()
         ]);
     }
-
-//    public function autoAddProduct(Request $request)
-//    {
-//        $metacritic = new Metacritic();
-//        $extract = $metacritic->extract(Str::after($request->url, 'https://www.metacritic.com'));
-//        $result = $extract['result'];
-//        $error = $extract['error'];
-//
-//        $product = Product::create(
-//            [
-//                'name' => $result['title'],
-//                'year' => Str::before($result['release_year'], '-'),
-//                'price' => $request->price,
-//                'quantity' => $request->quantity,
-//                'description' => $result['summary'],
-//                'picture' => $result['thumbnail'],
-//                'category_id' => $request->category,
-//            ]
-//        );
-//
-//        Metascore::create(
-//            [
-//                'product_id' => $product->id,
-//                'meta_score' => $result['meta_score'],
-//                'user_score' => $result['user_score']*10,
-//            ]
-//        );
-//
-//        $genre = Genre::firstOrCreate(
-//            [
-//                'eng_name' => $result['genres']
-//            ],
-//            [
-//                'eng_name' => $result['genres']
-//            ]
-//        );
-//
-//        ProductGenre::firstOrCreate(
-//            [
-//                'product_id' => $product->id, 'genre_id' => $genre->id
-//            ],
-//            [
-//                'product_id' => $product->id, 'genre_id' => $genre->id
-//            ]
-//        );
-//
-//        return back();
-//    }
 
     public function addProduct(Request $request)
     {
@@ -87,17 +32,15 @@ class AdminController extends Controller
             'quantity' => 'numeric|max:255',
         ], $messages);
 
-        $product = Product::create(
-            [
+        $product = Product::create([
                 'name' => $request->product_name,
                 'date' => $request->dateInput,
                 'price' => $request->price,
                 'quantity' => $request->quantity,
                 'description' => $request->description,
-                'picture' => $request->picture,
+                'image' => $request->image,
                 'category_id' => $request->category,
-            ]
-        );
+            ]);
 
         $metascore = Metascore::create(
             [
@@ -124,19 +67,16 @@ class AdminController extends Controller
     public function addGenre(Request $request)
     {
         $messages = [
-            'rus_genre_name.unique' => 'Такой жанр уже добавлен.',
-            'eng_genre_name.unique' => 'Такой жанр уже добавлен.',
+            'name.unique' => 'Такой жанр уже добавлен.',
         ];
 
         $request->validate([
-            'rus_genre_name' => 'max:255|unique:genres,rus_name',
-            'eng_genre_name' => 'max:255|unique:genres,eng_name',
+            'name' => 'max:255|unique:genres,name',
         ], $messages);
 
         Genre::create(
             [
-                'rus_name' => $request->rus_genre_name,
-                'eng_name' => $request->eng_genre_name,
+                'name' => $request->name,
             ]
         );
 

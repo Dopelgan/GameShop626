@@ -51,14 +51,11 @@
                     </div>
                     <div class="col-md-6">
                         <h3 class="">{{$product->name}}</h3>
-                        <h5 class="">Дата выхода: {{\Carbon\Carbon::parse($product->date)->translatedFormat('d F Y')}} г.</h5>
+                        <h5 class="">Дата выхода: {{\Carbon\Carbon::parse($product->date)->translatedFormat('d F Y')}}
+                            г.</h5>
                         <h5 class="">Жанры:
                             @foreach ($product->genres as $genre)
-                                @if(!$genre->rus_name == null)
-                                    {{ $genre->rus_name }}
-                                @else
-                                    {{ $genre->eng_name }}
-                                @endif
+                                {{ $genre->name }}
                             @endforeach
                         </h5>
                         <div class="card shadow p-3 mb-2 bg-white">

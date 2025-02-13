@@ -21,14 +21,6 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
-    {
-        return view('home', [
-            'popular' => $this->product->getPopularProducts(),
-            'newest' => $this->product->getNewestProducts(),
-        ]);
-    }
-
     public function home()
     {
         return view('home', [

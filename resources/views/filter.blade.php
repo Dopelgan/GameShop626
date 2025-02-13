@@ -29,11 +29,7 @@
                                            id="{{ $genre->id }}"
                                            value="{{ $genre->id }}">
                                     <label class="custom-control-label" for="{{ $genre->id }}">
-                                        @if($genre->rus_name == null)
-                                            {{$genre->eng_name}}
-                                        @else
-                                            {{$genre->rus_name}}
-                                        @endif
+                                            {{$genre->name}}
                                     </label>
                                 </div>
                             @endforeach
