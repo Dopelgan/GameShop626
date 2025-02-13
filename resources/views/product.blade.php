@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div class="container">
         <div class="d-flex justify-content-around" style="min-height: 420px">
             <div class="d-flex justify-content-center">
@@ -95,9 +94,9 @@
         <div class="d-flex row justify-content-between">
             @foreach($popular as $product)
                 <div class="card shadow bg-white rounded m-1" style="width: 180px;">
-                    <div class="card shadow bg-white rounded">
+                    <div class="card bg-white rounded">
                         <a href="{{ route('product.show', ['id' => $product->id]) }}">
-                            <img class="card-img-top rounded" src="{{ asset($product->image) }}" alt="Card image cap">
+                            <img class="card-img-top rounded" style="height: 220px" src="{{ asset($product->image) }}" alt="Card image cap">
                             <div class="card-img-overlay">
                                 <div class="d-flex justify-content-end card-img-overlay">
                                     <h6 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded
@@ -136,5 +135,4 @@
             @endforeach
         </div>
     </div>
-
 @endsection

@@ -65,9 +65,9 @@
                     @foreach($filter as $product)
                         @if($product->quantity > 0)
                             <div class="card shadow m-1 bg-white rounded" style="width: 200px;">
-                                <div class="card shadow bg-white rounded">
+                                <div class="card bg-white rounded">
                                     <a href="{{ route('product.show', ['id' => $product->product_id]) }}">
-                                        <img class="card-img-top rounded bg" src="{{asset($product->image)}}"
+                                        <img class="card-img-top rounded bg" style="height: 250px;" src="{{asset($product->image)}}"
                                              alt="Card image cap">
                                         <div class="d-flex justify-content-end card-img-overlay">
                                             <h6 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded"

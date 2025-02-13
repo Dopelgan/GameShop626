@@ -4,7 +4,8 @@
     <div class="container">
         <div class="d-flex flex-column">
             <div class="d-flex justify-content-center m-2">
-                <div id="carouselExampleIndicators" class="carousel slide shadow" data-ride="carousel" style="width: 700px">
+                <div id="carouselExampleIndicators" class="carousel slide shadow" data-ride="carousel"
+                     style="width: 700px">
                     <ol class="carousel-indicators">
                         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -12,16 +13,16 @@
                     </ol>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img class="d-block w-100" src="https://i.playground.ru/e/odjg6oU4uAtH2BNWqOqsmg.jpeg" alt="First slide">
+                            <img class="d-block w-100" src="/img/banners/Subverse banner.png" alt="First slide">
                         </div>
                         <div class="carousel-item">
                             <img class="d-block w-100"
-                                 src="https://media.gamestop.com/i/gamestop/11202406_ALT02/It-Takes-Two---Xbox-One"
+                                 src="/img/banners/IT TAKES TWO banner.png"
                                  alt="Second slide">
                         </div>
                         <div class="carousel-item">
                             <img class="d-block w-100"
-                                 src="https://i2.wp.com/www.reimarufiles.com/wp-content/uploads/2021/06/Hades_Preorder.jpg?fit=1920%2C1080&ssl=1"
+                                 src="/img/banners/Hades banner.png"
                                  alt="Third slide">
                         </div>
                     </div>
@@ -42,7 +43,7 @@
                     <div class="card shadow bg-white rounded m-1" style="width: 270px">
                         <div class="card shadow bg-white rounded">
                             <a href="{{ route('product.show', ['id' => $new->id]) }}">
-                                <img class="card-img-top rounded" src="{{asset($new->image)}}" alt="Card image cap">
+                                <img class="card-img-top rounded" style="height: 340px" src="{{asset($new->image)}}" alt="Card image cap">
                                 <div class="card-img-overlay">
                                     <div class="d-flex justify-content-end card-img-overlay">
                                         <h4 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded
@@ -84,9 +85,9 @@
             <div class="d-flex row justify-content-between">
                 @foreach($popular as $product)
                     <div class="card shadow bg-white rounded m-1" style="width: 180px">
-                        <div class="card shadow bg-white rounded">
+                        <div class="card bg-white rounded">
                             <a href="{{ route('product.show', ['id' => $product->id]) }}">
-                                <img class="card-img-top rounded" src="{{asset($product->image)}}" alt="Card image cap">
+                                <img class="card-img-top rounded" style="height: 220px" src="{{asset($product->image)}}" alt="Card image cap">
                                 <div class="card-img-overlay">
                                     <div class="d-flex justify-content-end card-img-overlay">
                                         <h6 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded
