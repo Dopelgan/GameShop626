@@ -24,7 +24,7 @@
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'Laravel') }}
-                <img class="ml-2" style="width: 50px" src="/img/logo.png">
+                <img class="ml-2" style="width: 50px" src="/img/logo.png" alt="logo">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ ('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
@@ -40,7 +40,7 @@
                 <form class="row w-50" action="{{route('filter')}}" method="post">
                     @csrf
                     <input type="text" name="search" id="search" class="form-control w-50">
-                    <button class="btn btn-light ml-2 w-25" type="submit">Поиск</button>
+                    <button class="btn btn-light ml-2" type="submit">Поиск</button>
                 </form>
 
                 <ul class="navbar-nav ml-auto">
@@ -61,9 +61,12 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                @if (Auth::user()->role == 'ADMIN')
+                                <a class="dropdown-item" href="{{ route ('adminPanel') }}">{{ ('Админка') }}</a>
+                                @endif
                                 <a class="dropdown-item" href="{{ route ('user.profile') }}">{{ ('Профиль') }}</a>
-                                <a class="dropdown-item" href="{{ route ('favorites') }}">{{ ('Избранное') }}</a>
-                                <a class="dropdown-item" href="{{ route ('basket') }}">{{ ('Корзина') }}</a>
+                                <a class="dropdown-item" href="{{ route ('favorites.index') }}">{{ ('Избранное') }}</a>
+                                <a class="dropdown-item" href="{{ route ('basket.index') }}">{{ ('Корзина') }}</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

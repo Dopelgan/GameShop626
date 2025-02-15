@@ -13,15 +13,15 @@
                     </ol>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img class="d-block w-100" src="/img/banners/Subverse banner.png" alt="First slide">
+                            <img class="d-block rounded w-100" src="/img/banners/Subverse banner.png" alt="First slide">
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100"
+                            <img class="d-block rounded w-100"
                                  src="/img/banners/IT TAKES TWO banner.png"
                                  alt="Second slide">
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100"
+                            <img class="d-block rounded w-100"
                                  src="/img/banners/Hades banner.png"
                                  alt="Third slide">
                         </div>
@@ -67,7 +67,7 @@
                                 <h4 class="truncate-new">{{$new->name}}</h4>
                             </a>
 
-                            <form action="{{route('addToBasket')}}" method="POST">
+                            <form action="{{route('basket.store')}}" method="POST">
                                 @csrf
                                 <input id="product_id" name="product_id" value="{{$new->id}}"
                                        type="hidden">
@@ -111,7 +111,7 @@
                                 <h6 class="truncate">{{$product->name}}</h6>
                             </a>
                             <div>
-                                <form action="{{route('addToBasket')}}" method="POST">
+                                <form action="{{route('basket.store')}}" method="POST">
                                     @csrf
                                     <input id="product_id" name="product_id" value="{{$product->id}}"
                                            type="hidden">

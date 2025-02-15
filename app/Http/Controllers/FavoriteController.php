@@ -9,15 +9,15 @@ use Illuminate\Support\Facades\Auth;
 
 class FavoriteController extends Controller
 {
-    public function favorites()
+    public function index()
     {
         return view('favorites', [
-                'products' => Product::whereIn('id', Favorite::where('user_id', Auth::user()->id)->pluck('product_id'))->get()
+                'products' => Product::whereIn('id', Favorite::where('user_id', Auth::user()->id)->pluck('product_id'))->get(),
             ]
         );
     }
 
-    public function addToFavorite(Request $request)
+    public function store(Request $request)
     {
         Favorite::FirstOrCreate(
             ['product_id' => $request->product_id, 'user_id' => Auth::user()->id],
@@ -27,14 +27,14 @@ class FavoriteController extends Controller
         return redirect()->back()->with('success', 'Товар добавлен в избранное.');
     }
 
-    public function deleteFromFavorite(Request $request)
+    public function destroy($id)
     {
-        Favorite::where('user_id', Auth::user()->id)->where('product_id', "$request->product_id")->delete();
+        Favorite::where('user_id', Auth::user()->id)->where('product_id', $id)->delete();
 
         return redirect()->back()->with('success', 'Товар удален из избранного.');
     }
 
-    public function clearFavorites()
+    public function clear()
     {
         Favorite::where('user_id', Auth::user()->id)->delete();
 

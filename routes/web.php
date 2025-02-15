@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\BasketController;
+use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\FilterController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PackageController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -15,39 +21,54 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@home')->name('home');
-Route::get('/home', 'HomeController@home')->name('home');
+Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::get('/home', [HomeController::class, 'home'])->name('home');
 Auth::routes();
 
-Route::get('/product/{id}', 'ProductController@show')->name('product.show');
+Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
 Route::resource('products', 'ProductController');
 
-Route::any('/filter', 'FilterController@filter')->name('filter');
+Route::any('/filter', [FilterController::class, 'filter'])->name('filter');
 
-Route::get('/favorites', 'FavoriteController@favorites')->name('favorites');
-Route::post('/addToFavorite', 'FavoriteController@addToFavorite')->name('addToFavorite');
-Route::post('/clearFavorites', 'FavoriteController@clearFavorites')->name('clearFavorites');
-Route::post('/deleteFromFavorite', 'FavoriteController@deleteFromFavorite')->name('deleteFromFavorite');
+Route::prefix('favorites')->middleware('auth')->group(function () {
+    // Получить список избранного
+    Route::get('/', [FavoriteController::class, 'index'])->name('favorites.index');
 
-Route::get('/basket', 'BasketController@basket')->name('basket');
-Route::post('/addToBasket', 'BasketController@addToBasket')->name('addToBasket');
-Route::post('/removeFromBasket', 'BasketController@removeFromBasket')->name('removeFromBasket');
-Route::post('/clearBasket', 'BasketController@clearBasket')->name('clearBasket');
+    // Добавить в избранное
+    Route::post('/', [FavoriteController::class, 'store'])->name('favorites.store');
 
-Route::any('/order', 'PackageController@order')->name('order');
-Route::post('/makePackage', 'PackageController@makePackage')->name('makePackage');
+    // Удалить из избранного (передаем ID элемента)
+    Route::delete('/{id}', [FavoriteController::class, 'destroy'])->name('favorites.destroy');
 
-Route::get('userProfile','UserController@userProfile')->name('userProfile');
-Route::post('userUpdate','UserController@userUpdate')->name('userUpdate');
+    // Очистить избранное
+    Route::delete('/', [FavoriteController::class, 'clear'])->name('favorites.clear');
+});
+
+Route::prefix('basket')->middleware('auth')->group(function () {
+    // Просмотр корзины
+    Route::get('/', [BasketController::class, 'index'])->name('basket.index');
+
+    // Добавление товара в корзину
+    Route::post('/', [BasketController::class, 'store'])->name('basket.store');
+
+    // Удаление товара из корзины (передаем ID товара)
+    Route::delete('/{id}', [BasketController::class, 'destroy'])->name('basket.destroy');
+
+    // Очистка корзины
+    Route::delete('/', [BasketController::class, 'clear'])->name('basket.clear');
+});
+
+Route::any('/order', [PackageController::class, 'order'])->name('order');
+Route::post('/makePackage', [PackageController::class, 'makePackage'])->name('makePackage');
 
 
-Route::middleware(['auth'])->group(function () {
+Route::prefix('profile')->middleware(['auth'])->group(function () {
     // Роут для отображения профиля пользователя
-    Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
+    Route::get('/', [UserController::class, 'profile'])->name('user.profile');
 
     // Роут для обновления данных профиля
-    Route::put('/profile/update', [UserController::class, 'updateProfile'])->name('user.update');
-    Route::put('/profile/editProfile', [UserController::class, 'editProfile'])->name('user.edit');
+    Route::put('/update', [UserController::class, 'updateProfile'])->name('user.update');
+    Route::put('/editProfile', [UserController::class, 'editProfile'])->name('user.edit');
 });
 
 Route::get('/change-password', 'UserController@showChangePasswordForm')->name('password.change');

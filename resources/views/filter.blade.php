@@ -91,7 +91,7 @@
                                     </a>
                                     <h5 class="text-center text-danger">{{$product->price}} р.</h5>
                                     <form class="card"
-                                          action="{{route('addToBasket')}}" method="POST">
+                                          action="{{route('basket.store')}}" method="POST">
                                         @csrf
                                         <input id="product_id" name="product_id" value="{{$product->product_id}}"
                                                type="hidden">
@@ -99,7 +99,7 @@
                                                value="В корзину">
                                     </form>
                                     <form class="card"
-                                          action="{{route('addToFavorite')}}" method="POST">
+                                          action="{{route('favorites.store')}}" method="POST">
                                         @csrf
                                         <input id="product_id" name="product_id" value="{{$product->product_id}}"
                                                type="hidden">
@@ -135,7 +135,7 @@
                                     <h5 class="text-center text-danger">{{$product->price}} р.</h5>
                                     <h6 class="text-center">Нет в наличии</h6>
                                     <form class="card"
-                                          action="{{route('addToFavorite')}}" method="POST">
+                                          action="{{route('favorites.store')}}" method="POST">
                                         @csrf
                                         <input id="product_id" name="product_id"
                                                value="{{$product->product_id}}"

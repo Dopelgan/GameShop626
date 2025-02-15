@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function adminPanel()
+    public function index()
     {
         return view('adminPanel', [
             'products' => Product::get(),

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class BasketController extends Controller
 {
-    public function basket()
+    public function index()
     {
         $products = Basket::whereHas('product', function ($query) {
             $query->where('user_id', Auth::user()->id);
@@ -26,7 +26,7 @@ class BasketController extends Controller
         ]);
     }
 
-    public function addToBasket(Request $request)
+    public function store(Request $request)
     {
         $basket = Basket::where('product_id', $request->product_id)
             ->where('user_id', Auth::user()->id)
@@ -45,9 +45,9 @@ class BasketController extends Controller
         return redirect()->back()->with('success', 'Товар добавлен в корзину.');
     }
 
-    public function removeFromBasket(Request $request)
+    public function destroy($id)
     {
-        $basket = Basket::where('product_id', $request->product_id)
+        $basket = Basket::where('product_id', $id)
             ->where('user_id', Auth::user()->id)
             ->first();
 
@@ -64,7 +64,7 @@ class BasketController extends Controller
     }
 
 
-    public function clearBasket()
+    public function clear()
     {
         Basket::where('user_id', Auth::user()->id)->delete();
 

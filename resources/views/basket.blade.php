@@ -45,14 +45,14 @@
                                 <td class="align-middle">
                                     <div class="d-flex flex-row align-items-center justify-content-center">
                                         <form class="d-flex flex-row align-items-center"
-                                              action="{{route('removeFromBasket')}}" method="post">
+                                              action="{{route('basket.destroy', ['id' => $product->product->id])}}" method="post">
                                             @csrf
-                                            <input type="hidden" name="product_id" value="{{$product->product->id}}">
+                                            @method('DELETE')
                                             <input class="btn btn-block btn-sm btn-outline-danger shadow-sm" value="-" type="submit">
                                         </form>
                                         <h6 class="m-3">{{$product->quantity}}</h6>
                                         <form class="d-flex flex-row align-items-center"
-                                              action="{{route('addToBasket')}}" method="post">
+                                              action="{{route('basket.store')}}" method="post">
                                             @csrf
                                             <input type="hidden" name="product_id" value="{{$product->product->id}}">
                                             <input class="btn btn-block btn-sm btn-outline-dark shadow-sm" value="+" type="submit">
@@ -75,8 +75,9 @@
                             @csrf
                             <button class="btn btn-block btn-outline-dark shadow" type="submit">Оформить заказ</button>
                         </form>
-                        <form class="mr-3 mb-3" action="{{route('clearBasket')}}" method="POST">
+                        <form class="mr-3 mb-3" action="{{route('basket.clear')}}" method="POST">
                             @csrf
+                            @method('DELETE')
                             <button class="btn btn-block btn-outline-danger shadow mt-2" type="submit">Очистить корзину</button>
                         </form>
                     </div>

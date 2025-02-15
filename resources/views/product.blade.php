@@ -68,8 +68,8 @@
                         @if (!$product->quantity == 0)
                             <h6 class="d-flex justify-content-end">В наличии: {{$product->quantity}} шт.</h6>
                             <div>
-                                <form class="card m-1 "
-                                      action="{{route('addToBasket')}}" method="POST">
+                                <form class="card m-1"
+                                      action="{{route('basket.store')}}" method="POST">
                                     @csrf
                                     <input id="product_id" name="product_id" value="{{$product->id}}" type="hidden">
                                     <input class="btn btn-block btn-outline-dark" type="submit"
@@ -79,13 +79,16 @@
                                     <div class="d-flex justify-content-end">Нет в наличии.</div>
                                 @endif
                                 <form class="card m-1"
-                                      action="{{route('addToFavorite')}}" method="POST">
+                                      action="{{route('favorites.store')}}" method="POST">
                                     @csrf
                                     <input id="product_id" name="product_id" value="{{$product->id}}" type="hidden">
                                     <input class="btn btn-block btn-light" type="submit"
                                            value="Добавить в избранное">
                                 </form>
-                                <a href="{{ route('products.edit', $product->id) }}" class="btn btn-block btn-primary">Изменить</a>
+                                @if (Auth::user()->role == 'ADMIN')
+                                    <a href="{{ route('products.edit', $product->id) }}"
+                                       class="btn btn-block btn-primary">Изменить</a>
+                                @endif
                             </div>
                     </div>
             </div>
@@ -96,7 +99,8 @@
                 <div class="card shadow bg-white rounded m-1" style="width: 180px;">
                     <div class="card bg-white rounded">
                         <a href="{{ route('product.show', ['id' => $product->id]) }}">
-                            <img class="card-img-top rounded" style="height: 220px" src="{{ asset($product->image) }}" alt="Card image cap">
+                            <img class="card-img-top rounded" style="height: 220px" src="{{ asset($product->image) }}"
+                                 alt="Card image cap">
                             <div class="card-img-overlay">
                                 <div class="d-flex justify-content-end card-img-overlay">
                                     <h6 class="d-flex justify-content-center align-items-center text-dark font-weight-bold rounded
@@ -120,7 +124,7 @@
                             <h6 class="truncate">{{$product->name}}</h6>
                         </a>
                         <div>
-                            <form action="{{route('addToBasket')}}" method="POST">
+                            <form action="{{route('basket.store')}}" method="POST">
                                 @csrf
                                 <input id="product_id" name="product_id" value="{{$product->id}}"
                                        type="hidden">

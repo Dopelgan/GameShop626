@@ -43,7 +43,7 @@
                             </a>
                             <div>
                                 @if(!$product->quantity == 0)
-                                    <form class="mb-1" action="{{route('addToBasket')}}" method="POST">
+                                    <form class="mb-1" action="{{route('basket.store')}}" method="POST">
                                         @csrf
                                         <input id="product_id" name="product_id" value="{{$product->id}}"
                                                type="hidden">
@@ -55,9 +55,9 @@
                                 @else
                                     <h6 class="text-center">Нет в наличии</h6>
                                 @endif
-                                <form action="{{route('deleteFromFavorite')}}" method="POST">
+                                <form action="{{ route('favorites.destroy', $product->id) }}" method="POST">
                                     @csrf
-                                    <input id="product_id" name="product_id" value="{{$product->id}}" type="hidden">
+                                    @method('DELETE')
                                     <input class="btn btn-sm btn-block btn-outline-danger shadow-sm"
                                            type="submit"
                                            value="Удалить">

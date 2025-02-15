@@ -112,7 +112,7 @@ class PackageController extends Controller
         LogService::write('info', 'Создан заказ', ['user_id' => $user->id, 'package_id' => $parentPackage->id]);
 
         // Возвращаем ответ с сообщением об успешном создании заказа
-        return redirect('basket')->with('success', 'Заказ успешно создан!');
+        return redirect('basket.index')->with('success', 'Заказ успешно создан!');
     }
 
     public function remove(Request $request)
