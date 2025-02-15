@@ -5,6 +5,7 @@ use App\Genre;
 use App\Metascore;
 use App\Product;
 use App\ProductGenre;
+use App\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,20 +17,28 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Category::create([
-           'name' => 'PC',
+        User::create([
+            'name' => 'admin',
+            'email' => 'admin@admin.ru',
+            'password' => '$2y$10$Tpht/PT07UwzQjF3l7nAB.8BJpeb6yWHbzWjsrRdp97FPkf.WcSq2',
+            'remember_token' => '9MlrAbOg0Hc0pbSx0pDr08T94X1vEje2GfL830oYdq9cHYoya1gSMm4lSPaG',
+            'role' => 'ADMIN',
         ]);
 
         Category::create([
-            'name' => 'PS5',
+           'name' => 'PC'
         ]);
 
         Category::create([
-            'name' => 'XBOX',
+            'name' => 'PS5'
         ]);
 
         Category::create([
-            'name' => 'Nintendo Switch',
+            'name' => 'XBOX'
+        ]);
+
+        Category::create([
+            'name' => 'Nintendo Switch'
         ]);
 
         $adventure = Genre::create([

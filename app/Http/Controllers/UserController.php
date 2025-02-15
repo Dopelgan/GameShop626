@@ -26,7 +26,7 @@ class UserController extends Controller
             'packages' => $packages]);
     }
 
-    public function editProfile()
+    public function edit()
     {
         // Получаем текущего пользователя
         $user = auth()->user();
@@ -36,7 +36,7 @@ class UserController extends Controller
             'user' => $user]);
     }
 
-    public function updateProfile(Request $request)
+    public function update(Request $request)
     {
         // Получаем текущего пользователя
         $user = auth()->user();

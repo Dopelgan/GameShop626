@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\FilterController;
@@ -26,7 +27,6 @@ Route::get('/home', [HomeController::class, 'home'])->name('home');
 Auth::routes();
 
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
-Route::resource('products', 'ProductController');
 
 Route::any('/filter', [FilterController::class, 'filter'])->name('filter');
 
@@ -58,28 +58,29 @@ Route::prefix('basket')->middleware('auth')->group(function () {
     Route::delete('/', [BasketController::class, 'clear'])->name('basket.clear');
 });
 
-Route::any('/order', [PackageController::class, 'order'])->name('order');
-Route::post('/makePackage', [PackageController::class, 'makePackage'])->name('makePackage');
-
-
 Route::prefix('profile')->middleware(['auth'])->group(function () {
     // Роут для отображения профиля пользователя
     Route::get('/', [UserController::class, 'profile'])->name('user.profile');
 
     // Роут для обновления данных профиля
-    Route::put('/update', [UserController::class, 'updateProfile'])->name('user.update');
-    Route::put('/editProfile', [UserController::class, 'editProfile'])->name('user.edit');
+    Route::put('/update', [UserController::class, 'update'])->name('user.update');
+    Route::put('/edit', [UserController::class, 'edit'])->name('user.edit');
 });
+
+Route::prefix('admin')->middleware(['auth', 'can:access-admin'])->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+});
+Route::resource('products', 'ProductController')->middleware(['auth', 'can:access-admin']);
+
+Route::any('/order', [PackageController::class, 'order'])->name('order');
+Route::post('/makePackage', [PackageController::class, 'makePackage'])->name('makePackage');
 
 Route::get('/change-password', 'UserController@showChangePasswordForm')->name('password.change');
 Route::post('/change-password', 'UserController@changePassword')->name('password.update');
 
-
 Route::any('/package/{id}', 'PackageController@package')->name('package');
 Route::post('/packageRemove', 'PackageController@remove')->name('packageRemove');
 
-
-Route::get('/adminPanel', 'AdminController@adminPanel')->name('adminPanel');
 Route::post('/addProduct', 'AdminController@addProduct')->name('addProduct');
 Route::get('/autoAddProduct', 'AdminController@autoAddProduct')->name('autoAddProduct');
 Route::post('/changeDescription', 'AdminController@changeDescription')->name('changeDescription');

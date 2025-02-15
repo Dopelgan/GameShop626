@@ -62,7 +62,7 @@
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 @if (Auth::user()->role == 'ADMIN')
-                                <a class="dropdown-item" href="{{ route ('adminPanel') }}">{{ ('Админка') }}</a>
+                                <a class="dropdown-item" href="{{ route ('admin.index') }}">{{ ('Админка') }}</a>
                                 @endif
                                 <a class="dropdown-item" href="{{ route ('user.profile') }}">{{ ('Профиль') }}</a>
                                 <a class="dropdown-item" href="{{ route ('favorites.index') }}">{{ ('Избранное') }}</a>
