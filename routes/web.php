@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\BasketController;
-use App\Http\Controllers\FavoriteController;
-use App\Http\Controllers\FilterController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminProductController;
+use App\Http\Controllers\Client\ClientProductController;
+use App\Http\Controllers\Client\ClientBasketController;
+use App\Http\Controllers\Client\ClientFavoriteController;
+use App\Http\Controllers\Client\ClientFilterController;
+use App\Http\Controllers\Client\ClientPackageController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\PackageController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -26,36 +27,36 @@ Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/home', [HomeController::class, 'home'])->name('home');
 Auth::routes();
 
-Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
+Route::get('/product/{id}', [ClientProductController::class, 'show'])->name('product.show');
 
-Route::any('/filter', [FilterController::class, 'filter'])->name('filter');
+Route::any('/filter', [ClientFilterController::class, 'filter'])->name('filter');
 
 Route::prefix('favorites')->middleware('auth')->group(function () {
     // Получить список избранного
-    Route::get('/', [FavoriteController::class, 'index'])->name('favorites.index');
+    Route::get('/', [ClientFavoriteController::class, 'index'])->name('favorites.index');
 
     // Добавить в избранное
-    Route::post('/', [FavoriteController::class, 'store'])->name('favorites.store');
+    Route::post('/', [ClientFavoriteController::class, 'store'])->name('favorites.store');
 
     // Удалить из избранного (передаем ID элемента)
-    Route::delete('/{id}', [FavoriteController::class, 'destroy'])->name('favorites.destroy');
+    Route::delete('/{id}', [ClientFavoriteController::class, 'destroy'])->name('favorites.destroy');
 
     // Очистить избранное
-    Route::delete('/', [FavoriteController::class, 'clear'])->name('favorites.clear');
+    Route::delete('/', [ClientFavoriteController::class, 'clear'])->name('favorites.clear');
 });
 
 Route::prefix('basket')->middleware('auth')->group(function () {
     // Просмотр корзины
-    Route::get('/', [BasketController::class, 'index'])->name('basket.index');
+    Route::get('/', [ClientBasketController::class, 'index'])->name('basket.index');
 
     // Добавление товара в корзину
-    Route::post('/', [BasketController::class, 'store'])->name('basket.store');
+    Route::post('/', [ClientBasketController::class, 'store'])->name('basket.store');
 
     // Удаление товара из корзины (передаем ID товара)
-    Route::delete('/{id}', [BasketController::class, 'destroy'])->name('basket.destroy');
+    Route::delete('/{id}', [ClientBasketController::class, 'destroy'])->name('basket.destroy');
 
     // Очистка корзины
-    Route::delete('/', [BasketController::class, 'clear'])->name('basket.clear');
+    Route::delete('/', [ClientBasketController::class, 'clear'])->name('basket.clear');
 });
 
 Route::prefix('profile')->middleware(['auth'])->group(function () {
@@ -70,16 +71,27 @@ Route::prefix('profile')->middleware(['auth'])->group(function () {
 Route::prefix('admin')->middleware(['auth', 'can:access-admin'])->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
 });
-Route::resource('products', 'ProductController')->middleware(['auth', 'can:access-admin']);
 
-Route::any('/order', [PackageController::class, 'order'])->name('order');
-Route::post('/makePackage', [PackageController::class, 'makePackage'])->name('makePackage');
+Route::prefix('products')->middleware(['auth', 'can:access-admin'])->group(function () {
+    // Роут для отображения профиля пользователя
+    Route::get('/', [AdminProductController::class, 'index'])->name('products.index');
+
+    // Роут для обновления данных профиля
+    Route::get('/create', [AdminProductController::class, 'create'])->name('products.create');
+    Route::post('/store', [AdminProductController::class, 'store'])->name('products.store');
+    Route::put('/update', [AdminProductController::class, 'update'])->name('products.update');
+    Route::get('/{id}/edit', [AdminProductController::class, 'edit'])->name('products.edit');
+    Route::delete('/destroy/{id}', [AdminProductController::class, 'destroy'])->name('products.destroy');
+});
+
+Route::any('/order', [ClientPackageController::class, 'order'])->name('order');
+Route::post('/makePackage', [ClientPackageController::class, 'makePackage'])->name('makePackage');
 
 Route::get('/change-password', 'UserController@showChangePasswordForm')->name('password.change');
 Route::post('/change-password', 'UserController@changePassword')->name('password.update');
 
-Route::any('/package/{id}', 'PackageController@package')->name('package');
-Route::post('/packageRemove', 'PackageController@remove')->name('packageRemove');
+Route::any('/package/{id}', 'ClientPackageController@package')->name('package');
+Route::post('/packageRemove', 'ClientPackageController@remove')->name('packageRemove');
 
 Route::post('/addProduct', 'AdminController@addProduct')->name('addProduct');
 Route::get('/autoAddProduct', 'AdminController@autoAddProduct')->name('autoAddProduct');
