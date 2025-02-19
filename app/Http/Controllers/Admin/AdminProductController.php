@@ -6,11 +6,11 @@ use App\Category;
 use App\Http\Controllers\Controller;
 use App\Metascore;
 use App\Product;
-use App\Services\LogService;
 use Illuminate\Http\Request;
 
 class AdminProductController extends Controller
 {
+
     public function index()
     {
         $products = Product::all();

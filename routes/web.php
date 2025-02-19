@@ -84,6 +84,18 @@ Route::prefix('products')->middleware(['auth', 'can:access-admin'])->group(funct
     Route::delete('/destroy/{id}', [AdminProductController::class, 'destroy'])->name('products.destroy');
 });
 
+Route::get('/products/new', [ClientProductController::class, 'new']);
+Route::get('/products/popular', [ClientProductController::class, 'popular']);
+
+Route::get('/test', function () {
+    return view('test'); // Возвращаем представление welcome.blade.php
+});
+
+
+
+
+
+
 Route::any('/order', [ClientPackageController::class, 'order'])->name('order');
 Route::post('/makePackage', [ClientPackageController::class, 'makePackage'])->name('makePackage');
 

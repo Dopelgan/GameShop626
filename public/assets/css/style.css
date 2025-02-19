@@ -4566,7 +4566,7 @@ body.offcanvas-open {
 }
 
 /*===================================
-    - Breadvrumb  
+    - Breadvrumb
 =================================*/
 .breadcrumb-area {
   background-image: url(../images/about/breadcrunb-bg.webp);
@@ -9730,4 +9730,11 @@ Pages - My Account
     width: 190px;
     height: 54px;
   }
+}
+
+.truncate {
+    white-space: nowrap;        /* Запретить перенос строки */
+    overflow: hidden;           /* Скрыть текст, выходящий за пределы */
+    text-overflow: ellipsis;   /* Добавить многоточие */
+    width: 220px;               /* Ширина блока */
 }

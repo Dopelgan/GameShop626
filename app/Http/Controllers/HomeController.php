@@ -23,7 +23,7 @@ class HomeController extends Controller
      */
     public function home()
     {
-        return view('home', [
+        return view('index', [
             'popular' => $this->product->getPopularProducts(),
             'newest' => $this->product->getNewestProducts(),
         ]);

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hmart - Two</title>
+    <title>Hmart - Home One</title>
     <meta name="robots" content="index, follow"/>
     <meta name="description" content="Hmart-Smart Product eCommerce html Template">
     <!-- Favicon -->
@@ -24,6 +24,7 @@
     <!-- Minify Version -->
     <!-- <link rel="stylesheet" href="assets/css/plugins.min.css">
     <link rel="stylesheet" href="assets/css/style.min.css"> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -42,19 +43,9 @@
                         <div class="top-nav">
                             <ul>
                                 <li><a href="tel:0123456789"><i class="fa fa-phone"></i> +012 3456 789</a></li>
-                                <li><a href="mailto:demo@example.com"><i class="fa fa-envelope-o"></i> demo@example.com</a></li>
-                                <li><a href="{{ route ('user.profile') }}"><i class="fa fa-user"></i> Account</a></li>
-                                @guest
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('login') }}">Войти</a>
-                                    </li>
-                                    @if (Route::has('register'))
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('register') }}">Зарегистрироваться</a>
-                                        </li>
-                                    @endif
-                                @else
-                                @endguest
+                                <li><a href="mailto:demo@example.com"><i class="fa fa-envelope-o"></i> demo@example.com</a>
+                                </li>
+                                <li><a href="my-account.html"><i class="fa fa-user"></i> Account</a></li>
                             </ul>
                         </div>
                     </div>
@@ -68,7 +59,7 @@
                 <div class="row justify-content-between align-items-center">
                     <div class="col-lg-3 col">
                         <div class="header-logo">
-                            <a href="{{ route('home') }}"><img src="assets/images/logo/logo.png" alt="Site Logo"/></a>
+                            <a href="index.html"><img src="assets/images/logo/logo.png" alt="Site Logo"/></a>
                         </div>
                     </div>
                     <div class="col-lg-6 d-none d-lg-block">
@@ -108,7 +99,7 @@
                 <div class="row justify-content-between align-items-center">
                     <div class="col-lg-3 col">
                         <div class="header-logo">
-                            <a href="{{ route('home') }}"><img src="assets/images/logo/logo.png" alt="Site Logo"/></a>
+                            <a href="index.html"><img src="assets/images/logo/logo.png" alt="Site Logo"/></a>
                         </div>
                     </div>
                     <div class="col-lg-6 d-none d-lg-block">
@@ -150,7 +141,8 @@
                         <ul>
                             <li class="dropdown"><a href="#">Home <i class="fa fa-angle-down"></i></a>
                                 <ul class="sub-menu">
-                                    <li><a href="{{ route('home') }}">Home</a></li>
+                                    <li><a href="index.html">Home 1</a></li>
+                                    <li><a href="index-2.html">Home 2</a></li>
                                 </ul>
                             </li>
                             <li><a href="about.html">About</a></li>
@@ -167,14 +159,14 @@
                                         </ul>
                                         <ul class="d-block">
                                             <li class="title"><a href="#">Other Shop Pages</a></li>
-                                            <li><a href="{{ route('basket.index') }}">Cart Page</a></li>
+                                            <li><a href="cart.html">Cart Page</a></li>
                                             <li><a href="checkout.html">Checkout Page</a></li>
                                             <li><a href="compare.html">Compare Page</a></li>
                                             <li><a href="wishlist.html">Wishlist Page</a></li>
                                         </ul>
                                         <ul class="d-block">
                                             <li class="title"><a href="#">Related Shop Pages</a></li>
-                                            <li><a href="{{ route('user.profile') }}">Account Page</a></li>
+                                            <li><a href="my-account.html">Account Page</a></li>
                                             <li><a href="login.html">Login & Register Page</a></li>
                                             <li><a href="empty-cart.html">Empty Cart Page</a></li>
                                             <li><a href="thank-you-page.html">Thank You Page</a></li>
@@ -223,7 +215,7 @@
                                             </li>
                                             <li><a href="single-product-sticky-right.html">Product Sticky Right</a>
                                             </li>
-                                            <li><a href="basket.index">Cart Page</a></li>
+                                            <li><a href="cart.html">Cart Page</a></li>
                                         </ul>
                                         <ul class="d-block p-0 border-0">
                                             <li class="title"><a href="#">Single Product Page</a></li>
@@ -376,7 +368,7 @@
             </div>
             <div class="foot">
                 <div class="buttons mt-30px">
-                    <a href="{{ route('basket.index') }}" class="btn btn-dark btn-hover-primary mb-30px">view cart</a>
+                    <a href="cart.html" class="btn btn-dark btn-hover-primary mb-30px">view cart</a>
                     <a href="checkout.html" class="btn btn-outline-dark current-btn">checkout</a>
                 </div>
             </div>
@@ -418,7 +410,7 @@
                             <li>
                                 <a href="#"><span class="menu-text"> Other Shop Pages</span></a>
                                 <ul class="sub-menu">
-                                    <li><a href="{{ route('basket.index') }}">Cart Page</a></li>
+                                    <li><a href="cart.html">Cart Page</a></li>
                                     <li><a href="checkout.html">Checkout Page</a></li>
                                     <li><a href="compare.html">Compare Page</a></li>
                                     <li><a href="wishlist.html">Wishlist Page</a></li>
@@ -448,7 +440,7 @@
                                     </li>
                                     <li><a href="shop-list-right-sidebar.html">Shop List Right Sidebar</a>
                                     </li>
-                                    <li><a href="{{ route('basket.index') }}">Cart Page</a></li>
+                                    <li><a href="cart.html">Cart Page</a></li>
                                     <li><a href="checkout.html">Checkout Page</a></li>
                                 </ul>
                             </li>
@@ -522,135 +514,138 @@
         </div>
     </div>
     <!-- OffCanvas Menu End -->
-    <main>
-        @yield('content')
-    </main>
-</div>
-<!-- Footer Area Start -->
-<div class="footer-area">
-    <div class="footer-container">
-        <div class="footer-top">
-            <div class="container">
-                <div class="row">
-                    <!-- Start single blog -->
-                    <div class="col-md-6 col-lg-3 mb-md-30px mb-lm-30px">
-                        <div class="single-wedge">
-                            <div class="footer-logo">
-                                <a href="index.html"><img src="assets/images/logo/footer-logo.png" alt=""></a>
+
+    @yield('content')
+
+
+    <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row">
+                        <!-- Start single blog -->
+                        <div class="col-md-6 col-lg-3 mb-md-30px mb-lm-30px">
+                            <div class="single-wedge">
+                                <div class="footer-logo">
+                                    <a href="index.html"><img src="assets/images/logo/footer-logo.png" alt=""></a>
+                                </div>
+                                <p class="about-text">Lorem ipsum dolor sit amet consl adipisi elit, sed do eiusmod
+                                    templ incididunt ut labore
+                                </p>
+                                <ul class="link-follow">
+                                    <li>
+                                        <a class="m-0" title="Twitter" target="_blank" rel="noopener noreferrer"
+                                           href="#"><i class="fa fa-facebook"
+                                                       aria-hidden="true"></i></a>
+                                    </li>
+                                    <li>
+                                        <a title="Tumblr" target="_blank" rel="noopener noreferrer" href="#"><i
+                                                class="fa fa-tumblr" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a title="Facebook" target="_blank" rel="noopener noreferrer" href="#"><i
+                                                class="fa fa-twitter" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a title="Instagram" target="_blank" rel="noopener noreferrer" href="#"><i
+                                                class="fa fa-instagram" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
-                            <p class="about-text">Lorem ipsum dolor sit amet consl adipisi elit, sed do eiusmod
-                                templ incididunt ut labore
-                            </p>
-                            <ul class="link-follow">
-                                <li>
-                                    <a class="m-0" title="Twitter" target="_blank" rel="noopener noreferrer"
-                                       href="#"><i class="fa fa-facebook"
-                                                   aria-hidden="true"></i></a>
-                                </li>
-                                <li>
-                                    <a title="Tumblr" target="_blank" rel="noopener noreferrer" href="#"><i
-                                            class="fa fa-tumblr" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a title="Facebook" target="_blank" rel="noopener noreferrer" href="#"><i
-                                            class="fa fa-twitter" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a title="Instagram" target="_blank" rel="noopener noreferrer" href="#"><i
-                                            class="fa fa-instagram" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                            </ul>
                         </div>
-                    </div>
-                    <!-- End single blog -->
-                    <!-- Start single blog -->
-                    <div class="col-md-6 col-lg-3 col-sm-6 mb-lm-30px pl-lg-60px">
-                        <div class="single-wedge">
-                            <h4 class="footer-herading">Services</h4>
-                            <div class="footer-links">
-                                <div class="footer-row">
-                                    <ul class="align-items-center">
-                                        <li class="li"><a class="single-link" href="my-account.html">My Account</a>
-                                        </li>
-                                        <li class="li"><a class="single-link" href="contact.html">Contact</a></li>
-                                        <li class="li"><a class="single-link" href="{{ route('basket.index') }}">Shopping cart</a>
-                                        </li>
-                                        <li class="li"><a class="single-link" href="shop-left-sidebar.html">Shop</a>
-                                        </li>
-                                        <li class="li"><a class="single-link" href="login.html">Services Login</a>
-                                        </li>
-                                    </ul>
+                        <!-- End single blog -->
+                        <!-- Start single blog -->
+                        <div class="col-md-6 col-lg-3 col-sm-6 mb-lm-30px pl-lg-60px">
+                            <div class="single-wedge">
+                                <h4 class="footer-herading">Services</h4>
+                                <div class="footer-links">
+                                    <div class="footer-row">
+                                        <ul class="align-items-center">
+                                            <li class="li"><a class="single-link" href="my-account.html">My Account</a>
+                                            </li>
+                                            <li class="li"><a class="single-link" href="contact.html">Contact</a></li>
+                                            <li class="li"><a class="single-link" href="cart.html">Shopping cart</a>
+                                            </li>
+                                            <li class="li"><a class="single-link" href="shop-left-sidebar.html">Shop</a>
+                                            </li>
+                                            <li class="li"><a class="single-link" href="login.html">Services Login</a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- End single blog -->
-                    <!-- Start single blog -->
-                    <div class="col-md-6 col-lg-3 col-sm-6 mb-lm-30px pl-lg-40px">
-                        <div class="single-wedge">
-                            <h4 class="footer-herading">My Account</h4>
-                            <div class="footer-links">
-                                <div class="footer-row">
-                                    <ul class="align-items-center">
-                                        <li class="li"><a class="single-link" href="my-account.html">My Account</a>
-                                        </li>
-                                        <li class="li"><a class="single-link" href="contact.html">Contact</a></li>
-                                        <li class="li"><a class="single-link" href="{{ route('basket.index') }}">Shopping cart</a>
-                                        </li>
-                                        <li class="li"><a class="single-link" href="shop-left-sidebar.html">Shop</a>
-                                        </li>
-                                        <li class="li"><a class="single-link" href="login.html">Services Login</a>
-                                        </li>
-                                    </ul>
+                        <!-- End single blog -->
+                        <!-- Start single blog -->
+                        <div class="col-md-6 col-lg-3 col-sm-6 mb-lm-30px pl-lg-40px">
+                            <div class="single-wedge">
+                                <h4 class="footer-herading">My Account</h4>
+                                <div class="footer-links">
+                                    <div class="footer-row">
+                                        <ul class="align-items-center">
+                                            <li class="li"><a class="single-link" href="my-account.html">My Account</a>
+                                            </li>
+                                            <li class="li"><a class="single-link" href="contact.html">Contact</a></li>
+                                            <li class="li"><a class="single-link" href="cart.html">Shopping cart</a>
+                                            </li>
+                                            <li class="li"><a class="single-link" href="shop-left-sidebar.html">Shop</a>
+                                            </li>
+                                            <li class="li"><a class="single-link" href="login.html">Services Login</a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- End single blog -->
-                    <!-- Start single blog -->
-                    <div class="col-md-6 col-lg-3 col-sm-12">
-                        <div class="single-wedge">
-                            <h4 class="footer-herading">Contact Info</h4>
-                            <div class="footer-links">
-                                <!-- News letter area -->
-                                <p class="address">Address: Your Address Goes Here.</p>
-                                <p class="phone">Phone/Fax:<a href="tel:0123456789"> 0123456789</a></p>
-                                <p class="mail">Email:<a href="mailto:demo@example.com"> demo@example.com</a></p>
-                                <p class="mail"><a href="https://demo@example.com"> demo@example.com</a></p>
-                                <!-- News letter area  End -->
+                        <!-- End single blog -->
+                        <!-- Start single blog -->
+                        <div class="col-md-6 col-lg-3 col-sm-12">
+                            <div class="single-wedge">
+                                <h4 class="footer-herading">Contact Info</h4>
+                                <div class="footer-links">
+                                    <!-- News letter area -->
+                                    <p class="address">Address: Your Address Goes Here.</p>
+                                    <p class="phone">Phone/Fax:<a href="tel:0123456789"> 0123456789</a></p>
+                                    <p class="mail">Email:<a href="mailto:demo@example.com"> demo@example.com</a></p>
+                                    <p class="mail"><a href="https://demo@example.com"> demo@example.com</a></p>
+                                    <!-- News letter area  End -->
+                                </div>
                             </div>
                         </div>
+                        <!-- End single blog -->
                     </div>
-                    <!-- End single blog -->
                 </div>
             </div>
-        </div>
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="line-shape-top line-height-1">
-                    <div class="row flex-md-row-reverse align-items-center">
-                        <div class="col-md-6 text-center text-md-end">
-                            <div class="payment-mth"><a href="#"><img class="img img-fluid"
-                                                                      src="assets/images/icons/payment.png"
-                                                                      alt="payment-image"></a></div>
-                        </div>
-                        <div class="col-md-6 text-center text-md-start">
-                            <p class="copy-text"> © 2021 <strong>Hmart</strong> Made With <i class="fa fa-heart"
-                                                                                             aria-hidden="true"></i>
-                                By <a class="company-name"
-                                      href="https://themeforest.net/user/codecarnival/portfolio">
-                                    <strong> Codecarnival </strong></a>.</p>
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="line-shape-top line-height-1">
+                        <div class="row flex-md-row-reverse align-items-center">
+                            <div class="col-md-6 text-center text-md-end">
+                                <div class="payment-mth"><a href="#"><img class="img img-fluid"
+                                                                          src="assets/images/icons/payment.png"
+                                                                          alt="payment-image"></a></div>
+                            </div>
+                            <div class="col-md-6 text-center text-md-start">
+                                <p class="copy-text"> © 2021 <strong>Hmart</strong> Made With <i class="fa fa-heart"
+                                                                                                 aria-hidden="true"></i>
+                                    By <a class="company-name"
+                                          href="https://themeforest.net/user/codecarnival/portfolio">
+                                        <strong> Codecarnival </strong></a>.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- Footer Area End -->
 </div>
-<!-- Footer Area End -->
+
+
 <!-- Modal -->
 <div class="modal modal-2 fade" id="exampleModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -734,9 +729,9 @@
                                 <span class="read-review"><a class="reviews" href="#">( 2 Review )</a></span>
                             </div>
                             <p class="mt-30px">Lorem ipsum dolor sit amet, consecte adipisicing elit, sed do eiusmll
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mill veniam, quis
-                                nostrud exercitation ullamco laboris nisi ut aliquip exet commodo consequat. Duis
-                                aute irure dolor</p>
+                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mill veniam, quis nostrud
+                                exercitation ullamco laboris nisi ut aliquip exet commodo consequat. Duis aute irure
+                                dolor</p>
                             <div class="pro-details-categories-info pro-details-same-style d-flex m-0">
                                 <span>SKU:</span>
                                 <ul class="d-flex">
@@ -851,6 +846,8 @@
         </div>
     </div>
 </div>
+
+
 <!-- Global Vendor, plugins JS -->
 <!-- JS Files
 ============================================ -->
