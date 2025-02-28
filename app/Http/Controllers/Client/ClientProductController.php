@@ -19,7 +19,7 @@ class ClientProductController extends Controller
         LogService::write('info', 'Просмотрен продукт', ['user_id' => auth()->user(), 'product_id' => $product->id]);
         $product->save();
 
-        return view('product', [
+        return view('single-product', [
             'product' => $product,
             'popular' => Product::getPopularProducts(),
         ]);

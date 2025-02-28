@@ -9,21 +9,21 @@
     <meta name="robots" content="index, follow"/>
     <meta name="description" content="Hmart-Smart Product eCommerce html Template">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.ico"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico"/>
     <!-- CSS
     ============================================ -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="assets/css/font.awesome.css"/>
-    <link rel="stylesheet" href="assets/css/pe-icon-7-stroke.css"/>
-    <link rel="stylesheet" href="assets/css/animate.min.css">
-    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
-    <link rel="stylesheet" href="assets/css/venobox.css">
-    <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/assets/css/font.awesome.css"/>
+    <link rel="stylesheet" href="/assets/css/pe-icon-7-stroke.css"/>
+    <link rel="stylesheet" href="/assets/css/animate.min.css">
+    <link rel="stylesheet" href="/assets/css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="/assets/css/venobox.css">
+    <link rel="stylesheet" href="/assets/css/jquery-ui.min.css">
     <!-- Style CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
     <!-- Minify Version -->
-    <!-- <link rel="stylesheet" href="assets/css/plugins.min.css">
-    <link rel="stylesheet" href="assets/css/style.min.css"> -->
+    <!-- <link rel="stylesheet" href="/assets/css/plugins.min.css">
+    <link rel="stylesheet" href="/assets/css/style.min.css"> -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
@@ -59,7 +59,7 @@
                 <div class="row justify-content-between align-items-center">
                     <div class="col-lg-3 col">
                         <div class="header-logo">
-                            <a href="index.html"><img src="assets/images/logo/logo.png" alt="Site Logo"/></a>
+                            <a href="/"><img src="/assets/images/logo/logo.png" alt="Site Logo"/></a>
                         </div>
                     </div>
                     <div class="col-lg-6 d-none d-lg-block">
@@ -99,7 +99,7 @@
                 <div class="row justify-content-between align-items-center">
                     <div class="col-lg-3 col">
                         <div class="header-logo">
-                            <a href="index.html"><img src="assets/images/logo/logo.png" alt="Site Logo"/></a>
+                            <a href="index.html"><img src="/assets/images/logo/logo.png" alt="Site Logo"/></a>
                         </div>
                     </div>
                     <div class="col-lg-6 d-none d-lg-block">
@@ -175,7 +175,7 @@
                                             <li>
                                                 <a class="p-0" href="shop-left-sidebar.html"><img
                                                         class="img-responsive w-100"
-                                                        src="assets/images/banner/menu-banner.png" alt=""></a>
+                                                        src="/assets/images/banner/menu-banner.png" alt=""></a>
                                             </li>
                                         </ul>
                                     </li>
@@ -292,7 +292,7 @@
             <div class="body customScroll">
                 <ul class="minicart-product-list">
                     <li>
-                        <a href="single-product.html" class="image"><img src="assets/images/product-image/1.webp"
+                        <a href="single-product.html" class="image"><img src="/assets/images/product-image/1.webp"
                                                                          alt="Cart product Image"></a>
                         <div class="content">
                             <a href="single-product.html" class="title">Modern Smart Phone</a>
@@ -301,7 +301,7 @@
                         </div>
                     </li>
                     <li>
-                        <a href="single-product.html" class="image"><img src="assets/images/product-image/2.webp"
+                        <a href="single-product.html" class="image"><img src="/assets/images/product-image/2.webp"
                                                                          alt="Cart product Image"></a>
                         <div class="content">
                             <a href="single-product.html" class="title">Bluetooth Headphone</a>
@@ -310,7 +310,7 @@
                         </div>
                     </li>
                     <li>
-                        <a href="single-product.html" class="image"><img src="assets/images/product-image/3.webp"
+                        <a href="single-product.html" class="image"><img src="/assets/images/product-image/3.webp"
                                                                          alt="Cart product Image"></a>
                         <div class="content">
                             <a href="single-product.html" class="title">Smart Music Box</a>
@@ -338,7 +338,7 @@
             <div class="body customScroll">
                 <ul class="minicart-product-list">
                     <li>
-                        <a href="single-product.html" class="image"><img src="assets/images/product-image/1.webp"
+                        <a href="single-product.html" class="image"><img src="/assets/images/product-image/1.webp"
                                                                          alt="Cart product Image"></a>
                         <div class="content">
                             <a href="single-product.html" class="title">Modern Smart Phone</a>
@@ -347,7 +347,7 @@
                         </div>
                     </li>
                     <li>
-                        <a href="single-product.html" class="image"><img src="assets/images/product-image/2.webp"
+                        <a href="single-product.html" class="image"><img src="/assets/images/product-image/2.webp"
                                                                          alt="Cart product Image"></a>
                         <div class="content">
                             <a href="single-product.html" class="title">Bluetooth Headphone</a>
@@ -356,7 +356,7 @@
                         </div>
                     </li>
                     <li>
-                        <a href="single-product.html" class="image"><img src="assets/images/product-image/3.webp"
+                        <a href="single-product.html" class="image"><img src="/assets/images/product-image/3.webp"
                                                                          alt="Cart product Image"></a>
                         <div class="content">
                             <a href="single-product.html" class="title">Smart Music Box</a>
@@ -528,7 +528,7 @@
                         <div class="col-md-6 col-lg-3 mb-md-30px mb-lm-30px">
                             <div class="single-wedge">
                                 <div class="footer-logo">
-                                    <a href="index.html"><img src="assets/images/logo/footer-logo.png" alt=""></a>
+                                    <a href="index.html"><img src="/assets/images/logo/footer-logo.png" alt=""></a>
                                 </div>
                                 <p class="about-text">Lorem ipsum dolor sit amet consl adipisi elit, sed do eiusmod
                                     templ incididunt ut labore
@@ -626,7 +626,7 @@
                         <div class="row flex-md-row-reverse align-items-center">
                             <div class="col-md-6 text-center text-md-end">
                                 <div class="payment-mth"><a href="#"><img class="img img-fluid"
-                                                                          src="assets/images/icons/payment.png"
+                                                                          src="/assets/images/icons/payment.png"
                                                                           alt="payment-image"></a></div>
                             </div>
                             <div class="col-md-6 text-center text-md-start">
@@ -660,23 +660,23 @@
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
                                     <img class="img-responsive m-auto"
-                                         src="assets/images/product-image/zoom-image/1.webp" alt="">
+                                         src="/assets/images/product-image/zoom-image/1.webp" alt="">
                                 </div>
                                 <div class="swiper-slide">
                                     <img class="img-responsive m-auto"
-                                         src="assets/images/product-image/zoom-image/2.webp" alt="">
+                                         src="/assets/images/product-image/zoom-image/2.webp" alt="">
                                 </div>
                                 <div class="swiper-slide">
                                     <img class="img-responsive m-auto"
-                                         src="assets/images/product-image/zoom-image/3.webp" alt="">
+                                         src="/assets/images/product-image/zoom-image/3.webp" alt="">
                                 </div>
                                 <div class="swiper-slide">
                                     <img class="img-responsive m-auto"
-                                         src="assets/images/product-image/zoom-image/4.webp" alt="">
+                                         src="/assets/images/product-image/zoom-image/4.webp" alt="">
                                 </div>
                                 <div class="swiper-slide">
                                     <img class="img-responsive m-auto"
-                                         src="assets/images/product-image/zoom-image/5.webp" alt="">
+                                         src="/assets/images/product-image/zoom-image/5.webp" alt="">
                                 </div>
                             </div>
                         </div>
@@ -684,23 +684,23 @@
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
                                     <img class="img-responsive m-auto"
-                                         src="assets/images/product-image/small-image/1.webp" alt="">
+                                         src="/assets/images/product-image/small-image/1.webp" alt="">
                                 </div>
                                 <div class="swiper-slide">
                                     <img class="img-responsive m-auto"
-                                         src="assets/images/product-image/small-image/2.webp" alt="">
+                                         src="/assets/images/product-image/small-image/2.webp" alt="">
                                 </div>
                                 <div class="swiper-slide">
                                     <img class="img-responsive m-auto"
-                                         src="assets/images/product-image/small-image/3.webp" alt="">
+                                         src="/assets/images/product-image/small-image/3.webp" alt="">
                                 </div>
                                 <div class="swiper-slide">
                                     <img class="img-responsive m-auto"
-                                         src="assets/images/product-image/small-image/4.webp" alt="">
+                                         src="/assets/images/product-image/small-image/4.webp" alt="">
                                 </div>
                                 <div class="swiper-slide">
                                     <img class="img-responsive m-auto"
-                                         src="assets/images/product-image/small-image/5.webp" alt="">
+                                         src="/assets/images/product-image/small-image/5.webp" alt="">
                                 </div>
                             </div>
                             <!-- Add Arrows -->
@@ -776,7 +776,7 @@
                                 </div>
                             </div>
                             <div class="payment-img">
-                                <a href="#"><img src="assets/images/icons/payment.png" alt=""></a>
+                                <a href="#"><img src="/assets/images/icons/payment.png" alt=""></a>
                             </div>
                         </div>
                     </div>
@@ -798,7 +798,7 @@
                 </div>
                 <div class="tt-modal-product">
                     <div class="tt-img">
-                        <img src="assets/images/product-image/1.webp" alt="Modern Smart Phone">
+                        <img src="/assets/images/product-image/1.webp" alt="Modern Smart Phone">
                     </div>
                     <h2 class="tt-title"><a href="#">Modern Smart Phone</a></h2>
                 </div>
@@ -818,7 +818,7 @@
                 </div>
                 <div class="tt-modal-product">
                     <div class="tt-img">
-                        <img src="assets/images/product-image/1.webp" alt="Modern Smart Phone">
+                        <img src="/assets/images/product-image/1.webp" alt="Modern Smart Phone">
                     </div>
                     <h2 class="tt-title"><a href="#">Modern Smart Phone</a></h2>
                 </div>
@@ -838,7 +838,7 @@
                 </div>
                 <div class="tt-modal-product">
                     <div class="tt-img">
-                        <img src="assets/images/product-image/1.webp" alt="Modern Smart Phone">
+                        <img src="/assets/images/product-image/1.webp" alt="Modern Smart Phone">
                     </div>
                     <h2 class="tt-title"><a href="#">Modern Smart Phone</a></h2>
                 </div>
@@ -851,24 +851,24 @@
 <!-- Global Vendor, plugins JS -->
 <!-- JS Files
 ============================================ -->
-<script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
-<script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
-<script src="assets/js/vendor/jquery-migrate-3.3.2.min.js"></script>
-<script src="assets/js/vendor/modernizr-3.11.2.min.js"></script>
-<script src="assets/js/plugins/jquery.countdown.min.js"></script>
-<script src="assets/js/plugins/swiper-bundle.min.js"></script>
-<script src="assets/js/plugins/scrollUp.js"></script>
-<script src="assets/js/plugins/venobox.min.js"></script>
-<script src="assets/js/plugins/jquery-ui.min.js"></script>
-<script src="assets/js/plugins/mailchimp-ajax.js"></script>
+<script src="/assets/js/vendor/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/vendor/jquery-3.6.0.min.js"></script>
+<script src="/assets/js/vendor/jquery-migrate-3.3.2.min.js"></script>
+<script src="/assets/js/vendor/modernizr-3.11.2.min.js"></script>
+<script src="/assets/js/plugins/jquery.countdown.min.js"></script>
+<script src="/assets/js/plugins/swiper-bundle.min.js"></script>
+<script src="/assets/js/plugins/scrollUp.js"></script>
+<script src="/assets/js/plugins/venobox.min.js"></script>
+<script src="/assets/js/plugins/jquery-ui.min.js"></script>
+<script src="/assets/js/plugins/mailchimp-ajax.js"></script>
 
 <!-- Minify Version -->
-<!-- <script src="assets/js/vendor.min.js"></script>
-<script src="assets/js/plugins.min.js"></script>
-<script src="assets/js/main.min.js"></script> -->
+<!-- <script src="/assets/js/vendor.min.js"></script>
+<script src="/assets/js/plugins.min.js"></script>
+<script src="/assets/js/main.min.js"></script> -->
 
 <!--Main JS (Common Activation Codes)-->
-<script src="assets/js/main.js"></script>
+<script src="/assets/js/main.js"></script>
 </body>
 
 </html>

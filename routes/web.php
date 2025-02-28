@@ -28,6 +28,7 @@ Route::get('/home', [HomeController::class, 'home'])->name('home');
 Auth::routes();
 
 Route::get('/product/{id}', [ClientProductController::class, 'show'])->name('product.show');
+Route::get('/product/{id}/get', [ClientProductController::class, 'get'])->name('product.get');
 
 Route::any('/filter', [ClientFilterController::class, 'filter'])->name('filter');
 
